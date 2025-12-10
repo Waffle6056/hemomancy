@@ -1,0 +1,14 @@
+[remap]
+
+importer="glsl"
+type="RDShaderFile"
+uid="uid://caw2dwj4v5wvw"
+path="res://.godot/imported/bloodsim.glsl-cd1536f081e8e3bfac5e10cad985368d.res"
+
+[deps]
+
+source_file="res://hemomancy/bloodsim.glsl"
+dest_files=["res://.godot/imported/bloodsim.glsl-cd1536f081e8e3bfac5e10cad985368d.res"]
+
+[params]
+

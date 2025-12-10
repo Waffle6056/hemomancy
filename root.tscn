@@ -1,0 +1,128 @@
+[gd_scene load_steps=15 format=3 uid="uid://bts6u3u7dti3b"]
+
+[ext_resource type="PackedScene" uid="uid://cl5catww2oaat" path="res://nexus/nexus.tscn" id="1_pq8q7"]
+[ext_resource type="Shader" uid="uid://dnl2w1yljscwm" path="res://environment/brick.gdshader" id="2_vvh5c"]
+[ext_resource type="Texture2D" uid="uid://blx08pj0g0x6k" path="res://icon.svg" id="3_28aoi"]
+[ext_resource type="PackedScene" uid="uid://bq28dawno13ag" path="res://player/player.tscn" id="4_28aoi"]
+[ext_resource type="Shader" uid="uid://dnn71i3ht6f11" path="res://environment/wall.gdshader" id="4_l8v81"]
+[ext_resource type="Texture2D" path="res://environment/circle.tres" id="5_jnlp7"]
+[ext_resource type="Script" uid="uid://ck53mxrcnk2al" path="res://Camera2d.cs" id="5_vyht1"]
+[ext_resource type="PackedScene" uid="uid://dd058p1sdspnc" path="res://player/melee_enemy.tscn" id="8_bf3um"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_jnlp7"]
+noise_type = 2
+frequency = 0.1844
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_l8v81"]
+noise = SubResource("FastNoiseLite_jnlp7")
+seamless = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vyht1"]
+shader = ExtResource("2_vvh5c")
+shader_parameter/brick_size = Vector2(50, 50)
+shader_parameter/brick_pattern = SubResource("NoiseTexture2D_l8v81")
+shader_parameter/edge_percent = 0.05
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_l8v81"]
+noise_type = 2
+frequency = 0.1534
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_vyht1"]
+noise = SubResource("FastNoiseLite_l8v81")
+seamless = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bf3um"]
+shader = ExtResource("4_l8v81")
+shader_parameter/brick_size = Vector2(50, 25)
+shader_parameter/brick_pattern = SubResource("NoiseTexture2D_vyht1")
+shader_parameter/edge_percent = 0.05
+
+[node name="root" type="Node2D"]
+
+[node name="Nexus" parent="." instance=ExtResource("1_pq8q7")]
+position = Vector2(-385.31998, -0.32000732)
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+position = Vector2(289, -288.53998)
+scale = Vector2(13.497501, 0.52281237)
+color = Color(0.26657522, 0.2665752, 0.2665752, 1)
+
+[node name="flooring" type="Sprite2D" parent="."]
+z_index = -1
+texture_repeat = 2
+material = SubResource("ShaderMaterial_vyht1")
+position = Vector2(289.16003, 0)
+scale = Vector2(13.497501, 3.9662502)
+texture = ExtResource("3_28aoi")
+
+[node name="wall" type="Sprite2D" parent="."]
+z_index = -1
+texture_repeat = 2
+material = SubResource("ShaderMaterial_bf3um")
+position = Vector2(289, -288.53998)
+scale = Vector2(13.497501, 0.52281237)
+texture = ExtResource("3_28aoi")
+
+[node name="bg" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+z_index = -2
+position = Vector2(292.5, 94.5)
+scale = Vector2(500, 500)
+texture = ExtResource("3_28aoi")
+
+[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
+position_smoothing_enabled = true
+script = ExtResource("5_vyht1")
+target = NodePath("../Player")
+
+[node name="Player" parent="." instance=ExtResource("4_28aoi")]
+z_index = 1
+position = Vector2(-85, -4)
+Speed = 300.0
+
+[node name="PointLight2D2" type="PointLight2D" parent="."]
+position = Vector2(200, 240)
+color = Color(0.76252604, 0.53404486, 0.19902185, 1)
+energy = 0.4
+texture = ExtResource("5_jnlp7")
+texture_scale = 2.0
+height = 176.0
+
+[node name="PointLight2D3" type="PointLight2D" parent="."]
+position = Vector2(200, -240)
+color = Color(0.76252604, 0.53404486, 0.19902185, 1)
+energy = 0.4
+texture = ExtResource("5_jnlp7")
+texture_scale = 2.0
+height = 176.0
+
+[node name="PointLight2D4" type="PointLight2D" parent="."]
+position = Vector2(838, 240)
+color = Color(0.76252604, 0.53404486, 0.19902185, 1)
+energy = 0.4
+texture = ExtResource("5_jnlp7")
+texture_scale = 2.0
+height = 176.0
+
+[node name="PointLight2D5" type="PointLight2D" parent="."]
+position = Vector2(833, -240)
+color = Color(0.76252604, 0.53404486, 0.19902185, 1)
+energy = 0.4
+texture = ExtResource("5_jnlp7")
+texture_scale = 2.0
+height = 176.0
+
+[node name="MeleeEnemy" parent="." instance=ExtResource("8_bf3um")]
+position = Vector2(954, -21)
+
+[node name="MeleeEnemy2" parent="." instance=ExtResource("8_bf3um")]
+position = Vector2(1005, 87)
+
+[node name="MeleeEnemy3" parent="." instance=ExtResource("8_bf3um")]
+position = Vector2(1035, -101)
+
+[node name="MeleeEnemy4" parent="." instance=ExtResource("8_bf3um")]
+position = Vector2(1120, 131)
+
+[node name="MeleeEnemy5" parent="." instance=ExtResource("8_bf3um")]
+position = Vector2(1164, -136)

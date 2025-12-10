@@ -1,0 +1,31 @@
+[gd_scene load_steps=7 format=3 uid="uid://ds7utwgypyluw"]
+
+[ext_resource type="Shader" uid="uid://d11ojohpxogoq" path="res://player/footstep.gdshader" id="1_4ry1k"]
+[ext_resource type="Texture2D" uid="uid://blx08pj0g0x6k" path="res://icon.svg" id="2_3pvjl"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_doba1"]
+shader = ExtResource("1_4ry1k")
+
+[sub_resource type="Curve" id="Curve_8kif1"]
+_data = [Vector2(0, 0.44472355), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_g6k8r"]
+curve = SubResource("Curve_8kif1")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ormbg"]
+gravity = Vector3(0, 0, 0)
+scale_min = 0.29999998
+scale_max = 0.29999998
+color = Color(1, 0, 0, 1)
+alpha_curve = SubResource("CurveTexture_g6k8r")
+
+[node name="FootSteps" type="GPUParticles2D"]
+z_index = -1
+material = SubResource("ShaderMaterial_doba1")
+emitting = false
+amount = 10
+texture = ExtResource("2_3pvjl")
+lifetime = 2.0
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_ormbg")

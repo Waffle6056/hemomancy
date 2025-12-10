@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=3 uid="uid://j13cwmfkpli6"]
+
+[ext_resource type="Script" uid="uid://cea2mmtnwoisu" path="res://player/HpComponent.cs" id="1_otge8"]
+
+[sub_resource type="Gradient" id="Gradient_tty8s"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_otge8"]
+gradient = SubResource("Gradient_tty8s")
+width = 1
+height = 1
+use_hdr = true
+
+[sub_resource type="Gradient" id="Gradient_d4ca4"]
+colors = PackedColorArray(1, 0, 0, 1, 1, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_nvhvp"]
+gradient = SubResource("Gradient_d4ca4")
+width = 1
+height = 1
+use_hdr = true
+
+[node name="HPComponent" type="Node2D" node_paths=PackedStringArray("HPDisplay", "BGDisplay", "Pivot")]
+script = ExtResource("1_otge8")
+Length = 75.0
+Height = 10.0
+Padding = 5.0
+HPDisplay = NodePath("Pivot/RED")
+BGDisplay = NodePath("Pivot/BG")
+Pivot = NodePath("Pivot")
+WaveLength = 2.0
+WaveTimeScale = 2.0
+
+[node name="Pivot" type="Node2D" parent="."]
+
+[node name="BG" type="Sprite2D" parent="Pivot"]
+z_index = 1
+texture = SubResource("GradientTexture2D_otge8")
+
+[node name="RED" type="Sprite2D" parent="Pivot"]
+z_index = 2
+texture = SubResource("GradientTexture2D_nvhvp")

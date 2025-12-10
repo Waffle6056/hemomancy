@@ -1,0 +1,112 @@
+[gd_scene load_steps=11 format=3 uid="uid://dd058p1sdspnc"]
+
+[ext_resource type="Texture2D" uid="uid://blx08pj0g0x6k" path="res://icon.svg" id="1_0wkl3"]
+[ext_resource type="Script" uid="uid://bce6n1tvk65ps" path="res://player/MeleeEnemy.cs" id="1_u1dsw"]
+[ext_resource type="PackedScene" uid="uid://j13cwmfkpli6" path="res://player/hp_component.tscn" id="2_u1dsw"]
+[ext_resource type="PackedScene" uid="uid://ds7utwgypyluw" path="res://player/foot_steps.tscn" id="4_rxrmi"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rxrmi"]
+radius = 35.0
+
+[sub_resource type="Animation" id="Animation_rxrmi"]
+resource_name = "contactreset"
+length = 0.33333668
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Area2D/CollisionShape2D:shape:radius")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.33333334),
+"transitions": PackedFloat32Array(0, 1),
+"update": 0,
+"values": [0.01, 38.209946]
+}
+
+[sub_resource type="Animation" id="Animation_togc1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Area2D/CollisionShape2D:shape:radius")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [38.209946]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Icon:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.7592886, 0.5871752, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_lxb2d"]
+resource_name = "hit"
+length = 0.26667002
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Icon:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(3.7252903e-09, 0.06666667, 0.13333334, 0.26666668),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 0, 0, 1), Color(0.7592886, 0.5871752, 0, 1), Color(1, 0, 0, 1), Color(0.7592886, 0.5871752, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lxb2d"]
+_data = {
+&"RESET": SubResource("Animation_togc1"),
+&"contactreset": SubResource("Animation_rxrmi"),
+&"hit": SubResource("Animation_lxb2d")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_togc1"]
+radius = 38.209946
+
+[node name="MeleeEnemy" type="CharacterBody2D" node_paths=PackedStringArray("HP", "Anims", "FootStepEmitter")]
+script = ExtResource("1_u1dsw")
+HP = NodePath("HPComponent")
+Speed = 50.0
+Anims = NodePath("AnimationPlayer")
+FootStepInterval = 0.2
+NearRadius = 60.0
+FootStepEmitter = NodePath("FootSteps")
+
+[node name="Icon" type="Sprite2D" parent="."]
+modulate = Color(0.7592886, 0.5871752, 0, 1)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_0wkl3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_rxrmi")
+
+[node name="HPComponent" parent="." instance=ExtResource("2_u1dsw")]
+position = Vector2(0, -55)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_lxb2d")
+}
+
+[node name="FootSteps" parent="." instance=ExtResource("4_rxrmi")]
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_togc1")
+
+[connection signal="body_entered" from="Area2D" to="." method="Contact"]

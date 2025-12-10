@@ -1,0 +1,183 @@
+[gd_scene load_steps=27 format=3 uid="uid://cl5catww2oaat"]
+
+[ext_resource type="Shader" uid="uid://cncdmw8gg425k" path="res://nexus/nexus.gdshader" id="1_7ypn0"]
+[ext_resource type="Script" uid="uid://ckp7my4bmo32u" path="res://nexus/Nexus.cs" id="1_npyyr"]
+[ext_resource type="Texture2D" uid="uid://blx08pj0g0x6k" path="res://icon.svg" id="2_upiol"]
+[ext_resource type="Shader" uid="uid://b8seewkdpe3b7" path="res://nexus/nexus_center.gdshader" id="3_hadw0"]
+[ext_resource type="Texture2D" path="res://environment/circle.tres" id="4_j16j4"]
+[ext_resource type="PackedScene" uid="uid://j13cwmfkpli6" path="res://player/hp_component.tscn" id="6_h76f6"]
+[ext_resource type="Shader" uid="uid://8g6syoppwtkp" path="res://nexus/hitparticle.gdshader" id="7_ao4yy"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6rwgm"]
+radius = 34.0
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_3s3eb"]
+frequency = 0.0066
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_dsuym"]
+noise = SubResource("FastNoiseLite_3s3eb")
+seamless = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_50umu"]
+shader = ExtResource("1_7ypn0")
+shader_parameter/time_scale = 1.0
+shader_parameter/pulse_time_scale = 1.0
+shader_parameter/rotate_time_scale = 0.5
+shader_parameter/transparency_pattern = SubResource("NoiseTexture2D_dsuym")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3yi2p"]
+shader = ExtResource("3_hadw0")
+shader_parameter/time_scale = 1.0
+shader_parameter/pulse_time_scale = 0.3
+shader_parameter/rotate_time_scale = 0.3
+
+[sub_resource type="Curve" id="Curve_7ypn0"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.2651515, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_upiol"]
+curve = SubResource("Curve_7ypn0")
+
+[sub_resource type="Gradient" id="Gradient_hadw0"]
+colors = PackedColorArray(0.38431373, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_6rwgm"]
+gradient = SubResource("Gradient_hadw0")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3s3eb"]
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 0.0
+emission_ring_radius = 50.38
+emission_ring_inner_radius = 37.03
+emission_ring_cone_angle = 90.0
+orbit_velocity_min = 0.1000001
+orbit_velocity_max = 0.40000013
+radial_velocity_min = 39.999977
+radial_velocity_max = 49.999977
+gravity = Vector3(0, 0, 0)
+tangential_accel_min = -2.2351742e-06
+tangential_accel_max = 19.999998
+scale_min = 0.049999997
+scale_max = 0.049999997
+color_ramp = SubResource("GradientTexture1D_6rwgm")
+alpha_curve = SubResource("CurveTexture_upiol")
+
+[sub_resource type="Animation" id="Animation_igjtn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hit:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_kylt6"]
+resource_name = "hit"
+length = 0.03333667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hit:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.033333335),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_w6aiu"]
+_data = {
+&"RESET": SubResource("Animation_igjtn"),
+&"hit": SubResource("Animation_kylt6")
+}
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_lpyev"]
+noise_type = 2
+frequency = 0.0117
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_834gl"]
+noise = SubResource("FastNoiseLite_lpyev")
+seamless = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ojxid"]
+shader = ExtResource("7_ao4yy")
+shader_parameter/transparency_pattern = SubResource("NoiseTexture2D_834gl")
+shader_parameter/color_offset = Vector3(0.7, 0, 0)
+
+[sub_resource type="Curve" id="Curve_fcotu"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_uukg0"]
+curve = SubResource("Curve_fcotu")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3fryt"]
+particle_flag_align_y = true
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 400.0
+initial_velocity_max = 600.0
+gravity = Vector3(0, 0, 0)
+damping_min = 500.00003
+damping_max = 500.00003
+scale_min = 0.29999998
+scale_max = 0.29999998
+alpha_curve = SubResource("CurveTexture_uukg0")
+
+[node name="Nexus" type="StaticBody2D" node_paths=PackedStringArray("HP", "Anims") groups=["playerteam"]]
+script = ExtResource("1_npyyr")
+HP = NodePath("HPComponent")
+Anims = NodePath("AnimationPlayer")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_6rwgm")
+
+[node name="Radius" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_50umu")
+scale = Vector2(1.57, 1.57)
+texture = ExtResource("2_upiol")
+
+[node name="Center" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_3yi2p")
+scale = Vector2(0.76, 0.76)
+texture = ExtResource("2_upiol")
+
+[node name="PassiveSwirl" type="GPUParticles2D" parent="."]
+amount = 16
+texture = ExtResource("2_upiol")
+lifetime = 4.0
+process_material = SubResource("ParticleProcessMaterial_3s3eb")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+color = Color(0.63529414, 0, 0, 1)
+energy = 5.0
+texture = ExtResource("4_j16j4")
+height = 30.0
+
+[node name="HPComponent" parent="." instance=ExtResource("6_h76f6")]
+position = Vector2(0, -110)
+Length = 100.0
+Height = 20.0
+MaxHP = 500.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_w6aiu")
+}
+
+[node name="Hit" type="GPUParticles2D" parent="."]
+material = SubResource("ShaderMaterial_ojxid")
+emitting = false
+amount = 3000
+texture = ExtResource("2_upiol")
+process_material = SubResource("ParticleProcessMaterial_3fryt")
