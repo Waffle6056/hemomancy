@@ -10,9 +10,9 @@ public partial class BloodSimCPU : Node2D
     [Export]
     uint MaxEnemyCount = 1000;
     [Export]
-    uint MaxParticleCount = 10;
+    uint MaxParticleCount = 10000;
     [Export]
-    uint MaxMomentaryInstantiationPositions = 10;
+    uint MaxMomentaryInstantiationPositions = 100;
     // first ind is the sum, subsequent indexes are the amount of particles instantiated at the corresponding position minus 1 in InstantiatePosition
     // done this way so its easy to update the buffer ᓚᘏᗢ
     int[] ToInstantiate; 
@@ -22,7 +22,7 @@ public partial class BloodSimCPU : Node2D
     ImageTexture[] samplePatterns = new ImageTexture[16];
     [Export]
     uint MaxFieldCount = 1000;
-    RenderingDevice Renderer = RenderingServer.CreateLocalRenderingDevice();
+    RenderingDevice Renderer = RenderingServer.GetRenderingDevice();
 
     enum ByteCount
     {
@@ -176,6 +176,8 @@ public partial class BloodSimCPU : Node2D
         }
 
         data.Add(patternUniform);
+        Display.Multimesh.InstanceCount = (int)MaxParticleCount;
+        data.Add(NewUniform(RenderingServer.MultimeshGetBufferRdRid(Display.Multimesh.GetRid())));
 
         return Renderer.UniformSetCreate(data, Shader,0);
 	}
@@ -192,7 +194,7 @@ public partial class BloodSimCPU : Node2D
         Renderer.ComputeListBindUniformSet(Computelist,UniformSet, 0);
         Renderer.ComputeListDispatch(Computelist, xGroups: MaxParticleCount, yGroups: 1, zGroups: 1);
         Renderer.ComputeListEnd();
-        Renderer.Submit();
+        //Renderer.Submit();
     }
 
     void ProcessOutputDamageData(byte[] array)
@@ -264,13 +266,12 @@ public partial class BloodSimCPU : Node2D
         UpdateEnemyData(delta);
         UpdateParticleData(delta);
         UpdatePlayerData(delta);
-        RunCompute();
+        RenderingServer.CallOnRenderThread(Callable.From(() => { RunCompute(); }));
     }
     public override void _Ready()
 	{
 		Shader = CompileShader("res://hemomancy/bloodsim.glsl");
         InitializeCompute();
-        Renderer.Submit();
 
     }
     String bufferToString<e>(Rid buffer, ByteCount type)
@@ -291,23 +292,25 @@ public partial class BloodSimCPU : Node2D
         {
             UpdateSimulation(timer);
             timer = 0;
-            Renderer.Sync();
 
-            byte[] array = Renderer.BufferGetData(Particle.Position);
-            float[] vecArray = new float[array.Length / (int)ByteCount.glfloat];
-            Buffer.BlockCopy(array, 0, vecArray, 0, array.Length);
-            for (int i = 0; i < vecArray.Length; i += 2)
-            {
-                Display.Multimesh.SetInstanceTransform2D(i / 2, Transform2D.Identity.Translated(new Vector2(vecArray[i], vecArray[i + 1])));
-            }
+            //byte[] array = Renderer.BufferGetData(Particle.Position);
+            //float[] vecArray = new float[array.Length / (int)ByteCount.glfloat];
+            //Buffer.BlockCopy(array, 0, vecArray, 0, array.Length);
+            //for (int i = 0; i < vecArray.Length; i += 2)
+            //{
+            //    Display.Multimesh.SetInstanceTransform2D(i / 2, Transform2D.Identity.Translated(new Vector2(vecArray[i], vecArray[i + 1])));
+            //}
+            //GD.Print("multimesh: " + bufferToString<float>(RenderingServer.MultimeshGetBufferRdRid(Display.Multimesh.GetRid()), ByteCount.glfloat));
+
         }
         //GD.Print("instantiatePositions: " + bufferToString<float>(Particle.InstantiatePosition, ByteCount.glfloat));
         //GD.Print("positions: " + bufferToString<float>(Particle.Position, ByteCount.glfloat));
         //printBuffer<int>(Particle.ToInstantiate, ByteCount.glint);
+
         //GD.Print();
 
         if (Input.IsActionJustPressed("F"))
-            InstantiateParticles(2, Player.instance.GlobalPosition);
+            InstantiateParticles(100, Player.instance.GlobalPosition);
         if (Input.IsActionJustPressed("P"))
         {
             

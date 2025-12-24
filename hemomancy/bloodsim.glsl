@@ -66,6 +66,11 @@ layout(set = 0,binding = 13) restrict buffer PlayerFieldSize{
 
 
 layout(binding = 14) uniform sampler2D patterns[16];//vector2, arbitrary value defining whether the vector is force or velocity, inherited velocity value
+
+layout(binding = 15) restrict buffer MultiMeshBuffer{
+	mat2x4[] transforms;
+} multi_mesh_transforms;
+
 float FORCE_VECTOR = 1.0;
 float VELOCITY_VECTOR = 0.0;
 float FRICTION_COEFFICIENT = 10.0;
@@ -78,6 +83,7 @@ float rand(vec2 co)
 void main() {
 
     uint particle_ind = gl_GlobalInvocationID.x;
+	multi_mesh_transforms.transforms[particle_ind] = mat2x4(0);
 	if (particle_in_use.in_use[particle_ind] == false){ // instantiates this invocation as a new particle if not in use and new particles are queued
 		int count_left = atomicAdd(particle_to_instantiate.count_to_instantiate,-1);
 		if (count_left > 0){
@@ -123,7 +129,10 @@ void main() {
 		particle_velocity.velocity[particle_ind] += player_field_velocity.field_velocity[field_ind] * max_inheritance_value;
 	}
 	particle_position.position[particle_ind] = particle_pos += particle_velocity.velocity[particle_ind] * particle_misc.delta_time;
-
+	multi_mesh_transforms.transforms[particle_ind][0][0] =  1;
+	multi_mesh_transforms.transforms[particle_ind][1][1] =  1;
+	multi_mesh_transforms.transforms[particle_ind][0][3] =  particle_pos.x;
+	multi_mesh_transforms.transforms[particle_ind][1][3] =  particle_pos.y;
 	if (field_ind != -1)
 		particle_velocity.velocity[particle_ind] -= player_field_velocity.field_velocity[field_ind] * max_inheritance_value;
 	particle_velocity.velocity[particle_ind] -= FRICTION_COEFFICIENT * particle_misc.mass[particle_ind] * particle_misc.delta_time;
