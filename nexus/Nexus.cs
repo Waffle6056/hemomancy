@@ -5,6 +5,8 @@ public partial class Nexus : Node2D, HasHP
 {
     public static Nexus instance;
     [Export]
+    public float ParticleHitboxRadius { get; set; } = 34;
+    [Export]
     public HpComponent HP { get; set; }
     [Export]
     public AnimationPlayer Anims;

@@ -1,0 +1,35 @@
+[gd_scene load_steps=8 format=3 uid="uid://bm06sc7clrtou"]
+
+[ext_resource type="Texture2D" uid="uid://blx08pj0g0x6k" path="res://icon.svg" id="1_6b75d"]
+[ext_resource type="Shader" uid="uid://bkaao0mkld0l4" path="res://hemomancy/particletest.gdshader" id="1_44s4y"]
+[ext_resource type="Script" uid="uid://bx7cmujnwj2v0" path="res://hemomancy/BloodSimCPU.cs" id="1_k6j45"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6b75d"]
+shader = ExtResource("1_44s4y")
+shader_parameter/particle_positions = Vector3(0, 0, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k6j45"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_k6j45"]
+material = SubResource("StandardMaterial3D_k6j45")
+size = Vector2(10, 10)
+
+[sub_resource type="MultiMesh" id="MultiMesh_6b75d"]
+instance_count = 10
+visible_instance_count = 10
+mesh = SubResource("QuadMesh_k6j45")
+buffer = PackedFloat32Array(1e-45, 0, 2.1e-44, 2e-44, 1e-45, 1.8e-44, 3e-45, 1e-45, 2e-44, 1.8e-44, 3e-45, 1.7e-44, 4e-45, 3e-45, 1.8e-44, 1.7e-44, 4e-45, 1.5e-44, 6e-45, 4e-45, 1.7e-44, 1.5e-44, 6e-45, 1.4e-44, 7e-45, 6e-45, 1.5e-44, 1.4e-44, 7e-45, 1.3e-44, 8e-45, 7e-45, 1.4e-44, 1.3e-44, 8e-45, 1.1e-44, 1e-44, 8e-45, 1.3e-44, 1.1e-44, 2e-44, 0, 2.1e-44, 2.1e-44, 1e-45, 0, 2.2e-44, 3.1e-44, 2.4e-44, 2.2e-44, 3.2e-44, 3.1e-44, 2.4e-44, 3e-44, 2.5e-44, 2.4e-44, 3.1e-44, 3e-44, 2.5e-44, 2.8e-44, 2.7e-44, 2.5e-44, 3e-44, 2.8e-44, 9.1835e-41, 3e-45, 2.75509e-40, 3e-44, 0, 0, 1, 0, 1, 1, 0, 1, 3e-44, 2.8e-44, 0.0018436876, 0.0483871)
+
+[node name="Node2D" type="Node2D" node_paths=PackedStringArray("Display")]
+script = ExtResource("1_k6j45")
+Display = NodePath("MultiMeshInstance2D")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+visible = false
+texture = ExtResource("1_6b75d")
+lifetime = 5.0
+process_material = SubResource("ShaderMaterial_6b75d")
+
+[node name="MultiMeshInstance2D" type="MultiMeshInstance2D" parent="."]
+multimesh = SubResource("MultiMesh_6b75d")
+texture = ExtResource("1_6b75d")

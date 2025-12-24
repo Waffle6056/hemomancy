@@ -1,30 +1,34 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\godot\\hemomancy\\",
+  "WorkspaceRootPath": "C:\\Users\\Tyler\\Desktop\\hemomancy\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|d:\\godot\\hemomancy\\hemomancy\\bloodsim.glsl||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|solutionrelative:hemomancy\\bloodsim.glsl||{8B382828-6202-11D1-8870-0000F87579D2}"
+      "AbsoluteMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|c:\\users\\tyler\\desktop\\hemomancy\\hemomancy\\bloodsimcpu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|solutionrelative:hemomancy\\bloodsimcpu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|d:\\godot\\hemomancy\\camera2d.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|solutionrelative:camera2d.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|c:\\users\\tyler\\desktop\\hemomancy\\player\\hpcomponent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|solutionrelative:player\\hpcomponent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|d:\\godot\\hemomancy\\nexus\\nexus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|c:\\users\\tyler\\desktop\\hemomancy\\enemy_controller\\meleeenemy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|solutionrelative:enemy_controller\\meleeenemy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|c:\\users\\tyler\\desktop\\hemomancy\\nexus\\nexus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|solutionrelative:nexus\\nexus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|d:\\godot\\hemomancy\\player\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|c:\\users\\tyler\\desktop\\hemomancy\\player\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|solutionrelative:player\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|d:\\godot\\hemomancy\\player\\meleeenemy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|solutionrelative:player\\meleeenemy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|c:\\users\\tyler\\desktop\\hemomancy\\hemomancy\\bloodsim.glsl||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|solutionrelative:hemomancy\\bloodsim.glsl||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|d:\\godot\\hemomancy\\player\\hpcomponent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|solutionrelative:player\\hpcomponent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|c:\\users\\tyler\\desktop\\hemomancy\\camera2d.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|solutionrelative:camera2d.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,36 +38,46 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "Player.cs",
-              "DocumentMoniker": "D:\\godot\\hemomancy\\player\\Player.cs",
+              "DocumentMoniker": "C:\\Users\\Tyler\\Desktop\\hemomancy\\player\\Player.cs",
               "RelativeDocumentMoniker": "player\\Player.cs",
-              "ToolTip": "D:\\godot\\hemomancy\\player\\Player.cs",
+              "ToolTip": "C:\\Users\\Tyler\\Desktop\\hemomancy\\player\\Player.cs",
               "RelativeToolTip": "player\\Player.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAAEAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-12-05T02:07:27.039Z",
-              "IsPinned": true
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+              "IsPinned": true,
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "bloodsim.glsl",
-              "DocumentMoniker": "D:\\godot\\hemomancy\\hemomancy\\bloodsim.glsl",
-              "RelativeDocumentMoniker": "hemomancy\\bloodsim.glsl",
-              "ToolTip": "D:\\godot\\hemomancy\\hemomancy\\bloodsim.glsl",
-              "RelativeToolTip": "hemomancy\\bloodsim.glsl",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-12-05T22:26:30.235Z",
+              "Title": "BloodSimCPU.cs",
+              "DocumentMoniker": "C:\\Users\\Tyler\\Desktop\\hemomancy\\hemomancy\\BloodSimCPU.cs",
+              "RelativeDocumentMoniker": "hemomancy\\BloodSimCPU.cs",
+              "ToolTip": "C:\\Users\\Tyler\\Desktop\\hemomancy\\hemomancy\\BloodSimCPU.cs",
+              "RelativeToolTip": "hemomancy\\BloodSimCPU.cs",
+              "ViewState": "AgIAABkAAAAAAAAAAAAgwCMAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-24T01:39:42.122Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "MeleeEnemy.cs",
+              "DocumentMoniker": "C:\\Users\\Tyler\\Desktop\\hemomancy\\enemy_controller\\MeleeEnemy.cs",
+              "RelativeDocumentMoniker": "enemy_controller\\MeleeEnemy.cs",
+              "ToolTip": "C:\\Users\\Tyler\\Desktop\\hemomancy\\enemy_controller\\MeleeEnemy.cs",
+              "RelativeToolTip": "enemy_controller\\MeleeEnemy.cs",
+              "ViewState": "AgIAAEIAAAAAAAAAAAAmwBQAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-22T10:29:08.546Z",
               "EditorCaption": ""
             },
             {
@@ -71,58 +85,88 @@
               "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
             },
             {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "MeleeEnemy.cs",
-              "DocumentMoniker": "D:\\godot\\hemomancy\\player\\MeleeEnemy.cs",
-              "RelativeDocumentMoniker": "player\\MeleeEnemy.cs",
-              "ToolTip": "D:\\godot\\hemomancy\\player\\MeleeEnemy.cs",
-              "RelativeToolTip": "player\\MeleeEnemy.cs",
-              "ViewState": "AgIAAAoAAAAAAAAAAAAgwCQAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-05T05:03:04.934Z"
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
+              "Title": "HpComponent.cs",
+              "DocumentMoniker": "C:\\Users\\Tyler\\Desktop\\hemomancy\\player\\HpComponent.cs",
+              "RelativeDocumentMoniker": "player\\HpComponent.cs",
+              "ToolTip": "C:\\Users\\Tyler\\Desktop\\hemomancy\\player\\HpComponent.cs",
+              "RelativeToolTip": "player\\HpComponent.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAA9AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-05T04:39:38.949Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "Nexus.cs",
-              "DocumentMoniker": "D:\\godot\\hemomancy\\nexus\\Nexus.cs",
+              "DocumentMoniker": "C:\\Users\\Tyler\\Desktop\\hemomancy\\nexus\\Nexus.cs",
               "RelativeDocumentMoniker": "nexus\\Nexus.cs",
-              "ToolTip": "D:\\godot\\hemomancy\\nexus\\Nexus.cs",
+              "ToolTip": "C:\\Users\\Tyler\\Desktop\\hemomancy\\nexus\\Nexus.cs",
               "RelativeToolTip": "nexus\\Nexus.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAnAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAA5AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-12-05T04:55:15.1Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "HpComponent.cs",
-              "DocumentMoniker": "D:\\godot\\hemomancy\\player\\HpComponent.cs",
-              "RelativeDocumentMoniker": "player\\HpComponent.cs",
-              "ToolTip": "D:\\godot\\hemomancy\\player\\HpComponent.cs",
-              "RelativeToolTip": "player\\HpComponent.cs",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAowCEAAAAhAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-05T04:39:38.949Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 6,
               "Title": "Camera2d.cs",
-              "DocumentMoniker": "D:\\godot\\hemomancy\\Camera2d.cs",
+              "DocumentMoniker": "C:\\Users\\Tyler\\Desktop\\hemomancy\\Camera2d.cs",
               "RelativeDocumentMoniker": "Camera2d.cs",
-              "ToolTip": "D:\\godot\\hemomancy\\Camera2d.cs",
+              "ToolTip": "C:\\Users\\Tyler\\Desktop\\hemomancy\\Camera2d.cs",
               "RelativeToolTip": "Camera2d.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-05T02:17:17.098Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-05T02:17:17.098Z"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
             },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "FloatingWindowState": {
+        "Id": "d531f3ed-2c7c-4ff7-bb9e-4aaff049009f",
+        "Display": 0,
+        "X": 809,
+        "Y": 42,
+        "Width": 1539,
+        "Height": 803,
+        "WindowState": 0
+      },
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "bloodsim.glsl",
+              "DocumentMoniker": "C:\\Users\\Tyler\\Desktop\\hemomancy\\hemomancy\\bloodsim.glsl",
+              "RelativeDocumentMoniker": "hemomancy\\bloodsim.glsl",
+              "ToolTip": "C:\\Users\\Tyler\\Desktop\\hemomancy\\hemomancy\\bloodsim.glsl",
+              "RelativeToolTip": "hemomancy\\bloodsim.glsl",
+              "ViewState": "AgIAAFEAAAAAAAAAAAAAAEMAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-12-05T22:26:30.235Z",
+              "EditorCaption": ""
             }
           ]
         }

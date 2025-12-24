@@ -7,6 +7,8 @@ public partial class Player : CharacterBody2D, HasHP
 	public static Player instance;
     [Export]
     public HpComponent HP { get; set; }
+	[Export]
+	public float ParticleHitboxRadius { get; set; } = 25f;
     [Export]
     public float Speed = 100.0f;
 	[Export]
@@ -25,6 +27,7 @@ public partial class Player : CharacterBody2D, HasHP
     double FootStepTimer = 0;
     public override void _Ready()
     {
+		HasHP.EntityList.Add(this);
 		Player.instance = this;
         base._Ready();
 		HP.Hit += hitParticles;

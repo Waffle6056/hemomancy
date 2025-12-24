@@ -6,6 +6,8 @@ public partial class MeleeEnemy : CharacterBody2D, HasHP
     [Export]
     public HpComponent HP { get; set; }
     [Export]
+    public float ParticleHitboxRadius { get; set; } = 38.21f;
+    [Export]
     public float Speed = 100.0f;
     [Export]
     public AnimationPlayer Anims;
@@ -16,7 +18,7 @@ public partial class MeleeEnemy : CharacterBody2D, HasHP
     [Export]
     public float NearRadius = 50f;
     [Export]
-    public float ContactDamage = 50f;
+    public int ContactDamage = 50;
     [Export]
     public GpuParticles2D FootStepEmitter;
     int FootStepSide = 1;
@@ -25,6 +27,7 @@ public partial class MeleeEnemy : CharacterBody2D, HasHP
     double FootStepTimer = 0;
     public override void _Ready()
     {
+        HasHP.EntityList.Add(this);
         base._Ready();
         HP.Hit += hitParticles;
     }

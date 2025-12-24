@@ -1,10 +1,14 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 public interface HasHP
-    {
-        [Export]
-        public HpComponent HP { get; set; }
-    }
+{
+    public static List<HasHP> EntityList = new List<HasHP>();
+    [Export]
+    public float ParticleHitboxRadius { get; set; }
+    [Export]
+    public HpComponent HP { get; set; }
+}
 public partial class HpComponent : Node2D
 {
     [Signal]
@@ -17,8 +21,8 @@ public partial class HpComponent : Node2D
     public float Padding = 10;
 
     [Export]
-    public float MaxHP = 200;
-    public float HP = 200;
+    public int MaxHP = 200;
+    public int HP = 200;
     [Export]
 	public Sprite2D HPDisplay = null;
     [Export]
@@ -45,8 +49,9 @@ public partial class HpComponent : Node2D
         HPDisplay.Scale = new Vector2(Math.Max(0,Length*HP/MaxHP - Padding), Height-Padding);
         Pivot.Position = new Vector2(0,(float)Math.Sin(time*WaveTimeScale)*WaveLength);
     }
-    public void TakeDamage(float amount)
+    public void TakeDamage(int amount)
     {
+        GD.Print("hit for " + amount);
         HP -= amount;
         EmitSignal(SignalName.Hit);
     }

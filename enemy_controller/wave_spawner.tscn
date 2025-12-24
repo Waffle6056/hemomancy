@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cuq7emhxxttsc"]
+
+[ext_resource type="Script" uid="uid://by8jebfwclap6" path="res://enemy_controller/WaveSpawner.cs" id="1_mvslf"]
+
+[node name="wave_spawner" type="Node2D"]
+script = ExtResource("1_mvslf")
