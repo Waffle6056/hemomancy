@@ -1,9 +1,33 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
+
 public interface HasHP
 {
     public static List<HasHP> EntityList = new List<HasHP>();
+    public static HashSet<int> ActiveIndexes = new HashSet<int>();
+    public static Queue<int> InactiveIndexes = new Queue<int>();
+    public static Queue<int> InactiveQueued = new Queue<int>();
+    static int Register(HasHP instance)
+    {
+        int HPIndex = 0;
+		if (HasHP.InactiveIndexes.Count > 0)
+			HPIndex = HasHP.InactiveIndexes.Dequeue();
+		else {
+			HPIndex = HasHP.EntityList.Count;
+			HasHP.EntityList.Add(instance);
+		}
+        HasHP.EntityList[HPIndex] = instance;
+		HasHP.ActiveIndexes.Add(HPIndex);
+        return HPIndex;
+    }
+    static void Deregister(int HPIndex)
+    {
+		HasHP.InactiveQueued.Enqueue(HPIndex);
+		HasHP.ActiveIndexes.Remove(HPIndex);
+    }
+    public int HPIndex { get; set; }
     [Export]
     public float ParticleHitboxRadius { get; set; }
     [Export]
@@ -51,7 +75,7 @@ public partial class HpComponent : Node2D
     }
     public void TakeDamage(int amount)
     {
-        GD.Print("hit for " + amount);
+        //GD.Print("hit for " + amount);
         HP -= amount;
         EmitSignal(SignalName.Hit);
     }

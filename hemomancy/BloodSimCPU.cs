@@ -3,14 +3,14 @@ using Godot.NativeInterop;
 using System;
 using System.Linq;
 
-public partial class BloodSimCPU : Node2D
+public partial class BloodSimCPU : Node
 {
     [Export]
     MultiMeshInstance2D Display;
     [Export]
     uint MaxEnemyCount = 1000;
     [Export]
-    uint MaxParticleCount = 10000;
+    uint MaxParticleCount = 1000000;
     [Export]
     uint MaxMomentaryInstantiationPositions = 100;
     // first ind is the sum, subsequent indexes are the amount of particles instantiated at the corresponding position minus 1 in InstantiatePosition
@@ -19,7 +19,9 @@ public partial class BloodSimCPU : Node2D
     Vector2[] InstantiatePosition;
     int InstantiateInd = 0;
     [Export]
-    ImageTexture[] samplePatterns = new ImageTexture[16];
+    ImageTexture[] PatternData = new ImageTexture[16];
+    [Export]
+    ImageTexture[] PatternData2 = new ImageTexture[16];
     [Export]
     uint MaxFieldCount = 1000;
     RenderingDevice Renderer = RenderingServer.GetRenderingDevice();
@@ -31,6 +33,7 @@ public partial class BloodSimCPU : Node2D
         glfloat = 4,
         glbool = 4,
         glint = 4,
+        gltransform2d = 24,
 
     }
     // Called when the node enters the scene tree for the first time.
@@ -57,15 +60,17 @@ public partial class BloodSimCPU : Node2D
     particleStruct Particle;
     struct playerStruct
     {
-        public Rid FieldPosition;
-        public Rid FieldVelocity;
+        public Rid FieldTransform;
+        public Rid FieldVelocityRot;
         public Rid FieldMagnitude;
         public Rid PatternIndex;
-        public Rid FieldSize;
     }
     playerStruct PlayerInput;
     Rid[] Sampler = new Rid[16];
     Rid[] Patterns = new Rid[16];
+    Rid[] Sampler2 = new Rid[16];
+    Rid[] Patterns2 = new Rid[16];
+
 
 
     Rid CompileShader(String file)
@@ -136,11 +141,10 @@ public partial class BloodSimCPU : Node2D
     Godot.Collections.Array<RDUniform> PlayerData()
     {
         Godot.Collections.Array<RDUniform> data = new Godot.Collections.Array<RDUniform>();
-        data.Add(NewUniform(PlayerInput.FieldPosition  = NewStorageBuffer(new byte[MaxFieldCount * (int)ByteCount.glvec2])));
-        data.Add(NewUniform(PlayerInput.FieldVelocity  = NewStorageBuffer(new byte[MaxFieldCount * (int)ByteCount.glvec2])));
-        data.Add(NewUniform(PlayerInput.FieldMagnitude = NewStorageBuffer(new byte[MaxFieldCount * (int)ByteCount.glfloat])));
-        data.Add(NewUniform(PlayerInput.PatternIndex   = NewStorageBuffer(new byte[MaxFieldCount * (int)ByteCount.glint])));
-        data.Add(NewUniform(PlayerInput.FieldSize      = NewStorageBuffer(new byte[MaxFieldCount * (int)ByteCount.glfloat])));
+        data.Add(NewUniform(PlayerInput.FieldTransform   = NewStorageBuffer(new byte[MaxFieldCount * (int)ByteCount.gltransform2d])));
+        data.Add(NewUniform(PlayerInput.FieldVelocityRot = NewStorageBuffer(new byte[MaxFieldCount * (int)ByteCount.glvec4])));
+        data.Add(NewUniform(PlayerInput.FieldMagnitude   = NewStorageBuffer(new byte[MaxFieldCount * (int)ByteCount.glfloat])));
+        data.Add(NewUniform(PlayerInput.PatternIndex     = NewStorageBuffer(new byte[MaxFieldCount * (int)ByteCount.glint])));
         return data;
     }
     Rid GetData()
@@ -152,16 +156,22 @@ public partial class BloodSimCPU : Node2D
         data.AddRange(PlayerData());
         RDTextureFormat format = new RDTextureFormat()
         {
-            Width = (uint)128,//samplePatterns[i].GetWidth(),
-            Height = (uint)128,//samplePatterns[i].GetHeight(),
+            Width = (uint)512,//samplePatterns[i].GetWidth(),
+            Height = (uint)512,//samplePatterns[i].GetHeight(),
             Depth = 16,
             TextureType = RenderingDevice.TextureType.Type2DArray,
-            Format = RenderingDevice.DataFormat.R4G4B4A4UnormPack16,
+            Format = RenderingDevice.DataFormat.R8G8B8A8Unorm,
             UsageBits = RenderingDevice.TextureUsageBits.CanUpdateBit | RenderingDevice.TextureUsageBits.SamplingBit,
         };
+        //GD.Print(PatternData[0].GetFormat());
 
 
         RDUniform patternUniform = new RDUniform
+        {
+            UniformType = RenderingDevice.UniformType.SamplerWithTexture,
+            Binding = bindingInd++
+        };
+        RDUniform patternUniform2 = new RDUniform
         {
             UniformType = RenderingDevice.UniformType.SamplerWithTexture,
             Binding = bindingInd++
@@ -173,9 +183,15 @@ public partial class BloodSimCPU : Node2D
             Patterns[i] = Renderer.TextureCreate(format, new RDTextureView());
             patternUniform.AddId(Sampler[i]);
             patternUniform.AddId(Patterns[i]);
+            Sampler2[i] = Renderer.SamplerCreate(samplerState);
+            Patterns2[i] = Renderer.TextureCreate(format, new RDTextureView());
+            patternUniform2.AddId(Sampler2[i]);
+            patternUniform2.AddId(Patterns2[i]);
         }
 
         data.Add(patternUniform);
+        data.Add(patternUniform2);
+        UpdatePatternData();
         Display.Multimesh.InstanceCount = (int)MaxParticleCount;
         data.Add(NewUniform(RenderingServer.MultimeshGetBufferRdRid(Display.Multimesh.GetRid())));
 
@@ -192,7 +208,7 @@ public partial class BloodSimCPU : Node2D
         Computelist = Renderer.ComputeListBegin();
         Renderer.ComputeListBindComputePipeline(Computelist, Pipeline);
         Renderer.ComputeListBindUniformSet(Computelist,UniformSet, 0);
-        Renderer.ComputeListDispatch(Computelist, xGroups: MaxParticleCount, yGroups: 1, zGroups: 1);
+        Renderer.ComputeListDispatch(Computelist, xGroups: 1000, yGroups: 1, zGroups: 1);
         Renderer.ComputeListEnd();
         //Renderer.Submit();
     }
@@ -201,7 +217,7 @@ public partial class BloodSimCPU : Node2D
     {
         int[] intArray = new int[array.Length / (int) ByteCount.glint];
         Buffer.BlockCopy(array, 0, intArray, 0, array.Length);
-        for (int i = 0; i < HasHP.EntityList.Count; i++)
+        foreach (int i in HasHP.ActiveIndexes)
         {
             HasHP node = HasHP.EntityList[i];
             if (intArray[i] > 0)
@@ -213,10 +229,12 @@ public partial class BloodSimCPU : Node2D
     {
         //ProcessOutputDamageData(Renderer.BufferGetData(Enemy.Damage));
         Renderer.BufferGetDataAsync(Enemy.Damage, Callable.From<byte[]>(ProcessOutputDamageData));
-        float[] positionData = new float[HasHP.EntityList.Count*2];
-        float[] radiusData = new float[HasHP.EntityList.Count];
-        int[] outputDamageData = new int[HasHP.EntityList.Count];
-        for (int i = 0; i < HasHP.EntityList.Count; i++)
+        while (HasHP.InactiveQueued.Count > 0)
+            HasHP.InactiveIndexes.Enqueue(HasHP.InactiveQueued.Dequeue());
+        float[] positionData   = new float[MaxEnemyCount * (int) ByteCount.glvec2 / (int) ByteCount.glfloat];
+        float[] radiusData     = new float[MaxEnemyCount];
+        int[]   outputDamageData = new int[MaxEnemyCount];
+        foreach (int i in HasHP.ActiveIndexes)
         {
             HasHP node = HasHP.EntityList[i];
             positionData[i*2] = (node as Node2D).Position.X;
@@ -242,7 +260,7 @@ public partial class BloodSimCPU : Node2D
 
     void UpdateParticleData(double delta)
     {
-        GD.Print("called");
+        //GD.Print("called");
         byte[] ToInstantiateBytes = ToByteArray(ToInstantiate, ByteCount.glint);
         byte[] InstantiatePositionBytes = ToByteArray(Vec2ToFloatArray(InstantiatePosition), ByteCount.glfloat);
         //GD.Print(ToInstantiate[0]);
@@ -257,10 +275,56 @@ public partial class BloodSimCPU : Node2D
 
         Renderer.BufferUpdate(Particle.Misc, 0, (uint)ByteCount.glfloat, BitConverter.GetBytes((float)delta));
     }
-    void UpdatePlayerData(double delta)
+    void UpdatePlayerData(double delta) 
     {
+        while (ManipulationField.InactiveQueued.Count > 0)
+            ManipulationField.InactiveIndexes.Enqueue(ManipulationField.InactiveQueued.Dequeue());
+        float[]   transformData    = new float[MaxFieldCount * (int) ByteCount.gltransform2d / (int) ByteCount.glfloat];
+        float[]   velocityRotData  = new float[MaxFieldCount * (int) ByteCount.glvec4 / (int) ByteCount.glfloat];
+        float[]   magnitudeData    = new float[MaxFieldCount];
+        int[]     patternIndexData = new int[MaxFieldCount];
+        foreach (int i in ManipulationField.ActiveIndexes)
+        {
+            ManipulationField node = ManipulationField.FieldList[i];
+
+            Transform2D test = node.GlobalTransform;
+
+            transformData[i * 6 + 0] =test[0][0]; 
+            transformData[i * 6 + 1] =test[0][1];  
+            transformData[i * 6 + 2] =test[1][0];
+            transformData[i * 6 + 3] =test[1][1];
+            transformData[i * 6 + 4] =test[2][0];
+            transformData[i * 6 + 5] =test[2][1];
+            velocityRotData[i*4+0] = node.Velocity.X;
+            velocityRotData[i*4+1] = node.Velocity.Y;
+
+            velocityRotData[i*4+2] = node.RotationSpeed;
+            magnitudeData[i] = node.Magnitude;
+            patternIndexData[i] = node.Pattern;
+        }
+        //GD.Print(String.Join(',', velocityRotData));
+        byte[] transformBytes    = ToByteArray(transformData, ByteCount.glfloat);
+        byte[] velocityRotBytes  = ToByteArray(velocityRotData, ByteCount.glfloat);
+        byte[] magnitudeBytes    = ToByteArray(magnitudeData,ByteCount.glfloat);
+        byte[] patternIndexBytes = ToByteArray(patternIndexData, ByteCount.glint);
+        Renderer.BufferUpdate(PlayerInput.FieldTransform   , 0, (uint) transformBytes.Length, transformBytes);
+        Renderer.BufferUpdate(PlayerInput.FieldVelocityRot , 0, (uint) velocityRotBytes.Length, velocityRotBytes);
+        Renderer.BufferUpdate(PlayerInput.FieldMagnitude   , 0, (uint) magnitudeBytes.Length, magnitudeBytes);
+        Renderer.BufferUpdate(PlayerInput.PatternIndex     , 0, (uint) patternIndexBytes.Length, patternIndexBytes);
         //TODO patterns
     }
+    
+    void UpdatePatternData()
+    {
+        for (int i = 0; i < Patterns.Length; i++)
+        {
+            if (PatternData[i] != null)
+                Renderer.TextureUpdate(Patterns[i], 0, PatternData[i].GetImage().GetData());
+            if (PatternData2[i] != null)
+                Renderer.TextureUpdate(Patterns2[i], 0, PatternData2[i].GetImage().GetData());
+        }
+    }
+
     void UpdateSimulation(double delta)
     {
         UpdateEnemyData(delta);
@@ -274,10 +338,10 @@ public partial class BloodSimCPU : Node2D
         InitializeCompute();
 
     }
-    String bufferToString<e>(Rid buffer, ByteCount type)
+    String bufferToString<E>(Rid buffer, ByteCount type)
     {
         byte[] array = Renderer.BufferGetData(buffer);
-        e[] vecArray = new e[array.Length / (int)type];
+        E[] vecArray = new E[array.Length / (int)type];
         Buffer.BlockCopy(array, 0, vecArray, 0, array.Length);
         return String.Join(",", vecArray);
 
@@ -310,10 +374,12 @@ public partial class BloodSimCPU : Node2D
         //GD.Print();
 
         if (Input.IsActionJustPressed("F"))
-            InstantiateParticles(100, Player.instance.GlobalPosition);
+            InstantiateParticles(1000, Player.instance.GlobalPosition);
         if (Input.IsActionJustPressed("P"))
         {
-            
+            GD.Print("field velo data : " +bufferToString<float>(PlayerInput.FieldVelocityRot,ByteCount.glfloat));
+            //GD.Print("mesh mat data : " +bufferToString<float>((RenderingServer.MultimeshGetBufferRdRid(Display.Multimesh.GetRid())),ByteCount.glfloat));
+
 
 
         }
@@ -334,11 +400,10 @@ public partial class BloodSimCPU : Node2D
         Renderer.FreeRid(Particle.ToInstantiate);
         Renderer.FreeRid(Particle.InstantiatePosition);
         Renderer.FreeRid(Particle.Misc);
-        Renderer.FreeRid(PlayerInput.FieldPosition);
-        Renderer.FreeRid(PlayerInput.FieldVelocity);
+        Renderer.FreeRid(PlayerInput.FieldTransform);
+        Renderer.FreeRid(PlayerInput.FieldVelocityRot);
         Renderer.FreeRid(PlayerInput.FieldMagnitude);
         Renderer.FreeRid(PlayerInput.PatternIndex);
-        Renderer.FreeRid(PlayerInput.FieldSize);
         for (int i = 0; i < 16; i++)
         {
             Renderer.FreeRid(Sampler[i]);

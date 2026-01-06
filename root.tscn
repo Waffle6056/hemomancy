@@ -67,7 +67,7 @@ texture = ExtResource("3_28aoi")
 [node name="bg" type="Sprite2D" parent="."]
 modulate = Color(0, 0, 0, 1)
 z_index = -2
-position = Vector2(292.5, 94.5)
+position = Vector2(301.00003, 59.000008)
 scale = Vector2(500, 500)
 texture = ExtResource("3_28aoi")
 
@@ -113,19 +113,16 @@ texture = ExtResource("5_jnlp7")
 texture_scale = 2.0
 height = 176.0
 
+[node name="Node2D" parent="." instance=ExtResource("9_huihk")]
+
 [node name="MeleeEnemy" parent="." instance=ExtResource("8_bf3um")]
-position = Vector2(954, -21)
+position = Vector2(787, 147)
 
 [node name="MeleeEnemy2" parent="." instance=ExtResource("8_bf3um")]
-position = Vector2(1005, 87)
+position = Vector2(992, 72)
 
 [node name="MeleeEnemy3" parent="." instance=ExtResource("8_bf3um")]
-position = Vector2(1035, -101)
+position = Vector2(822, -32)
 
 [node name="MeleeEnemy4" parent="." instance=ExtResource("8_bf3um")]
-position = Vector2(1120, 131)
-
-[node name="MeleeEnemy5" parent="." instance=ExtResource("8_bf3um")]
-position = Vector2(1164, -136)
-
-[node name="Node2D" parent="." instance=ExtResource("9_huihk")]
+position = Vector2(990, -99)

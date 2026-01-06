@@ -5,6 +5,7 @@ public partial class MeleeEnemy : CharacterBody2D, HasHP
 {
     [Export]
     public HpComponent HP { get; set; }
+    public int HPIndex { get; set; }
     [Export]
     public float ParticleHitboxRadius { get; set; } = 38.21f;
     [Export]
@@ -28,6 +29,7 @@ public partial class MeleeEnemy : CharacterBody2D, HasHP
     public override void _Ready()
     {
         HasHP.EntityList.Add(this);
+		HPIndex = HasHP.Register(this);
         base._Ready();
         HP.Hit += hitParticles;
     }
@@ -84,4 +86,9 @@ public partial class MeleeEnemy : CharacterBody2D, HasHP
         Velocity = velocity;
         MoveAndSlide();
     }
+    public override void _ExitTree()
+    {
+		HasHP.Deregister(HPIndex);
+        base._ExitTree();
+	}
 }

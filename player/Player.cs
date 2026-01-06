@@ -7,6 +7,7 @@ public partial class Player : CharacterBody2D, HasHP
 	public static Player instance;
     [Export]
     public HpComponent HP { get; set; }
+    public int HPIndex { get; set; }
 	[Export]
 	public float ParticleHitboxRadius { get; set; } = 25f;
     [Export]
@@ -15,6 +16,7 @@ public partial class Player : CharacterBody2D, HasHP
     public float DashDistance = 100.0f;
 	[Export]
 	public AnimationPlayer Anims;
+	
 	[Export]
 	public float FootStepInterval = .1f;
 	[Export]
@@ -22,20 +24,35 @@ public partial class Player : CharacterBody2D, HasHP
     [Export]
     public GpuParticles2D DashStepEmitter;
     int FootStepSide = 1;
-
-
     double FootStepTimer = 0;
+	[Export]
+	public ManipulationField Dagger;
+
     public override void _Ready()
     {
-		HasHP.EntityList.Add(this);
+		HPIndex = HasHP.Register(this);
 		Player.instance = this;
         base._Ready();
 		HP.Hit += hitParticles;
     }
+
 	public void hitParticles()
 	{
 		Anims.Play("hit");
 	}
+    public override void _Process(double delta)
+    {
+        base._Process(delta);
+		if (Input.IsActionJustPressed("R"))
+		{
+			ManipulationField f = Dagger.Duplicate() as ManipulationField;
+			AddSibling(f);
+			f.GlobalPosition = GlobalPosition + Vector2.Right.Rotated(Random.Shared.NextSingle() * 2 * (float)Math.PI) * 100;
+			f.Velocity = (GetGlobalMousePosition() - f.GlobalPosition).Normalized() * 700;
+			f.LookAt(GetGlobalMousePosition());
+			f.Rotate((float)Math.PI / 2);
+		}
+    }
     public override void _PhysicsProcess(double delta)
 	{
 
@@ -84,5 +101,11 @@ public partial class Player : CharacterBody2D, HasHP
 
 		Velocity = velocity;
 		MoveAndSlide();
+	}
+
+    public override void _ExitTree()
+    {
+		HasHP.Deregister(HPIndex);
+        base._ExitTree();
 	}
 }

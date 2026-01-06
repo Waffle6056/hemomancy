@@ -1,19 +1,51 @@
-[gd_scene load_steps=4 format=3 uid="uid://bb5si87v1rfnn"]
+[gd_scene load_steps=10 format=3 uid="uid://bb5si87v1rfnn"]
 
 [ext_resource type="Script" uid="uid://bgk5jtnpd6oev" path="res://environment/save_output.gd" id="1_4nc1y"]
-[ext_resource type="Shader" uid="uid://breppmuchtude" path="res://environment/circle.gdshader" id="2_4nc1y"]
+[ext_resource type="Shader" uid="uid://5s5ote5c3uh3" path="res://hemomancy/pattern_creator.gdshader" id="2_6nwbq"]
+[ext_resource type="Shader" uid="uid://ckwm2qvwrnvgn" path="res://hemomancy/blood.gdshader" id="2_qjrub"]
+[ext_resource type="Shader" uid="uid://b08cke1ssu5nt" path="res://environment/test.gdshader" id="3_d7lgd"]
+[ext_resource type="Texture2D" path="res://environment/circle.tres" id="3_u3qe7"]
+[ext_resource type="Texture2D" uid="uid://clipc67y40fhi" path="res://output.tres" id="4_d7lgd"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_wxhd8"]
-shader = ExtResource("2_4nc1y")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gs2jo"]
+shader = ExtResource("2_qjrub")
+shader_parameter/transparency_map = ExtResource("3_u3qe7")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hqx0d"]
+shader = ExtResource("2_6nwbq")
+shader_parameter/points = PackedVector2Array(0.5, 0.25, 0.4, 0.6, 0.5, 0.75, 0.6, 0.6, -1, -1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u3qe7"]
+shader = ExtResource("3_d7lgd")
+shader_parameter/test = ExtResource("4_d7lgd")
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_4nc1y")
 
 [node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
 render_target_update_mode = 4
 
+[node name="ColorRect3" type="ColorRect" parent="SubViewport"]
+material = SubResource("ShaderMaterial_gs2jo")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="ColorRect" type="ColorRect" parent="SubViewport"]
-material = SubResource("ShaderMaterial_wxhd8")
+visible = false
+material = SubResource("ShaderMaterial_hqx0d")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect2" type="ColorRect" parent="SubViewport"]
+visible = false
+material = SubResource("ShaderMaterial_u3qe7")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
