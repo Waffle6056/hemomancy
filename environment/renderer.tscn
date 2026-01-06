@@ -1,23 +1,42 @@
-[gd_scene load_steps=10 format=3 uid="uid://bb5si87v1rfnn"]
+[gd_scene load_steps=14 format=3 uid="uid://bb5si87v1rfnn"]
 
 [ext_resource type="Script" uid="uid://bgk5jtnpd6oev" path="res://environment/save_output.gd" id="1_4nc1y"]
-[ext_resource type="Shader" uid="uid://5s5ote5c3uh3" path="res://hemomancy/pattern_creator.gdshader" id="2_6nwbq"]
+[ext_resource type="Shader" uid="uid://5s5ote5c3uh3" path="res://hemomancy/patterns/pattern_creator.gdshader" id="2_6nwbq"]
 [ext_resource type="Shader" uid="uid://ckwm2qvwrnvgn" path="res://hemomancy/blood.gdshader" id="2_qjrub"]
 [ext_resource type="Shader" uid="uid://b08cke1ssu5nt" path="res://environment/test.gdshader" id="3_d7lgd"]
 [ext_resource type="Texture2D" path="res://environment/circle.tres" id="3_u3qe7"]
-[ext_resource type="Texture2D" uid="uid://clipc67y40fhi" path="res://output.tres" id="4_d7lgd"]
+[ext_resource type="Texture2D" uid="uid://5kv2q7ahgnal" path="res://hemomancy/patterns/condensation/condensation2.tres" id="4_d7lgd"]
+[ext_resource type="Shader" uid="uid://ddcdkciy8xvr1" path="res://hemomancy/patterns/condensation/condensation.gdshader" id="7_gs2jo"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gs2jo"]
 shader = ExtResource("2_qjrub")
 shader_parameter/transparency_map = ExtResource("3_u3qe7")
+shader_parameter/transparency_offset = -0.2
+shader_parameter/pulse_magnitude = 0.1
+shader_parameter/red_range = 0.3
+shader_parameter/red_offset = 0.2
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hqx0d"]
 shader = ExtResource("2_6nwbq")
-shader_parameter/points = PackedVector2Array(0.5, 0.25, 0.4, 0.6, 0.5, 0.75, 0.6, 0.6, -1, -1)
+shader_parameter/points = PackedVector2Array(0.5, 0.45, 0.47, 0.5, 0.5, 0.54, 0.53, 0.5, -1, -1)
+shader_parameter/padding = 0.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_u3qe7"]
 shader = ExtResource("3_d7lgd")
 shader_parameter/test = ExtResource("4_d7lgd")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_gs2jo"]
+noise_type = 2
+frequency = 0.0085
+fractal_octaves = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_lhxa0"]
+noise = SubResource("FastNoiseLite_gs2jo")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lhxa0"]
+shader = ExtResource("7_gs2jo")
+shader_parameter/transparency_map = SubResource("NoiseTexture2D_lhxa0")
+shader_parameter/transparency_offset = -0.69
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_4nc1y")
@@ -26,7 +45,8 @@ script = ExtResource("1_4nc1y")
 transparent_bg = true
 render_target_update_mode = 4
 
-[node name="ColorRect3" type="ColorRect" parent="SubViewport"]
+[node name="blood" type="ColorRect" parent="SubViewport"]
+visible = false
 material = SubResource("ShaderMaterial_gs2jo")
 anchors_preset = 15
 anchor_right = 1.0
@@ -34,7 +54,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ColorRect" type="ColorRect" parent="SubViewport"]
+[node name="pattern maker" type="ColorRect" parent="SubViewport"]
 visible = false
 material = SubResource("ShaderMaterial_hqx0d")
 anchors_preset = 15
@@ -43,9 +63,26 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ColorRect2" type="ColorRect" parent="SubViewport"]
+[node name="test" type="ColorRect" parent="SubViewport"]
 visible = false
 material = SubResource("ShaderMaterial_u3qe7")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="condensation pattern" type="ColorRect" parent="SubViewport"]
+material = SubResource("ShaderMaterial_lhxa0")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="blank" type="ColorRect" parent="SubViewport"]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

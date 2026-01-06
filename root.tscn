@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bts6u3u7dti3b"]
+[gd_scene load_steps=17 format=3 uid="uid://bts6u3u7dti3b"]
 
 [ext_resource type="PackedScene" uid="uid://cl5catww2oaat" path="res://nexus/nexus.tscn" id="1_pq8q7"]
 [ext_resource type="Shader" uid="uid://dnl2w1yljscwm" path="res://environment/brick.gdshader" id="2_vvh5c"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://ck53mxrcnk2al" path="res://Camera2d.cs" id="5_vyht1"]
 [ext_resource type="PackedScene" uid="uid://dd058p1sdspnc" path="res://enemy_controller/melee_enemy.tscn" id="8_bf3um"]
 [ext_resource type="PackedScene" uid="uid://bm06sc7clrtou" path="res://hemomancy/blood.tscn" id="9_huihk"]
+[ext_resource type="PackedScene" uid="uid://cgxyxbdgd214l" path="res://hemomancy/patterns/dagger/dagger.tscn" id="10_tw3kd"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_jnlp7"]
 noise_type = 2
@@ -126,3 +127,9 @@ position = Vector2(822, -32)
 
 [node name="MeleeEnemy4" parent="." instance=ExtResource("8_bf3um")]
 position = Vector2(990, -99)
+
+[node name="dagger" parent="." instance=ExtResource("10_tw3kd")]
+visible = false
+position = Vector2(480, -98)
+VelocityMagnitude = 500.0
+AccelerationMagnitude = 100.0

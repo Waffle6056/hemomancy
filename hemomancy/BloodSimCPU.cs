@@ -143,7 +143,7 @@ public partial class BloodSimCPU : Node
         Godot.Collections.Array<RDUniform> data = new Godot.Collections.Array<RDUniform>();
         data.Add(NewUniform(PlayerInput.FieldTransform   = NewStorageBuffer(new byte[MaxFieldCount * (int)ByteCount.gltransform2d])));
         data.Add(NewUniform(PlayerInput.FieldVelocityRot = NewStorageBuffer(new byte[MaxFieldCount * (int)ByteCount.glvec4])));
-        data.Add(NewUniform(PlayerInput.FieldMagnitude   = NewStorageBuffer(new byte[MaxFieldCount * (int)ByteCount.glfloat])));
+        data.Add(NewUniform(PlayerInput.FieldMagnitude   = NewStorageBuffer(new byte[MaxFieldCount * (int)ByteCount.glvec2])));
         data.Add(NewUniform(PlayerInput.PatternIndex     = NewStorageBuffer(new byte[MaxFieldCount * (int)ByteCount.glint])));
         return data;
     }
@@ -208,7 +208,7 @@ public partial class BloodSimCPU : Node
         Computelist = Renderer.ComputeListBegin();
         Renderer.ComputeListBindComputePipeline(Computelist, Pipeline);
         Renderer.ComputeListBindUniformSet(Computelist,UniformSet, 0);
-        Renderer.ComputeListDispatch(Computelist, xGroups: 1000, yGroups: 1, zGroups: 1);
+        Renderer.ComputeListDispatch(Computelist, xGroups: MaxParticleCount, yGroups: 1, zGroups: 1);
         Renderer.ComputeListEnd();
         //Renderer.Submit();
     }
@@ -281,7 +281,7 @@ public partial class BloodSimCPU : Node
             ManipulationField.InactiveIndexes.Enqueue(ManipulationField.InactiveQueued.Dequeue());
         float[]   transformData    = new float[MaxFieldCount * (int) ByteCount.gltransform2d / (int) ByteCount.glfloat];
         float[]   velocityRotData  = new float[MaxFieldCount * (int) ByteCount.glvec4 / (int) ByteCount.glfloat];
-        float[]   magnitudeData    = new float[MaxFieldCount];
+        float[]   magnitudeData    = new float[MaxFieldCount * (int) ByteCount.glvec2 / (int) ByteCount.glfloat];
         int[]     patternIndexData = new int[MaxFieldCount];
         foreach (int i in ManipulationField.ActiveIndexes)
         {
@@ -299,7 +299,8 @@ public partial class BloodSimCPU : Node
             velocityRotData[i*4+1] = node.Velocity.Y;
 
             velocityRotData[i*4+2] = node.RotationSpeed;
-            magnitudeData[i] = node.Magnitude;
+            magnitudeData[i*2+0] = node.VelocityMagnitude;
+            magnitudeData[i*2+1] = node.AccelerationMagnitude;
             patternIndexData[i] = node.Pattern;
         }
         //GD.Print(String.Join(',', velocityRotData));
@@ -348,12 +349,41 @@ public partial class BloodSimCPU : Node
     }
     double timer = 0;
     double interval = 1/24f;
+    bool toggle = false;
+    double toggleFrequency = 250;
+    double toggleHeld = 0;
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+        //GD.Print();
+        if (Input.IsActionJustPressed("1"))
+        {
+            toggle = !toggle;
+        }
+
+        if (Input.IsActionJustPressed("2"))
+            InstantiateParticles(1000, Player.instance.GlobalPosition);
+        if (Input.IsActionJustPressed("P"))
+        {
+            GD.Print("particle position data : " +bufferToString<float>(Particle.Position,ByteCount.glfloat));
+            //GD.Print("mesh mat data : " +bufferToString<float>((RenderingServer.MultimeshGetBufferRdRid(Display.Multimesh.GetRid())),ByteCount.glfloat));
+
+
+
+        }
+    }
+    public override void _PhysicsProcess(double delta)
+    {
         timer += delta;
         if (timer > interval)
         {
+
+            if (toggle)
+            {
+                toggleHeld += interval * toggleFrequency;
+                InstantiateParticles((int)toggleHeld, Player.instance.GlobalPosition);
+                toggleHeld -= (int)toggleHeld;
+            }
             UpdateSimulation(timer);
             timer = 0;
 
@@ -371,20 +401,7 @@ public partial class BloodSimCPU : Node
         //GD.Print("positions: " + bufferToString<float>(Particle.Position, ByteCount.glfloat));
         //printBuffer<int>(Particle.ToInstantiate, ByteCount.glint);
 
-        //GD.Print();
-
-        if (Input.IsActionJustPressed("F"))
-            InstantiateParticles(1000, Player.instance.GlobalPosition);
-        if (Input.IsActionJustPressed("P"))
-        {
-            GD.Print("field velo data : " +bufferToString<float>(PlayerInput.FieldVelocityRot,ByteCount.glfloat));
-            //GD.Print("mesh mat data : " +bufferToString<float>((RenderingServer.MultimeshGetBufferRdRid(Display.Multimesh.GetRid())),ByteCount.glfloat));
-
-
-
-        }
-
-
+        base._PhysicsProcess(delta);
     }
     public override void _ExitTree()
     {

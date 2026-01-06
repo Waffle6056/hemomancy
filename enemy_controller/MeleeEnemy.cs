@@ -35,6 +35,8 @@ public partial class MeleeEnemy : CharacterBody2D, HasHP
     }
     public void hitParticles()
     {
+        if (HP.HP <= 0)
+            QueueFree();
         Anims.Play("hit");
     }
     public void Contact(Node2D other)

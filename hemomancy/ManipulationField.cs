@@ -33,14 +33,15 @@ public partial class ManipulationField : Node2D
 	[Export]
 	public float RotationSpeed = 0;
 	[Export]
-	public float Magnitude = 1;
+	public float VelocityMagnitude = 1;
+	[Export]
+	public float AccelerationMagnitude = 1;
 	[Export]
 	public int Pattern = 0;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		FieldIndex = Register(this);
-		GD.Print(FieldIndex+"ind");
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -49,6 +50,12 @@ public partial class ManipulationField : Node2D
 		GlobalPosition += Velocity * (float) delta;
 		Rotate(RotationSpeed * (float)delta);
 
+	}
+
+	public void Delete()
+	{
+		GD.Print("called delete");
+		QueueFree();
 	}
 
     public override void _ExitTree()

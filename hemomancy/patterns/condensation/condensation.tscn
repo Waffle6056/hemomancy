@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://dcb6s467oqy27"]
+
+[ext_resource type="Script" uid="uid://dmvk7122tmtia" path="res://hemomancy/ManipulationField.cs" id="1_e3vr8"]
+[ext_resource type="Texture2D" uid="uid://ckygfwj6aovs1" path="res://hemomancy/patterns/condensation/condensation1.tres" id="2_r25k0"]
+
+[node name="condensation" type="Node2D"]
+scale = Vector2(500, 500)
+script = ExtResource("1_e3vr8")
+RotationSpeed = 0.785
+VelocityMagnitude = 0.0
+AccelerationMagnitude = 500.0
+Pattern = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.4745098)
+scale = Vector2(0.002, 0.002)
+texture = ExtResource("2_r25k0")

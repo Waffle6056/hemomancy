@@ -10,4 +10,4 @@ func _ready() -> void:
 	print(image.get_format())
 	var image_texture = ImageTexture.create_from_image(image)
 	
-	ResourceSaver.save(image_texture,"res://output.tres")
+	ResourceSaver.save(image_texture,"res://hemomancy/patterns/condensation/condensation1.tres")

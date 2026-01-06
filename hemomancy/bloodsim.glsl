@@ -1,7 +1,7 @@
 #[compute]
 #version 450
 
-layout(local_size_x = 1000, local_size_y = 1, local_size_z = 1) in;
+layout(local_size_x = 1, local_size_y = 1, local_size_z = 1) in;
 
 
 layout(set = 0,binding = 0) restrict buffer EnemyPosition{
@@ -53,7 +53,7 @@ layout(set = 0,binding = 10) restrict buffer PlayerFieldVelocityRot{
 } player_field_velocity_rot;
 
 layout(set = 0,binding = 11) restrict buffer PlayerFieldMagnitude{
-	float field_magnitude[];
+	vec2 field_magnitude[];
 } player_field_magnitude;
 
 layout(set = 0,binding = 12) restrict buffer PlayerFieldPattern{
@@ -71,7 +71,10 @@ layout(binding = 15) restrict buffer MultiMeshBuffer{
 float FRICTION_COEFFICIENT = 3.0;
 float INHERITANCE_TO_UV = .25;
 float BORDER_WIDTH = 20;
+float STEP_PADDING = 5;
 float GRADIENT_STEP_SIZE = 1.0/256.0;
+float MAX_MASS = 1.5;
+float MIN_MASS = .5;
 
 float rand(vec2 co)
 {
@@ -99,13 +102,14 @@ void instantiate_particle(uint particle_ind, int count_left){
 	particle_in_use.in_use[particle_ind] = true;
 	particle_position.position[particle_ind] = particle_instantiate_position.position[i];
 	particle_velocity.velocity[particle_ind] = rotate2d(rand(particle_ind*.1)*2*3.14) * vec2(rand(particle_ind*.1+1),0) * 300;
-	particle_misc.mass[particle_ind] = rand(vec2(particle_ind*.1+3))+.5;
+	particle_misc.mass[particle_ind] = rand(vec2(particle_ind*.1+2));
+	particle_misc.mass[particle_ind] = MIN_MASS + particle_misc.mass[particle_ind] * (MAX_MASS-MIN_MASS);
 }
 
 float solve_for_time(vec2 v, vec2 a, float x){
-	if (length(a) == 0)
+	if (length(v) != 0)
 		return x/length(v);
-	return 999999;
+	return 999;
 	//return (-v+sqrt(v*v+2*a*x))/a;
 }
 
@@ -156,24 +160,24 @@ void main() {
 	do {
 
 		vec2 acceleration = vec2(0);
-		float distance_step = BORDER_WIDTH;
+		float distance_step = BORDER_WIDTH - STEP_PADDING;
 		if (in_a_field && min(uv.x,uv.y) >= 0 && max(uv.x,uv.y) <= 1){
 		
 			int pattern_ind = player_field_pattern.pattern_index[field_ind];
 			vec4 pattern_point = texture(patterns[pattern_ind], uv);
 			vec4 pattern_point2 = texture(patterns2[pattern_ind], uv);
-			distance_step = 1.0/pattern_point2.r * BORDER_WIDTH;
+			distance_step = 1.0/pattern_point2.r * BORDER_WIDTH - STEP_PADDING;
 			
 			float field_scale = size(player_field_transform.field_transform[field_ind]).x;
 			max_inheritance_value = min(1.0, (pattern_point.b * INHERITANCE_TO_UV * field_scale)/(INHERITANCE_TO_UV * field_scale-BORDER_WIDTH));
 			if (max_inheritance_value >= 1.0){
-				velocity = normalize(mat2(player_field_transform.field_transform[field_ind]) * (vec2(pattern_point.rg)-vec2(.5))) * player_field_magnitude.field_magnitude[field_ind];
+				velocity = normalize(mat2(player_field_transform.field_transform[field_ind]) * (vec2(pattern_point.rg)-vec2(.5))) * player_field_magnitude.field_magnitude[field_ind].x;
 			}
 			else {
 				float gradient_x = texture(patterns[pattern_ind], vec2(min(1.0,uv.x+GRADIENT_STEP_SIZE),uv.y)).b - texture(patterns[pattern_ind], vec2(max(0.0,uv.x-GRADIENT_STEP_SIZE),uv.y)).b;
 				float gradient_y = texture(patterns[pattern_ind], vec2(uv.x,min(1.0,uv.y+GRADIENT_STEP_SIZE))).b - texture(patterns[pattern_ind], vec2(uv.x,max(0.0,uv.y-GRADIENT_STEP_SIZE))).b;
-
-				acceleration = normalize(mat2(player_field_transform.field_transform[field_ind]) * vec2(gradient_x,gradient_y)) / particle_misc.mass[particle_ind] * player_field_magnitude.field_magnitude[field_ind];
+				if (!(gradient_y == 0 && gradient_x == 0))
+					acceleration = normalize(mat2(player_field_transform.field_transform[field_ind]) * vec2(gradient_x,gradient_y)) / particle_misc.mass[particle_ind] * player_field_magnitude.field_magnitude[field_ind].y;
 			}
 		}
 		float time_used = solve_for_time(velocity, acceleration,distance_step);
@@ -197,8 +201,14 @@ void main() {
 		particle_pos += momentary_velocity * particle_misc.delta_time;
 	}
 
-	multi_mesh_transforms.transforms[particle_ind][0][0] =  sqrt(particle_misc.mass[particle_ind]);
-	multi_mesh_transforms.transforms[particle_ind][1][1] =  sqrt(particle_misc.mass[particle_ind]);
+	vec2 xaxis = vec2(sqrt(particle_misc.mass[particle_ind]),0);
+	xaxis = rotate2d((particle_misc.mass[particle_ind]-MIN_MASS)/(MAX_MASS-MIN_MASS) * 3.14) * xaxis;
+	vec2 yaxis = rotate2d(3.14/2) * xaxis;
+	
+	multi_mesh_transforms.transforms[particle_ind][0][0] =  xaxis.x;
+	multi_mesh_transforms.transforms[particle_ind][0][1] =  xaxis.y;
+	multi_mesh_transforms.transforms[particle_ind][1][0] =  yaxis.x;
+	multi_mesh_transforms.transforms[particle_ind][1][1] =	yaxis.y;
 	multi_mesh_transforms.transforms[particle_ind][0][3] =  particle_pos.x;
 	multi_mesh_transforms.transforms[particle_ind][1][3] =  particle_pos.y;
 
@@ -207,7 +217,7 @@ void main() {
 	for (int i = 0; i < enemy_position.position.length(); i++){
 		if (length(enemy_position.position[i]-particle_pos) <= enemy_radius.radius[i]){ //TODO line circle collision
 			atomicAdd(enemy_damage.damage[i],1);
-			//particle_in_use.in_use[particle_ind] = false;
+			particle_in_use.in_use[particle_ind] = false;
 		}
 	}
 

@@ -24,8 +24,11 @@ public interface HasHP
     }
     static void Deregister(int HPIndex)
     {
-		HasHP.InactiveQueued.Enqueue(HPIndex);
-		HasHP.ActiveIndexes.Remove(HPIndex);
+        if (ActiveIndexes.Contains(HPIndex))
+        {
+            HasHP.InactiveQueued.Enqueue(HPIndex);
+            HasHP.ActiveIndexes.Remove(HPIndex);
+        }
     }
     public int HPIndex { get; set; }
     [Export]

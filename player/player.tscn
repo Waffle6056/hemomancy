@@ -1,11 +1,13 @@
-[gd_scene load_steps=20 format=3 uid="uid://bq28dawno13ag"]
+[gd_scene load_steps=22 format=3 uid="uid://bq28dawno13ag"]
 
 [ext_resource type="Texture2D" uid="uid://blx08pj0g0x6k" path="res://icon.svg" id="1_4flbx"]
 [ext_resource type="Script" uid="uid://8rg72xll20s0" path="res://player/Player.cs" id="1_rkbax"]
 [ext_resource type="Shader" uid="uid://8g6syoppwtkp" path="res://nexus/hitparticle.gdshader" id="3_qjkh3"]
 [ext_resource type="PackedScene" uid="uid://j13cwmfkpli6" path="res://player/hp_component.tscn" id="4_yw30f"]
 [ext_resource type="PackedScene" uid="uid://ds7utwgypyluw" path="res://player/foot_steps.tscn" id="5_qjkh3"]
-[ext_resource type="PackedScene" uid="uid://cgxyxbdgd214l" path="res://hemomancy/dagger.tscn" id="6_g6k8r"]
+[ext_resource type="PackedScene" uid="uid://cgxyxbdgd214l" path="res://hemomancy/patterns/dagger/dagger.tscn" id="6_g6k8r"]
+[ext_resource type="PackedScene" uid="uid://dcb6s467oqy27" path="res://hemomancy/patterns/condensation/condensation.tscn" id="7_boad6"]
+[ext_resource type="Script" uid="uid://duvaeijy7bmtt" path="res://player/timer.gd" id="8_rgyib"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rkbax"]
 radius = 25.0
@@ -179,7 +181,7 @@ _data = {
 &"hit": SubResource("Animation_qjkh3")
 }
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("HP", "Anims", "FootStepEmitter", "DashStepEmitter", "Dagger") groups=["playerteam"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("HP", "Anims", "FootStepEmitter", "DashStepEmitter", "Dagger", "Condensation") groups=["playerteam"]]
 script = ExtResource("1_rkbax")
 HP = NodePath("HPComponent")
 Anims = NodePath("AnimationPlayer")
@@ -187,6 +189,7 @@ FootStepInterval = 0.2
 FootStepEmitter = NodePath("FootSteps")
 DashStepEmitter = NodePath("DashStep")
 Dagger = NodePath("Constructs/dagger")
+Condensation = NodePath("Constructs/condensation")
 
 [node name="Icon" type="Sprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
@@ -223,5 +226,18 @@ visible = false
 visible = false
 top_level = true
 position = Vector2(-1000, -1000)
-scale = Vector2(100, 100)
-Magnitude = 200.0
+scale = Vector2(300, 300)
+VelocityMagnitude = 300.0
+AccelerationMagnitude = 100.0
+
+[node name="condensation" parent="Constructs" instance=ExtResource("7_boad6")]
+visible = false
+top_level = true
+position = Vector2(-1000, -1000)
+AccelerationMagnitude = 1000.0
+
+[node name="testname" type="Timer" parent="Constructs/condensation"]
+autostart = true
+script = ExtResource("8_rgyib")
+
+[connection signal="timeout" from="Constructs/condensation/testname" to="Constructs/condensation" method="Delete"]

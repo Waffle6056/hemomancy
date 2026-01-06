@@ -27,10 +27,12 @@ public partial class Player : CharacterBody2D, HasHP
     double FootStepTimer = 0;
 	[Export]
 	public ManipulationField Dagger;
+	[Export]
+	public ManipulationField Condensation;
 
     public override void _Ready()
     {
-		HPIndex = HasHP.Register(this);
+		//HPIndex = HasHP.Register(this);
 		Player.instance = this;
         base._Ready();
 		HP.Hit += hitParticles;
@@ -40,18 +42,46 @@ public partial class Player : CharacterBody2D, HasHP
 	{
 		Anims.Play("hit");
 	}
+	ManipulationField SummonDagger(Vector2 globalPosition)
+	{
+		ManipulationField f = Dagger.Duplicate() as ManipulationField;
+		AddSibling(f);
+		f.GlobalPosition = globalPosition;
+		f.Velocity = (GetGlobalMousePosition() - f.GlobalPosition).Normalized() * 700;
+		f.LookAt(GetGlobalMousePosition());
+		f.Rotate((float)Math.PI / 2);
+		return f;
+	}
+	ManipulationField SummonCondensation(Vector2 globalPosition)
+	{
+		ManipulationField f = Condensation.Duplicate() as ManipulationField;
+		AddSibling(f);
+		GD.Print(f.GetChildren());
+		f.GlobalPosition = globalPosition;
+		f.Rotate((float)(Random.Shared.NextDouble() * Math.Tau));
+		return f;
+	}
+	bool condensationToggle = false;
     public override void _Process(double delta)
     {
         base._Process(delta);
 		if (Input.IsActionJustPressed("R"))
 		{
-			ManipulationField f = Dagger.Duplicate() as ManipulationField;
-			AddSibling(f);
-			f.GlobalPosition = GlobalPosition + Vector2.Right.Rotated(Random.Shared.NextSingle() * 2 * (float)Math.PI) * 100;
-			f.Velocity = (GetGlobalMousePosition() - f.GlobalPosition).Normalized() * 700;
-			f.LookAt(GetGlobalMousePosition());
-			f.Rotate((float)Math.PI / 2);
+			Vector2 p = GlobalPosition + Vector2.Right.Rotated(Random.Shared.NextSingle() * 2 * (float)Math.PI) * 100;
+			SummonCondensation(p).TreeExited += () => { SummonDagger(p); };
 		}
+		if (Input.IsActionJustPressed("Q"))
+		{
+			(SummonCondensation(GetGlobalMousePosition()).GetChild(1) as Timer).Start(3.0);
+		}
+		if (Input.IsActionJustPressed("3"))
+		{
+			condensationToggle = !condensationToggle;
+		}
+		if (condensationToggle)
+			Condensation.GlobalPosition = GlobalPosition;
+		else
+			Condensation.GlobalPosition = new Vector2(-1000, -1000);
     }
     public override void _PhysicsProcess(double delta)
 	{
