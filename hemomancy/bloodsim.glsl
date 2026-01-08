@@ -69,9 +69,8 @@ layout(binding = 15) restrict buffer MultiMeshBuffer{
 } multi_mesh_transforms;
 
 float FRICTION_COEFFICIENT = 3.0;
-float INHERITANCE_TO_UV = .25;
-float BORDER_WIDTH = 20;
-float STEP_PADDING = 5;
+float INHERITANCE_TO_UV = 1.0/16.0;
+float BORDER_WIDTH = 10;
 float GRADIENT_STEP_SIZE = 1.0/256.0;
 float MAX_MASS = 1.5;
 float MIN_MASS = .5;
@@ -160,13 +159,13 @@ void main() {
 	do {
 
 		vec2 acceleration = vec2(0);
-		float distance_step = BORDER_WIDTH - STEP_PADDING;
+		float distance_step = BORDER_WIDTH;
 		if (in_a_field && min(uv.x,uv.y) >= 0 && max(uv.x,uv.y) <= 1){
 		
 			int pattern_ind = player_field_pattern.pattern_index[field_ind];
 			vec4 pattern_point = texture(patterns[pattern_ind], uv);
 			vec4 pattern_point2 = texture(patterns2[pattern_ind], uv);
-			distance_step = 1.0/pattern_point2.r * BORDER_WIDTH - STEP_PADDING;
+			distance_step = 1.0/pattern_point2.r * BORDER_WIDTH;
 			
 			float field_scale = size(player_field_transform.field_transform[field_ind]).x;
 			max_inheritance_value = min(1.0, (pattern_point.b * INHERITANCE_TO_UV * field_scale)/(INHERITANCE_TO_UV * field_scale-BORDER_WIDTH));

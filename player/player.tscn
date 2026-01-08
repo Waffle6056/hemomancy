@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://bq28dawno13ag"]
+[gd_scene load_steps=23 format=3 uid="uid://bq28dawno13ag"]
 
 [ext_resource type="Texture2D" uid="uid://blx08pj0g0x6k" path="res://icon.svg" id="1_4flbx"]
 [ext_resource type="Script" uid="uid://8rg72xll20s0" path="res://player/Player.cs" id="1_rkbax"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://ds7utwgypyluw" path="res://player/foot_steps.tscn" id="5_qjkh3"]
 [ext_resource type="PackedScene" uid="uid://cgxyxbdgd214l" path="res://hemomancy/patterns/dagger/dagger.tscn" id="6_g6k8r"]
 [ext_resource type="PackedScene" uid="uid://dcb6s467oqy27" path="res://hemomancy/patterns/condensation/condensation.tscn" id="7_boad6"]
+[ext_resource type="PackedScene" uid="uid://b4guuym6qd8p2" path="res://hemomancy/patterns/spike/spike.tscn" id="7_hg6s5"]
 [ext_resource type="Script" uid="uid://duvaeijy7bmtt" path="res://player/timer.gd" id="8_rgyib"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rkbax"]
@@ -181,7 +182,7 @@ _data = {
 &"hit": SubResource("Animation_qjkh3")
 }
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("HP", "Anims", "FootStepEmitter", "DashStepEmitter", "Dagger", "Condensation") groups=["playerteam"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("HP", "Anims", "FootStepEmitter", "DashStepEmitter", "Dagger", "Condensation", "Spike") groups=["playerteam"]]
 script = ExtResource("1_rkbax")
 HP = NodePath("HPComponent")
 Anims = NodePath("AnimationPlayer")
@@ -190,6 +191,7 @@ FootStepEmitter = NodePath("FootSteps")
 DashStepEmitter = NodePath("DashStep")
 Dagger = NodePath("Constructs/dagger")
 Condensation = NodePath("Constructs/condensation")
+Spike = NodePath("Constructs/spike")
 
 [node name="Icon" type="Sprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
@@ -230,14 +232,16 @@ scale = Vector2(300, 300)
 VelocityMagnitude = 300.0
 AccelerationMagnitude = 100.0
 
+[node name="spike" parent="Constructs" instance=ExtResource("7_hg6s5")]
+visible = false
+position = Vector2(-1000, -1000)
+
 [node name="condensation" parent="Constructs" instance=ExtResource("7_boad6")]
 visible = false
 top_level = true
 position = Vector2(-1000, -1000)
 AccelerationMagnitude = 1000.0
 
-[node name="testname" type="Timer" parent="Constructs/condensation"]
-autostart = true
+[node name="testname" type="Timer" parent="Constructs/condensation" node_paths=PackedStringArray("target")]
 script = ExtResource("8_rgyib")
-
-[connection signal="timeout" from="Constructs/condensation/testname" to="Constructs/condensation" method="Delete"]
+target = NodePath("..")

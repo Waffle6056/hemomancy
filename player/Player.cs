@@ -29,6 +29,8 @@ public partial class Player : CharacterBody2D, HasHP
 	public ManipulationField Dagger;
 	[Export]
 	public ManipulationField Condensation;
+	[Export]
+	public Node2D Spike;
 
     public override void _Ready()
     {
@@ -61,6 +63,15 @@ public partial class Player : CharacterBody2D, HasHP
 		f.Rotate((float)(Random.Shared.NextDouble() * Math.Tau));
 		return f;
 	}
+	void SummonSpike(Vector2 globalPosition)
+	{
+		Node2D f = Spike.Duplicate() as Node2D;
+		AddSibling(f);
+		f.GlobalPosition = globalPosition;
+		f.LookAt(GetGlobalMousePosition());
+		f.Rotate((float)Math.PI / 2);
+
+	}
 	bool condensationToggle = false;
     public override void _Process(double delta)
     {
@@ -74,6 +85,12 @@ public partial class Player : CharacterBody2D, HasHP
 		{
 			(SummonCondensation(GetGlobalMousePosition()).GetChild(1) as Timer).Start(3.0);
 		}
+		if (Input.IsActionJustPressed("F"))
+		{
+			Vector2 p = GlobalPosition + Vector2.Right.Rotated(Random.Shared.NextSingle() * 2 * (float)Math.PI) * 100;
+			SummonCondensation(p).TreeExited += () => { SummonSpike(p); };
+		}
+
 		if (Input.IsActionJustPressed("3"))
 		{
 			condensationToggle = !condensationToggle;

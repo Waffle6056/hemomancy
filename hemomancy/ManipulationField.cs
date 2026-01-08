@@ -52,12 +52,6 @@ public partial class ManipulationField : Node2D
 
 	}
 
-	public void Delete()
-	{
-		GD.Print("called delete");
-		QueueFree();
-	}
-
     public override void _ExitTree()
     {
 		Deregister(FieldIndex);

@@ -1,13 +1,15 @@
-[gd_scene load_steps=16 format=3 uid="uid://bm06sc7clrtou"]
+[gd_scene load_steps=18 format=3 uid="uid://bm06sc7clrtou"]
 
 [ext_resource type="Texture2D" uid="uid://blx08pj0g0x6k" path="res://icon.svg" id="1_6b75d"]
 [ext_resource type="Shader" uid="uid://bkaao0mkld0l4" path="res://hemomancy/particletest.gdshader" id="1_44s4y"]
 [ext_resource type="Script" uid="uid://bx7cmujnwj2v0" path="res://hemomancy/BloodSimCPU.cs" id="1_k6j45"]
-[ext_resource type="Texture2D" uid="uid://cgqtnw5jng4dv" path="res://hemomancy/patterns/dagger/dagger1.tres" id="2_6qwvo"]
+[ext_resource type="Texture2D" uid="uid://cyvlvnl0moe6t" path="res://hemomancy/patterns/dagger/dagger1.tres" id="2_6qwvo"]
 [ext_resource type="Texture2D" uid="uid://ckygfwj6aovs1" path="res://hemomancy/patterns/condensation/condensation1.tres" id="3_dhu25"]
-[ext_resource type="Texture2D" uid="uid://bkk3vehh6wo0a" path="res://hemomancy/patterns/dagger/dagger2.tres" id="3_s1km8"]
+[ext_resource type="Texture2D" uid="uid://dibm5l3bvs1lf" path="res://hemomancy/patterns/dagger/dagger2.tres" id="3_s1km8"]
+[ext_resource type="Texture2D" uid="uid://0m0xxegf5ayn" path="res://hemomancy/patterns/spike/spike1.tres" id="4_fq687"]
 [ext_resource type="Texture2D" uid="uid://5kv2q7ahgnal" path="res://hemomancy/patterns/condensation/condensation2.tres" id="5_8a4ng"]
 [ext_resource type="Shader" uid="uid://ckwm2qvwrnvgn" path="res://hemomancy/blood.gdshader" id="6_s1km8"]
+[ext_resource type="Texture2D" uid="uid://dof15yvwcnlfw" path="res://hemomancy/patterns/spike/spike2.tres" id="7_rilc2"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6b75d"]
 shader = ExtResource("1_44s4y")
@@ -43,8 +45,8 @@ buffer = PackedFloat32Array(-4.4293006e+22, -4.4293006e+22, -4.4293006e+22, -4.4
 [node name="Node2D" type="Node2D" node_paths=PackedStringArray("Display")]
 script = ExtResource("1_k6j45")
 Display = NodePath("MultiMeshInstance2D")
-PatternData = [ExtResource("2_6qwvo"), ExtResource("3_dhu25"), null, null, null, null, null, null, null, null, null, null, null, null, null, null]
-PatternData2 = [ExtResource("3_s1km8"), ExtResource("5_8a4ng"), null, null, null, null, null, null, null, null, null, null, null, null, null, null]
+PatternData = [ExtResource("2_6qwvo"), ExtResource("3_dhu25"), ExtResource("4_fq687"), null, null, null, null, null, null, null, null, null, null, null, null, null]
+PatternData2 = [ExtResource("3_s1km8"), ExtResource("5_8a4ng"), ExtResource("7_rilc2"), null, null, null, null, null, null, null, null, null, null, null, null, null]
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 visible = false
