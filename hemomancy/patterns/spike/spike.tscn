@@ -16,7 +16,7 @@ AccelerationMagnitude = 1000.0
 Pattern = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="Node2D"]
-modulate = Color(1, 1, 1, 0.44705883)
+modulate = Color(1, 1, 1, 0.447059)
 scale = Vector2(0.002, 0.002)
 texture = ExtResource("2_6ceou")
 
@@ -34,7 +34,7 @@ AccelerationMagnitude = 1000.0
 Pattern = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="Node2D2"]
-modulate = Color(1, 1, 1, 0.44705883)
+modulate = Color(1, 1, 1, 0.447059)
 scale = Vector2(0.002, 0.002)
 texture = ExtResource("2_6ceou")
 

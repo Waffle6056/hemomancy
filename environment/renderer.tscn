@@ -5,10 +5,10 @@
 [ext_resource type="Shader" uid="uid://ckwm2qvwrnvgn" path="res://hemomancy/blood.gdshader" id="2_qjrub"]
 [ext_resource type="Shader" uid="uid://b08cke1ssu5nt" path="res://environment/test.gdshader" id="3_d7lgd"]
 [ext_resource type="Texture2D" path="res://environment/circle.tres" id="3_u3qe7"]
-[ext_resource type="Texture2D" uid="uid://5kv2q7ahgnal" path="res://hemomancy/patterns/condensation/condensation2.tres" id="4_d7lgd"]
+[ext_resource type="Texture2D" uid="uid://b8e0shd4omda" path="res://hemomancy/patterns/condensation/condensation2.tres" id="4_d7lgd"]
 [ext_resource type="Shader" uid="uid://ddcdkciy8xvr1" path="res://hemomancy/patterns/condensation/condensation.gdshader" id="7_gs2jo"]
 [ext_resource type="Shader" uid="uid://qusvgfhcevnd" path="res://hemomancy/patterns/spike/spike.gdshader" id="8_lhxa0"]
-[ext_resource type="Texture2D" uid="uid://0m0xxegf5ayn" path="res://hemomancy/patterns/spike/spike1.tres" id="9_6tdp5"]
+[ext_resource type="Texture2D" uid="uid://dellrkhs25n5l" path="res://hemomancy/patterns/spike/spike1.tres" id="9_6tdp5"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gs2jo"]
 shader = ExtResource("2_qjrub")
@@ -20,7 +20,9 @@ shader_parameter/red_offset = 0.2
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hqx0d"]
 shader = ExtResource("2_6nwbq")
-shader_parameter/points = PackedVector2Array(0.5, 0.3, 0.45, 0.6, 0.5, 0.65, 0.55, 0.6, -1, -1)
+shader_parameter/points = PackedVector2Array(0.5, 0.45, 0.4, 0.65, 0.5, 0.75, 0.6, 0.65, -1, -1)
+shader_parameter/border_max_dis = 0.183
+shader_parameter/frame_active = 1
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_u3qe7"]
 shader = ExtResource("3_d7lgd")
@@ -37,11 +39,14 @@ noise = SubResource("FastNoiseLite_gs2jo")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lhxa0"]
 shader = ExtResource("7_gs2jo")
 shader_parameter/transparency_map = SubResource("NoiseTexture2D_lhxa0")
-shader_parameter/transparency_offset = -0.69
+shader_parameter/map_factor = 0.515
+shader_parameter/frame_active = 2
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_m4llh"]
 shader = ExtResource("2_6nwbq")
-shader_parameter/points = PackedVector2Array(0, 1, 0.05, 1, 0, 0.53, -1, -1)
+shader_parameter/points = PackedVector2Array(-0.2, 1, 0.2, 1, 0, 0.5, -1, -1)
+shader_parameter/border_max_dis = 0.0625
+shader_parameter/frame_active = 1
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6tdp5"]
 shader = ExtResource("8_lhxa0")
@@ -50,6 +55,7 @@ shader_parameter/b_offset = 0.2
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_4nc1y")
+frames = 2
 
 [node name="SubViewport" type="SubViewport" parent="."]
 transparent_bg = true
@@ -64,7 +70,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="dagger pattern" type="ColorRect" parent="SubViewport"]
+[node name="dagger" type="ColorRect" parent="SubViewport" groups=["pattern_renderable"]]
+visible = false
 material = SubResource("ShaderMaterial_hqx0d")
 anchors_preset = 15
 anchor_right = 1.0
@@ -81,7 +88,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="condensation pattern" type="ColorRect" parent="SubViewport"]
+[node name="condensation" type="ColorRect" parent="SubViewport" groups=["pattern_renderable"]]
 visible = false
 material = SubResource("ShaderMaterial_lhxa0")
 anchors_preset = 15
@@ -99,7 +106,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="spike_pass1" type="ColorRect" parent="SubViewport"]
+[node name="spike" type="ColorRect" parent="SubViewport" groups=["pattern_renderable"]]
 visible = false
 material = SubResource("ShaderMaterial_m4llh")
 anchors_preset = 15

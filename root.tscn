@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bts6u3u7dti3b"]
+[gd_scene load_steps=15 format=3 uid="uid://bts6u3u7dti3b"]
 
 [ext_resource type="PackedScene" uid="uid://cl5catww2oaat" path="res://nexus/nexus.tscn" id="1_pq8q7"]
 [ext_resource type="Shader" uid="uid://dnl2w1yljscwm" path="res://environment/brick.gdshader" id="2_vvh5c"]
@@ -7,9 +7,7 @@
 [ext_resource type="Shader" uid="uid://dnn71i3ht6f11" path="res://environment/wall.gdshader" id="4_l8v81"]
 [ext_resource type="Texture2D" path="res://environment/circle.tres" id="5_jnlp7"]
 [ext_resource type="Script" uid="uid://ck53mxrcnk2al" path="res://Camera2d.cs" id="5_vyht1"]
-[ext_resource type="PackedScene" uid="uid://dd058p1sdspnc" path="res://enemy_controller/melee_enemy.tscn" id="8_bf3um"]
 [ext_resource type="PackedScene" uid="uid://bm06sc7clrtou" path="res://hemomancy/blood.tscn" id="9_huihk"]
-[ext_resource type="PackedScene" uid="uid://cgxyxbdgd214l" path="res://hemomancy/patterns/dagger/dagger.tscn" id="10_tw3kd"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_jnlp7"]
 noise_type = 2
@@ -42,33 +40,33 @@ shader_parameter/edge_percent = 0.05
 [node name="root" type="Node2D"]
 
 [node name="Nexus" parent="." instance=ExtResource("1_pq8q7")]
-position = Vector2(-385.31998, -0.32000732)
+position = Vector2(-385.32, -0.320007)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-position = Vector2(289, -288.53998)
-scale = Vector2(13.497501, 0.52281237)
-color = Color(0.26657522, 0.2665752, 0.2665752, 1)
+position = Vector2(289, -288.54)
+scale = Vector2(13.4975, 0.522812)
+color = Color(0.266575, 0.266575, 0.266575, 1)
 
 [node name="flooring" type="Sprite2D" parent="."]
 z_index = -1
 texture_repeat = 2
 material = SubResource("ShaderMaterial_vyht1")
-position = Vector2(289.16003, 0)
-scale = Vector2(13.497501, 3.9662502)
+position = Vector2(289.16, 0)
+scale = Vector2(13.4975, 3.96625)
 texture = ExtResource("3_28aoi")
 
 [node name="wall" type="Sprite2D" parent="."]
 z_index = -1
 texture_repeat = 2
 material = SubResource("ShaderMaterial_bf3um")
-position = Vector2(289, -288.53998)
-scale = Vector2(13.497501, 0.52281237)
+position = Vector2(289, -288.54)
+scale = Vector2(13.4975, 0.522812)
 texture = ExtResource("3_28aoi")
 
 [node name="bg" type="Sprite2D" parent="."]
 modulate = Color(0, 0, 0, 1)
 z_index = -2
-position = Vector2(301.00003, 59.000008)
+position = Vector2(301, 59)
 scale = Vector2(500, 500)
 texture = ExtResource("3_28aoi")
 
@@ -84,7 +82,7 @@ Speed = 300.0
 
 [node name="PointLight2D2" type="PointLight2D" parent="."]
 position = Vector2(200, 240)
-color = Color(0.76252604, 0.53404486, 0.19902185, 1)
+color = Color(0.762526, 0.534045, 0.199022, 1)
 energy = 0.4
 texture = ExtResource("5_jnlp7")
 texture_scale = 2.0
@@ -92,7 +90,7 @@ height = 176.0
 
 [node name="PointLight2D3" type="PointLight2D" parent="."]
 position = Vector2(200, -240)
-color = Color(0.76252604, 0.53404486, 0.19902185, 1)
+color = Color(0.762526, 0.534045, 0.199022, 1)
 energy = 0.4
 texture = ExtResource("5_jnlp7")
 texture_scale = 2.0
@@ -100,7 +98,7 @@ height = 176.0
 
 [node name="PointLight2D4" type="PointLight2D" parent="."]
 position = Vector2(838, 240)
-color = Color(0.76252604, 0.53404486, 0.19902185, 1)
+color = Color(0.762526, 0.534045, 0.199022, 1)
 energy = 0.4
 texture = ExtResource("5_jnlp7")
 texture_scale = 2.0
@@ -108,28 +106,10 @@ height = 176.0
 
 [node name="PointLight2D5" type="PointLight2D" parent="."]
 position = Vector2(833, -240)
-color = Color(0.76252604, 0.53404486, 0.19902185, 1)
+color = Color(0.762526, 0.534045, 0.199022, 1)
 energy = 0.4
 texture = ExtResource("5_jnlp7")
 texture_scale = 2.0
 height = 176.0
 
 [node name="Node2D" parent="." instance=ExtResource("9_huihk")]
-
-[node name="MeleeEnemy" parent="." instance=ExtResource("8_bf3um")]
-position = Vector2(787, 147)
-
-[node name="MeleeEnemy2" parent="." instance=ExtResource("8_bf3um")]
-position = Vector2(992, 72)
-
-[node name="MeleeEnemy3" parent="." instance=ExtResource("8_bf3um")]
-position = Vector2(822, -32)
-
-[node name="MeleeEnemy4" parent="." instance=ExtResource("8_bf3um")]
-position = Vector2(990, -99)
-
-[node name="dagger" parent="." instance=ExtResource("10_tw3kd")]
-visible = false
-position = Vector2(480, -98)
-VelocityMagnitude = 500.0
-AccelerationMagnitude = 100.0

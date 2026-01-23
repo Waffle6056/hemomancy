@@ -15,8 +15,8 @@ radius = 34.0
 frequency = 0.0066
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_dsuym"]
-noise = SubResource("FastNoiseLite_3s3eb")
 seamless = true
+noise = SubResource("FastNoiseLite_3s3eb")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_50umu"]
 shader = ExtResource("1_7ypn0")
@@ -32,14 +32,14 @@ shader_parameter/pulse_time_scale = 0.3
 shader_parameter/rotate_time_scale = 0.3
 
 [sub_resource type="Curve" id="Curve_7ypn0"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.2651515, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.265152, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="CurveTexture" id="CurveTexture_upiol"]
 curve = SubResource("Curve_7ypn0")
 
 [sub_resource type="Gradient" id="Gradient_hadw0"]
-colors = PackedColorArray(0.38431373, 0, 0, 1, 0, 0, 0, 1)
+colors = PackedColorArray(0.384314, 0, 0, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_6rwgm"]
 gradient = SubResource("Gradient_hadw0")
@@ -52,15 +52,15 @@ emission_ring_height = 0.0
 emission_ring_radius = 50.38
 emission_ring_inner_radius = 37.03
 emission_ring_cone_angle = 90.0
-orbit_velocity_min = 0.1000001
-orbit_velocity_max = 0.40000013
-radial_velocity_min = 39.999977
-radial_velocity_max = 49.999977
+orbit_velocity_min = 0.1
+orbit_velocity_max = 0.4
+radial_velocity_min = 40.0
+radial_velocity_max = 50.0
 gravity = Vector3(0, 0, 0)
-tangential_accel_min = -2.2351742e-06
-tangential_accel_max = 19.999998
-scale_min = 0.049999997
-scale_max = 0.049999997
+tangential_accel_min = -2.23517e-06
+tangential_accel_max = 20.0
+scale_min = 0.05
+scale_max = 0.05
 color_ramp = SubResource("GradientTexture1D_6rwgm")
 alpha_curve = SubResource("CurveTexture_upiol")
 
@@ -81,7 +81,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_kylt6"]
 resource_name = "hit"
-length = 0.03333667
+length = 0.0333367
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -89,7 +89,7 @@ tracks/0/path = NodePath("Hit:emitting")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.033333335),
+"times": PackedFloat32Array(0, 0.0333333),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
@@ -106,8 +106,8 @@ noise_type = 2
 frequency = 0.0117
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_834gl"]
-noise = SubResource("FastNoiseLite_lpyev")
 seamless = true
+noise = SubResource("FastNoiseLite_lpyev")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ojxid"]
 shader = ExtResource("7_ao4yy")
@@ -128,10 +128,10 @@ spread = 180.0
 initial_velocity_min = 400.0
 initial_velocity_max = 600.0
 gravity = Vector3(0, 0, 0)
-damping_min = 500.00003
-damping_max = 500.00003
-scale_min = 0.29999998
-scale_max = 0.29999998
+damping_min = 500.0
+damping_max = 500.0
+scale_min = 0.3
+scale_max = 0.3
 alpha_curve = SubResource("CurveTexture_uukg0")
 
 [node name="Nexus" type="StaticBody2D" node_paths=PackedStringArray("HP", "Anims") groups=["playerteam"]]
@@ -159,7 +159,7 @@ lifetime = 4.0
 process_material = SubResource("ParticleProcessMaterial_3s3eb")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-color = Color(0.63529414, 0, 0, 1)
+color = Color(0.635294, 0, 0, 1)
 energy = 5.0
 texture = ExtResource("4_j16j4")
 height = 30.0

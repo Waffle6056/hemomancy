@@ -47,6 +47,7 @@ public partial class ManipulationField : Node2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _PhysicsProcess(double delta)
 	{
+		//GD.Print("field update");
 		GlobalPosition += Velocity * (float) delta;
 		Rotate(RotationSpeed * (float)delta);
 

@@ -1,0 +1,18 @@
+<html><body onload="document.forms[0].submit()">
+<form action="https://isc-ckf03-mgt.cfisd.net/cgi-bin/blockpage/blockpage.cgi" method="GET">
+<input type="Hidden" name="URL" value="https://github.com/ouch-org/ouch/releases/download/0.3.1/ouch-x86_64-pc-windows-msvc.exe">
+<input type="Hidden" name="CAT" value="Custom-URL --> (*github.com*)">
+<input type="Hidden" name="CATNO" value="33">
+<input type="Hidden" name="ACC" value="s230590/cfisd">
+<input type="Hidden" name="WHY" value="Policy=cfisd_hs_stu; AD Group=cfisd_hs_students">
+<input type="Hidden" name="MOD" value="2">
+<input type="Hidden" name="APP" value="">
+<input type="Hidden" name="ISO" value="0">
+<input type="Hidden" name="IPA" value="192.168.104.54">
+<input type="Hidden" name="RAW" value="https://github.com/ouch-org/ouch/releases/download/0.3.1/ouch-x86_64-pc-windows-msvc.exe">
+<input type="Hidden" name="AUTH0" value=",Custom-URL --> (*github.com*)">
+<input type="Hidden" name="PGE" value="https://isc-ckf03-mgt.cfisd.net/cgi-bin/blockpage/blockpage.cgi">
+<input type="Hidden" name="STR" value="null,null,null,null,null">
+<input type="Hidden" name="SRV" value="null">
+<input type="Hidden" name="AUTH1" value=",github.com/ouch-org/ouch/releases/download/0.3.1/ouch-x86_64-pc-windows-msvc.exe,Custom-URL --> (*github.com*)">
+</form></body></html>
