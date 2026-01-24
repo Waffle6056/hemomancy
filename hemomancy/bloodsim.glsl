@@ -69,10 +69,11 @@ layout(binding = 15) restrict buffer MultiMeshBuffer{
 } multi_mesh_transforms;
 
 float FRICTION_COEFFICIENT = 3.0;
-float BORDER_WIDTH = 50;
+float BORDER_WIDTH = 10;
 float GRADIENT_STEP_SIZE = 1.0/256.0;
 float MAX_MASS = 1.5;
 float MIN_MASS = .5;
+float LENGTH_THRESHOLD = 0.01;
 
 float rand(vec2 co)
 {
@@ -168,6 +169,8 @@ void main() {
 		if (min(local_pos.x,local_pos.y) >= 0 && max(local_pos.x,local_pos.y) <= 1){
 			vec4 cur_pattern_point2 = texture(patterns2[player_field_pattern.pattern_index[i]], local_pos);
 			vec2 vecA = uv_to_vec(cur_pattern_point2.rg) * cur_pattern_point2.b;
+			if (length(vecA) <= LENGTH_THRESHOLD)
+				continue;
 			float cur_line_displacement = calc_scaled_line_displacement(player_field_transform.field_transform[i], vecA);
 			if (cur_line_displacement < min_line_displacement){
 				min_line_displacement = cur_line_displacement;
@@ -193,21 +196,23 @@ void main() {
 			vec4 pattern_point2 = texture(patterns2[pattern_ind], uv);
 			mat3x2 field_transform = player_field_transform.field_transform[field_ind];
 
-//			distance_step = 1.0/pattern_point.b * BORDER_WIDTH;
+			distance_step = 1.0/pattern_point.b * BORDER_WIDTH;
 			
 			vec2 vecA = uv_to_vec(pattern_point2.rg) * pattern_point2.b;
-			float cur_line_displacement = calc_scaled_line_displacement(field_transform, vecA);
-			float max_pixel_length = calc_scaled_line_displacement(field_transform, normalize(vecA)*pattern_point2.b);
-			inheritance_value = max(0.0,min(1.0, (max_pixel_length - cur_line_displacement)/(max_pixel_length-BORDER_WIDTH)));
-
-			if (inheritance_value >= 1.0 && length(uv_to_vec(pattern_point.rg) * player_field_magnitude.field_magnitude[field_ind].x) > 0){
-				velocity = normalize(mat2(field_transform) * uv_to_vec(pattern_point.rg)) * player_field_magnitude.field_magnitude[field_ind].x;
-			}
-			else {
-				// float gradient_x = texture(patterns[pattern_ind], vec2(min(1.0,uv.x+GRADIENT_STEP_SIZE),uv.y)).b - texture(patterns[pattern_ind], vec2(max(0.0,uv.x-GRADIENT_STEP_SIZE),uv.y)).b;
-				// float gradient_y = texture(patterns[pattern_ind], vec2(uv.x,min(1.0,uv.y+GRADIENT_STEP_SIZE))).b - texture(patterns[pattern_ind], vec2(uv.x,max(0.0,uv.y-GRADIENT_STEP_SIZE))).b;
-				// if (!(gradient_y == 0 && gradient_x == 0))
-				acceleration = normalize(mat2(field_transform) * calc_scaled_acceleration(field_transform,vecA)) / particle_misc.mass[particle_ind] * inheritance_value * player_field_magnitude.field_magnitude[field_ind].y;
+			if (length(vecA) > LENGTH_THRESHOLD){
+				float cur_line_displacement = calc_scaled_line_displacement(field_transform, vecA);
+				float max_pixel_length = calc_scaled_line_displacement(field_transform, normalize(vecA)*pattern_point2.b);
+				inheritance_value = max(0.0,min(1.0, (max_pixel_length - cur_line_displacement)/(max_pixel_length-BORDER_WIDTH)));
+	
+				if (inheritance_value >= 1.0 && length(uv_to_vec(pattern_point.rg) * player_field_magnitude.field_magnitude[field_ind].x) > 0){
+					velocity = normalize(mat2(field_transform) * uv_to_vec(pattern_point.rg)) * player_field_magnitude.field_magnitude[field_ind].x;
+				}
+				else {
+					// float gradient_x = texture(patterns[pattern_ind], vec2(min(1.0,uv.x+GRADIENT_STEP_SIZE),uv.y)).b - texture(patterns[pattern_ind], vec2(max(0.0,uv.x-GRADIENT_STEP_SIZE),uv.y)).b;
+					// float gradient_y = texture(patterns[pattern_ind], vec2(uv.x,min(1.0,uv.y+GRADIENT_STEP_SIZE))).b - texture(patterns[pattern_ind], vec2(uv.x,max(0.0,uv.y-GRADIENT_STEP_SIZE))).b;
+					// if (!(gradient_y == 0 && gradient_x == 0))
+					acceleration = normalize(mat2(field_transform) * calc_scaled_acceleration(field_transform,vecA)) / particle_misc.mass[particle_ind] * inheritance_value * player_field_magnitude.field_magnitude[field_ind].y;
+				}
 			}
 		}
 		float time_used = solve_for_time(velocity, acceleration,distance_step);

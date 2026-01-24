@@ -386,6 +386,10 @@ public partial class BloodSimCPU : Node
 			}
 			//GD.Print("UPDATE SIM");
 			UpdateSimulation(interval);
+			foreach (int fieldInd in ManipulationField.ActiveIndexes)
+			{
+				ManipulationField.FieldList[fieldInd].SimAlignedProcess(interval);
+			}
 			timer = 0;
 
 			//byte[] array = Renderer.BufferGetData(Particle.Position);

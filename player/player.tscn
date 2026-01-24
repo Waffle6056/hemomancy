@@ -230,7 +230,7 @@ top_level = true
 position = Vector2(-1000, -1000)
 scale = Vector2(300, 300)
 VelocityMagnitude = 300.0
-AccelerationMagnitude = 100.0
+AccelerationMagnitude = 500.0
 
 [node name="spike" parent="Constructs" instance=ExtResource("7_hg6s5")]
 visible = false

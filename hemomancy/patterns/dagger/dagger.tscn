@@ -1,14 +1,17 @@
 [gd_scene load_steps=3 format=3 uid="uid://cgxyxbdgd214l"]
 
 [ext_resource type="Script" uid="uid://dmvk7122tmtia" path="res://hemomancy/ManipulationField.cs" id="1_jvopj"]
-[ext_resource type="Texture2D" uid="uid://b72rjq0iix1dp" path="res://hemomancy/patterns/dagger/dagger1.tres" id="2_tj6gf"]
+[ext_resource type="Texture2D" uid="uid://dsc8a4fbdr1el" path="res://hemomancy/patterns/dagger/dagger1.tres" id="2_tj6gf"]
 
 [node name="dagger" type="Node2D"]
 scale = Vector2(512, 512)
 script = ExtResource("1_jvopj")
+Velocity = Vector2(1000, 0)
+VelocityMagnitude = 300.0
+AccelerationMagnitude = 500.0
 
 [node name="Samplepattern" type="Sprite2D" parent="."]
-modulate = Color(1, 1, 1, 0.168627)
+modulate = Color(1, 1, 1, 0.28235295)
 z_index = 7
 scale = Vector2(0.002, 0.002)
 texture = ExtResource("2_tj6gf")

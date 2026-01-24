@@ -48,9 +48,14 @@ public partial class ManipulationField : Node2D
 	public override void _PhysicsProcess(double delta)
 	{
 		//GD.Print("field update");
+		
+
+	}
+
+	public void SimAlignedProcess(double delta)
+	{
 		GlobalPosition += Velocity * (float) delta;
 		Rotate(RotationSpeed * (float)delta);
-
 	}
 
     public override void _ExitTree()

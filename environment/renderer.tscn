@@ -1,14 +1,15 @@
-[gd_scene load_steps=18 format=3 uid="uid://bb5si87v1rfnn"]
+[gd_scene load_steps=22 format=3 uid="uid://bb5si87v1rfnn"]
 
 [ext_resource type="Script" uid="uid://bgk5jtnpd6oev" path="res://environment/save_output.gd" id="1_4nc1y"]
 [ext_resource type="Shader" uid="uid://5s5ote5c3uh3" path="res://hemomancy/patterns/pattern_creator.gdshader" id="2_6nwbq"]
 [ext_resource type="Shader" uid="uid://ckwm2qvwrnvgn" path="res://hemomancy/blood.gdshader" id="2_qjrub"]
 [ext_resource type="Shader" uid="uid://b08cke1ssu5nt" path="res://environment/test.gdshader" id="3_d7lgd"]
 [ext_resource type="Texture2D" path="res://environment/circle.tres" id="3_u3qe7"]
-[ext_resource type="Texture2D" uid="uid://b8e0shd4omda" path="res://hemomancy/patterns/condensation/condensation2.tres" id="4_d7lgd"]
+[ext_resource type="Texture2D" uid="uid://cemb0yhko42l0" path="res://hemomancy/patterns/condensation/condensation2.tres" id="4_d7lgd"]
 [ext_resource type="Shader" uid="uid://ddcdkciy8xvr1" path="res://hemomancy/patterns/condensation/condensation.gdshader" id="7_gs2jo"]
 [ext_resource type="Shader" uid="uid://qusvgfhcevnd" path="res://hemomancy/patterns/spike/spike.gdshader" id="8_lhxa0"]
-[ext_resource type="Texture2D" uid="uid://dellrkhs25n5l" path="res://hemomancy/patterns/spike/spike1.tres" id="9_6tdp5"]
+[ext_resource type="Texture2D" uid="uid://c6bx4akk2yh1r" path="res://hemomancy/patterns/spike/spike1.tres" id="9_6tdp5"]
+[ext_resource type="Shader" uid="uid://co1oynenes66o" path="res://hemomancy/patterns/path/path.gdshader" id="10_m4llh"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gs2jo"]
 shader = ExtResource("2_qjrub")
@@ -52,6 +53,20 @@ shader_parameter/frame_active = 1
 shader = ExtResource("8_lhxa0")
 shader_parameter/orig = ExtResource("9_6tdp5")
 shader_parameter/b_offset = 0.2
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_q75ar"]
+frequency = 0.0283
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_dwcvp"]
+noise = SubResource("FastNoiseLite_q75ar")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tjn1r"]
+shader = ExtResource("10_m4llh")
+shader_parameter/transparency_map = SubResource("NoiseTexture2D_dwcvp")
+shader_parameter/frame_active = 2
+shader_parameter/y_clip = 0.51
+shader_parameter/x_scale = 9.82
+shader_parameter/x_pow = 3.345
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_4nc1y")
@@ -118,6 +133,15 @@ grow_vertical = 2
 [node name="spike_pass2" type="ColorRect" parent="SubViewport"]
 visible = false
 material = SubResource("ShaderMaterial_6tdp5")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="path" type="ColorRect" parent="SubViewport" groups=["pattern_renderable"]]
+visible = false
+material = SubResource("ShaderMaterial_tjn1r")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

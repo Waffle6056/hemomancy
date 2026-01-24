@@ -3,24 +3,24 @@
   "WorkspaceRootPath": "E:\\hemomancy\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|e:\\hemomancy\\hemomancy\\bloodsim.glsl||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|solutionrelative:hemomancy\\bloodsim.glsl||{8B382828-6202-11D1-8870-0000F87579D2}"
+      "AbsoluteMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|e:\\hemomancy\\hemomancy\\bloodsimcpu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|solutionrelative:hemomancy\\bloodsimcpu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|e:\\hemomancy\\hemomancy\\manipulationfield.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|solutionrelative:hemomancy\\manipulationfield.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|e:\\hemomancy\\hemomancy.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|solutionrelative:hemomancy.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|e:\\hemomancy\\hemomancy\\bloodsimcpu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|solutionrelative:hemomancy\\bloodsimcpu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|e:\\hemomancy\\hemomancy\\bloodsim.glsl||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|solutionrelative:hemomancy\\bloodsim.glsl||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|e:\\hemomancy\\player\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|solutionrelative:player\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|e:\\hemomancy\\hemomancy.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|solutionrelative:hemomancy.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|e:\\hemomancy\\hemomancy\\patterns\\spike\\timer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -50,7 +50,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Document",
@@ -60,28 +60,28 @@
               "RelativeDocumentMoniker": "hemomancy\\ManipulationField.cs",
               "ToolTip": "E:\\hemomancy\\hemomancy\\ManipulationField.cs",
               "RelativeToolTip": "hemomancy\\ManipulationField.cs",
-              "ViewState": "AgIAACEAAAAAAAAAAAAowDEAAAADAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-01-05T09:07:31.729Z",
               "IsPinned": true,
               "EditorCaption": ""
             },
             {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "bloodsim.glsl",
               "DocumentMoniker": "E:\\hemomancy\\hemomancy\\bloodsim.glsl",
               "RelativeDocumentMoniker": "hemomancy\\bloodsim.glsl",
               "ToolTip": "E:\\hemomancy\\hemomancy\\bloodsim.glsl",
               "RelativeToolTip": "hemomancy\\bloodsim.glsl",
-              "ViewState": "AgIAAK8AAAAAAAAAAAApwMoAAABHAAAAAAAAAA==",
+              "ViewState": "AgIAALsAAAAAAAAAAAAAAMYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
               "WhenOpened": "2026-01-22T23:18:46.407Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
             },
             {
               "$type": "Document",
@@ -93,31 +93,30 @@
               "RelativeToolTip": "hemomancy\\patterns\\spike\\Timer.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-08T02:04:14.948Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-08T02:04:14.948Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
               "Title": "BloodSimCPU.cs",
               "DocumentMoniker": "E:\\hemomancy\\hemomancy\\BloodSimCPU.cs",
               "RelativeDocumentMoniker": "hemomancy\\BloodSimCPU.cs",
               "ToolTip": "E:\\hemomancy\\hemomancy\\BloodSimCPU.cs",
               "RelativeToolTip": "hemomancy\\BloodSimCPU.cs",
-              "ViewState": "AgIAAFEBAAAAAAAAAAAiwG8BAAAFAAAAAAAAAA==",
+              "ViewState": "AgIAAG4BAAAAAAAAAAAuwIYBAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-12-24T01:39:42.122Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 3,
               "Title": "Player.cs",
               "DocumentMoniker": "E:\\hemomancy\\player\\Player.cs",
               "RelativeDocumentMoniker": "player\\Player.cs",
               "ToolTip": "E:\\hemomancy\\player\\Player.cs",
               "RelativeToolTip": "player\\Player.cs",
-              "ViewState": "AgIAAGQAAAAAAAAAAAAYwDMAAAACAAAAAAAAAA==",
+              "ViewState": "AgIAAEoAAAAAAAAAAAAAwDMAAAADAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-12-05T02:07:27.039Z",
               "EditorCaption": ""
@@ -160,7 +159,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
               "Title": "hemomancy.csproj",
               "DocumentMoniker": "E:\\HEMOMANCY\\hemomancy.csproj",
               "RelativeDocumentMoniker": "hemomancy.csproj",
@@ -168,8 +167,7 @@
               "RelativeToolTip": "hemomancy.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-12-31T10:20:20.362Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-31T10:20:20.362Z"
             },
             {
               "$type": "Document",

@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://cdl55m21d5syg"]
+
+[ext_resource type="Script" uid="uid://dmvk7122tmtia" path="res://hemomancy/ManipulationField.cs" id="1_i7qd2"]
+[ext_resource type="Texture2D" path="res://hemomancy/patterns/path/path2.tres" id="2_uke27"]
+
+[node name="path" type="Node2D"]
+scale = Vector2(512, 512)
+script = ExtResource("1_i7qd2")
+VelocityMagnitude = 0.0
+AccelerationMagnitude = 1000.0
+Pattern = 3
+
+[node name="Samplepattern" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.30980393)
+z_index = 7
+scale = Vector2(0.002, 0.002)
+texture = ExtResource("2_uke27")
