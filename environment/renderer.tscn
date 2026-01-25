@@ -5,10 +5,10 @@
 [ext_resource type="Shader" uid="uid://ckwm2qvwrnvgn" path="res://hemomancy/blood.gdshader" id="2_qjrub"]
 [ext_resource type="Shader" uid="uid://b08cke1ssu5nt" path="res://environment/test.gdshader" id="3_d7lgd"]
 [ext_resource type="Texture2D" path="res://environment/circle.tres" id="3_u3qe7"]
-[ext_resource type="Texture2D" uid="uid://cemb0yhko42l0" path="res://hemomancy/patterns/condensation/condensation2.tres" id="4_d7lgd"]
+[ext_resource type="Texture2D" uid="uid://dgqhjl65xtmv2" path="res://hemomancy/patterns/condensation/condensation2.tres" id="4_d7lgd"]
 [ext_resource type="Shader" uid="uid://ddcdkciy8xvr1" path="res://hemomancy/patterns/condensation/condensation.gdshader" id="7_gs2jo"]
 [ext_resource type="Shader" uid="uid://qusvgfhcevnd" path="res://hemomancy/patterns/spike/spike.gdshader" id="8_lhxa0"]
-[ext_resource type="Texture2D" uid="uid://c6bx4akk2yh1r" path="res://hemomancy/patterns/spike/spike1.tres" id="9_6tdp5"]
+[ext_resource type="Texture2D" uid="uid://dqhg0h3sm42gc" path="res://hemomancy/patterns/spike/spike1.tres" id="9_6tdp5"]
 [ext_resource type="Shader" uid="uid://co1oynenes66o" path="res://hemomancy/patterns/path/path.gdshader" id="10_m4llh"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gs2jo"]
@@ -23,7 +23,8 @@ shader_parameter/red_offset = 0.2
 shader = ExtResource("2_6nwbq")
 shader_parameter/points = PackedVector2Array(0.5, 0.45, 0.4, 0.65, 0.5, 0.75, 0.6, 0.65, -1, -1)
 shader_parameter/border_max_dis = 0.183
-shader_parameter/frame_active = 1
+shader_parameter/frame_active = 2
+shader_parameter/inheritance = 0.703
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_u3qe7"]
 shader = ExtResource("3_d7lgd")
@@ -48,6 +49,7 @@ shader = ExtResource("2_6nwbq")
 shader_parameter/points = PackedVector2Array(-0.2, 1, 0.2, 1, 0, 0.5, -1, -1)
 shader_parameter/border_max_dis = 0.0625
 shader_parameter/frame_active = 1
+shader_parameter/inheritance = 0.0625
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6tdp5"]
 shader = ExtResource("8_lhxa0")

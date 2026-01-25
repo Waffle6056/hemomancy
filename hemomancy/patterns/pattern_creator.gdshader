@@ -3,6 +3,7 @@ shader_type canvas_item;
 uniform vec2 points[16];
 uniform float border_max_dis = .0625;
 uniform int frame_active = 1;
+uniform float inheritance = .0625;
 
 void vertex() {
 	// Called for every vertex the material is visible on.
@@ -121,7 +122,7 @@ void fragment() {
 				
 		}
 	
-		//if (length(max_dis) <= 1.0)
+		//if (length(max_dis) <= inheritance)
 			//COLOR = vec4(0,0,0,1);
 		//COLOR = vec4(inverse_step,0,0,1);
 		//COLOR = vec4(dir,0,1);d

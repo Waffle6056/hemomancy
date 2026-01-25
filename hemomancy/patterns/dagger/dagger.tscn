@@ -6,7 +6,6 @@
 [node name="dagger" type="Node2D"]
 scale = Vector2(512, 512)
 script = ExtResource("1_jvopj")
-Velocity = Vector2(1000, 0)
 VelocityMagnitude = 300.0
 AccelerationMagnitude = 500.0
 

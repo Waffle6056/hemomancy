@@ -229,8 +229,6 @@ visible = false
 top_level = true
 position = Vector2(-1000, -1000)
 scale = Vector2(300, 300)
-VelocityMagnitude = 300.0
-AccelerationMagnitude = 500.0
 
 [node name="spike" parent="Constructs" instance=ExtResource("7_hg6s5")]
 visible = false
@@ -241,7 +239,7 @@ visible = false
 top_level = true
 position = Vector2(-1000, -1000)
 RotationSpeed = 0.785
-AccelerationMagnitude = 1500.0
+AccelerationMagnitude = 7500.0
 
 [node name="testname" type="Timer" parent="Constructs/condensation" node_paths=PackedStringArray("target")]
 script = ExtResource("8_rgyib")

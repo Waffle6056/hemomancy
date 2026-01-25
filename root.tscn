@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bts6u3u7dti3b"]
+[gd_scene load_steps=16 format=3 uid="uid://bts6u3u7dti3b"]
 
 [ext_resource type="PackedScene" uid="uid://cl5catww2oaat" path="res://nexus/nexus.tscn" id="1_pq8q7"]
 [ext_resource type="Shader" uid="uid://dnl2w1yljscwm" path="res://environment/brick.gdshader" id="2_vvh5c"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" path="res://environment/circle.tres" id="5_jnlp7"]
 [ext_resource type="Script" uid="uid://ck53mxrcnk2al" path="res://Camera2d.cs" id="5_vyht1"]
 [ext_resource type="PackedScene" uid="uid://bm06sc7clrtou" path="res://hemomancy/blood.tscn" id="9_huihk"]
+[ext_resource type="PackedScene" uid="uid://cdl55m21d5syg" path="res://hemomancy/patterns/path/path.tscn" id="10_tw3kd"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_jnlp7"]
 noise_type = 2
@@ -113,3 +114,6 @@ texture_scale = 2.0
 height = 176.0
 
 [node name="Node2D" parent="." instance=ExtResource("9_huihk")]
+
+[node name="path" parent="." instance=ExtResource("10_tw3kd")]
+position = Vector2(311, -14)

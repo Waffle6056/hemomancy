@@ -53,6 +53,8 @@ public partial class BloodSimCPU : Node
 		public Rid Position;
 		public Rid Velocity;
 		public Rid InUse;
+		public Rid Field;
+		public Rid MaxInheritance;
 		public Rid ToInstantiate;
 		public Rid InstantiatePosition;
 		public Rid Misc;
@@ -133,6 +135,8 @@ public partial class BloodSimCPU : Node
 		data.Add(NewUniform(Particle.Position            = NewStorageBuffer(new byte[MaxParticleCount * (int)ByteCount.glvec2])));
 		data.Add(NewUniform(Particle.Velocity            = NewStorageBuffer(new byte[MaxParticleCount * (int)ByteCount.glvec2])));
 		data.Add(NewUniform(Particle.InUse               = NewStorageBuffer(new byte[MaxParticleCount * (int)ByteCount.glbool])));
+		data.Add(NewUniform(Particle.Field               = NewStorageBuffer(new byte[MaxParticleCount * (int)ByteCount.glint])));
+		data.Add(NewUniform(Particle.MaxInheritance      = NewStorageBuffer(new byte[MaxParticleCount * (int)ByteCount.glfloat])));
 		data.Add(NewUniform(Particle.ToInstantiate       = NewStorageBuffer(new byte[(int)ByteCount.glint + ToInstantiate.Length * (int)ByteCount.glint])));
 		data.Add(NewUniform(Particle.InstantiatePosition = NewStorageBuffer(new byte[InstantiatePosition.Length * (int)ByteCount.glvec2])));
 		data.Add(NewUniform(Particle.Misc                = NewStorageBuffer(new byte[(int)ByteCount.glfloat + MaxParticleCount * (int)ByteCount.glfloat])));
@@ -384,11 +388,15 @@ public partial class BloodSimCPU : Node
 				InstantiateParticles((int)toggleHeld, Player.instance.GlobalPosition);
 				toggleHeld -= (int)toggleHeld;
 			}
+			foreach (int fieldInd in ManipulationField.ActiveIndexes)
+			{
+				ManipulationField.FieldList[fieldInd].PreSimProcess(interval);
+			}
 			//GD.Print("UPDATE SIM");
 			UpdateSimulation(interval);
 			foreach (int fieldInd in ManipulationField.ActiveIndexes)
 			{
-				ManipulationField.FieldList[fieldInd].SimAlignedProcess(interval);
+				ManipulationField.FieldList[fieldInd].PostSimProcess(interval);
 			}
 			timer = 0;
 
