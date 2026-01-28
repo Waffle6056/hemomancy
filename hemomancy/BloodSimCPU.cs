@@ -5,6 +5,7 @@ using System.Linq;
 
 public partial class BloodSimCPU : Node
 {
+	public static BloodSimCPU instance;
 	[Export]
 	MultiMeshInstance2D Display;
 	[Export]
@@ -241,8 +242,8 @@ public partial class BloodSimCPU : Node
 		foreach (int i in HasHP.ActiveIndexes)
 		{
 			HasHP node = HasHP.EntityList[i];
-			positionData[i*2] = (node as Node2D).Position.X;
-			positionData[i*2+1] = (node as Node2D).Position.Y;
+			positionData[i*2] = (node as Node2D).GlobalPosition.X;
+			positionData[i*2+1] = (node as Node2D).GlobalPosition.Y;
 			radiusData[i] = node.ParticleHitboxRadius;
 		}
 		byte[] positionDataBytes     = ToByteArray(positionData,     ByteCount.glfloat);
@@ -254,7 +255,7 @@ public partial class BloodSimCPU : Node
 		
 	}
 
-	void InstantiateParticles(int count, Vector2 position)
+	public void InstantiateParticles(int count, Vector2 position)
 	{
 		ToInstantiate[InstantiateInd+1] = count;
 		InstantiatePosition[InstantiateInd] = position;
@@ -339,6 +340,7 @@ public partial class BloodSimCPU : Node
 	}
 	public override void _Ready()
 	{
+		instance = this;
 		Shader = CompileShader("res://hemomancy/bloodsim.glsl");
 		InitializeCompute();
 
@@ -372,8 +374,8 @@ public partial class BloodSimCPU : Node
 			//GD.Print("field position data : " +bufferToString<float>(PlayerInput.FieldTransform,ByteCount.glfloat));
 			//GD.Print("mesh mat data : " +bufferToString<float>((RenderingServer.MultimeshGetBufferRdRid(Display.Multimesh.GetRid())),ByteCount.glfloat));
 
-
-
+			//GD.Print("enemy data: " + bufferToString<float>(Enemy.Position, ByteCount.glfloat));
+			GD.Print(String.Join(", ", HasHP.EntityList));
 		}
 	}
 	public override void _PhysicsProcess(double delta)

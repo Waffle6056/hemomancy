@@ -39,21 +39,28 @@ public interface HasHP
 public partial class HpComponent : Node2D
 {
     [Signal]
-    public delegate void HitEventHandler();
+    public delegate void HitEventHandler(float amt);
     [Export]
     public float Length = 200;
     [Export]
     public float Height = 200;
     [Export]
     public float Padding = 10;
+    [Export]
+    public Vector2 offset = new Vector2(0,-55);
 
     [Export]
-    public int MaxHP = 200;
-    public int HP = 200;
+    public int MaxHP = 100;
+    [Export]
+    public int MaxOverhealth = 75;
+    public int HP{get{return HP;} set{HP = Math.Min(MaxHP+MaxOverhealth,HP);}}
+    public int Overhealth{get{ return Math.Min(MaxOverhealth,Math.Max(0,HP-MaxHP));}}
     [Export]
 	public Sprite2D HPDisplay = null;
     [Export]
     public Sprite2D BGDisplay = null;
+    [Export]
+    public OverhealthDisplay OverhealthDisplay;
     [Export]
     public Node2D Pivot = null;
 
@@ -74,13 +81,15 @@ public partial class HpComponent : Node2D
         time += delta;
         BGDisplay.Scale = new Vector2(Length, Height);
         HPDisplay.Scale = new Vector2(Math.Max(0,Length*HP/MaxHP - Padding), Height-Padding);
-        Pivot.Position = new Vector2(0,(float)Math.Sin(time*WaveTimeScale)*WaveLength);
+        Pivot.Position = offset+new Vector2(0,(float)Math.Sin(time*WaveTimeScale)*WaveLength);
+        OverhealthDisplay?.set(Overhealth,MaxOverhealth);
     }
     public void TakeDamage(int amount)
     {
         //GD.Print("hit for " + amount);
         HP -= amount;
-        EmitSignal(SignalName.Hit);
+        EmitSignal(SignalName.Hit, amount);
+        BloodSimCPU.instance.InstantiateParticles(Math.Max(0,amount-Overhealth), GlobalPosition);
     }
 }
 

@@ -1,11 +1,11 @@
 [gd_scene load_steps=3 format=3 uid="uid://cgxyxbdgd214l"]
 
-[ext_resource type="Script" uid="uid://dmvk7122tmtia" path="res://hemomancy/ManipulationField.cs" id="1_jvopj"]
+[ext_resource type="Script" uid="uid://c7bbn5ywxpo0o" path="res://hemomancy/patterns/dagger/Dagger.cs" id="1_1rk3v"]
 [ext_resource type="Texture2D" uid="uid://dsc8a4fbdr1el" path="res://hemomancy/patterns/dagger/dagger1.tres" id="2_tj6gf"]
 
 [node name="dagger" type="Node2D"]
 scale = Vector2(512, 512)
-script = ExtResource("1_jvopj")
+script = ExtResource("1_1rk3v")
 VelocityMagnitude = 300.0
 AccelerationMagnitude = 500.0
 

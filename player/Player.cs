@@ -25,70 +25,93 @@ public partial class Player : CharacterBody2D, HasHP
     public GpuParticles2D DashStepEmitter;
     int FootStepSide = 1;
     double FootStepTimer = 0;
+	[Signal]
+	public delegate void NextMouseCaptureEventHandler(Vector2 MousePosition);
 	[Export]
 	public ManipulationField Dagger;
 	[Export]
 	public ManipulationField Condensation;
+//	[Export]
+//	public ManipulationField Spike;
 	[Export]
-	public Node2D Spike;
+	public Timer KillTimer;
+	public bool AbsorbBlood = false;
 
     public override void _Ready()
     {
-		//HPIndex = HasHP.Register(this);
+		HPIndex = HasHP.Register(this);
 		Player.instance = this;
         base._Ready();
-		HP.Hit += hitParticles;
+		HP.Hit += hit;
     }
 
-	public void hitParticles()
+	public void hit(float amt)
 	{
+
+        BloodSimCPU.instance.InstantiateParticles((int)amt, GlobalPosition);
 		Anims.Play("hit");
 	}
-	ManipulationField SummonDagger(Vector2 globalPosition)
-	{
-		ManipulationField f = Dagger.Duplicate() as ManipulationField;
-		AddSibling(f);
-		f.GlobalPosition = globalPosition;
-		f.Velocity = (GetGlobalMousePosition() - f.GlobalPosition).Normalized() * 700;
-		f.LookAt(GetGlobalMousePosition());
-		f.Rotate((float)Math.PI / 2);
-		return f;
-	}
-	ManipulationField SummonCondensation(Vector2 globalPosition)
-	{
-		ManipulationField f = Condensation.Duplicate() as ManipulationField;
-		AddSibling(f);
-		GD.Print(f.GetChildren());
-		f.GlobalPosition = globalPosition;
-		f.Rotate((float)(Random.Shared.NextDouble() * Math.Tau));
-		return f;
-	}
-	void SummonSpike(Vector2 globalPosition)
-	{
-		Node2D f = Spike.Duplicate() as Node2D;
-		AddSibling(f);
-		f.GlobalPosition = globalPosition;
-		f.LookAt(GetGlobalMousePosition());
-		f.Rotate((float)Math.PI / 2);
 
+	ManipulationField Summon(ManipulationField baseObject, Vector2 globalPosition, Vector2 dir)
+	{
+		ManipulationField f = baseObject.Duplicate() as ManipulationField;
+		AddSibling(f);
+		f.GlobalPosition = globalPosition;
+		f.LookAt(f.GlobalPosition + dir);
+		f.Rotate((float)Math.PI / 2);
+		return f;
+	}
+	ManipulationField Summon(ManipulationField baseObject, Vector2 globalPosition)
+	{
+		return Summon(baseObject, globalPosition, Vector2.Up.Rotated((float)(Random.Shared.NextDouble() * Math.Tau)));
 	}
 	bool condensationToggle = false;
-    public override void _Process(double delta)
+    
+	void DelayedMouseDirectionSummon(ManipulationField baseObject)
+	{
+		Vector2 p = GetGlobalMousePosition();
+		ManipulationField con = Summon(Condensation, p);
+		NextMouseCaptureEventHandler summonDagger = null;
+		summonDagger = (pos) => { 
+			con.QueueFree();
+			Summon(baseObject,p,pos-p);
+			NextMouseCapture -= summonDagger;
+		};
+		NextMouseCapture += summonDagger;
+	}
+	public override void _Input(InputEvent @event)
+	{
+		if (@event is InputEventMouseButton)
+		{
+			InputEventMouseButton ev = @event as InputEventMouseButton;
+			if (ev.ButtonIndex == MouseButton.Left)
+			{
+				EmitSignal(SignalName.NextMouseCapture,GetGlobalMousePosition());
+			}
+		}
+	}
+	public override void _Process(double delta)
     {
         base._Process(delta);
 		if (Input.IsActionJustPressed("R"))
 		{
-			Vector2 p = GlobalPosition + Vector2.Right.Rotated(Random.Shared.NextSingle() * 2 * (float)Math.PI) * 100;
-			SummonCondensation(p).TreeExited += () => { SummonDagger(p); };
+			//Vector2 p = GlobalPosition + Vector2.Right.Rotated(Random.Shared.NextSingle() * 2 * (float)Math.PI) * 100;
+			DelayedMouseDirectionSummon(Dagger);
 		}
 		if (Input.IsActionJustPressed("Q"))
 		{
-			(SummonCondensation(GetGlobalMousePosition()).GetChild(1) as Timer).Start(3.0);
+			Timer d = (KillTimer.Duplicate()) as Timer;
+			Summon(Condensation, GetGlobalMousePosition()).AddChild(d);
+			d.Start(3.0);
+
 		}
-		if (Input.IsActionJustPressed("F"))
+		AbsorbBlood = Input.IsActionPressed("AbsorbBlood");
+		if (Input.IsActionJustPressed("ReleaseBlood"))
 		{
-			Vector2 p = GlobalPosition + Vector2.Right.Rotated(Random.Shared.NextSingle() * 2 * (float)Math.PI) * 100;
-			SummonCondensation(p).TreeExited += () => { SummonSpike(p); };
+			HP.HP -= 25;
+
+			//HP.TakeDamage(10);
+			//DelayedMouseDirectionSummon(Spike);
 		}
 
 		if (Input.IsActionJustPressed("3"))

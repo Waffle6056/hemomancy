@@ -1,8 +1,11 @@
 shader_type canvas_item;
+render_mode unshaded;
 
 uniform sampler2D transparency_pattern;
 uniform vec3 color_offset = vec3(.7,0,0);
 varying vec2 world_position;
+uniform vec4 color : source_color = vec4(1.0);
+
 
 void vertex() {
     world_position = (MODEL_MATRIX * vec4(VERTEX,0, 1.0)).xy;
@@ -17,8 +20,7 @@ void fragment() {
 	vec2 world_uv = mod(world_position / 200.0,1);
 	float alpha = (1.0-dis_factor) * texture(transparency_pattern, world_uv).r;
 	COLOR.a = min(COLOR.a,alpha);
-	COLOR.rgb /= 7.0;
-	COLOR.rgb += color_offset;
+	COLOR.rgb = color.rgb;
 }
 
 //void light() {

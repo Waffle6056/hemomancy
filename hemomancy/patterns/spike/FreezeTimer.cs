@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class Timer : Godot.Timer
+public partial class FreezeTimer : Timer
 {
 	[Export]
 	public ManipulationField ManipulationField;

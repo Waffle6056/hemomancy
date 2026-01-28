@@ -6,10 +6,8 @@ var target : Node2D
 func _ready() -> void:
 	#print("called ready")
 	start();
-	timeout.connect(target.queue_free);
+	if (target != null):
+		timeout.connect(target.queue_free);
+	else:
+		timeout.connect(get_parent().queue_free);
 	pass # Replace with function body.
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	#print(time_left)
-	pass

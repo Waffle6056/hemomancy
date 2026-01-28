@@ -52,10 +52,10 @@ public partial class ManipulationField : Node2D
 
 	}
 
-	public void PreSimProcess(double delta)
+	public virtual void PreSimProcess(double delta)
 	{
 	}
-	public void PostSimProcess(double delta)
+	public virtual void PostSimProcess(double delta)
 	{
 		GlobalPosition += Velocity * (float) delta;
 		Rotate(RotationSpeed * (float)delta);

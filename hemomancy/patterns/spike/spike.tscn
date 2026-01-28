@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://b4guuym6qd8p2"]
 
 [ext_resource type="Script" uid="uid://dmvk7122tmtia" path="res://hemomancy/ManipulationField.cs" id="1_wv5ee"]
-[ext_resource type="Texture2D" uid="uid://0m0xxegf5ayn" path="res://hemomancy/patterns/spike/spike1.tres" id="2_6ceou"]
-[ext_resource type="Script" uid="uid://bq0wkxmy2s2ql" path="res://hemomancy/patterns/spike/Timer.cs" id="3_6ceou"]
+[ext_resource type="Texture2D" uid="uid://dqhg0h3sm42gc" path="res://hemomancy/patterns/spike/spike1.tres" id="2_6ceou"]
+[ext_resource type="Script" uid="uid://bq0wkxmy2s2ql" path="res://hemomancy/patterns/spike/FreezeTimer.cs" id="3_6ceou"]
 [ext_resource type="Script" uid="uid://duvaeijy7bmtt" path="res://player/timer.gd" id="3_fxoh2"]
 
 [node name="spike" type="Node2D"]

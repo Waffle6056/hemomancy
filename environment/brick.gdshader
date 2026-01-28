@@ -39,6 +39,8 @@ void fragment() {
 	COLOR = brick_outline * brick_color;
 	COLOR.a = 1.0;
 	//COLOR = vec4(NORMAL+vec3(.5),1.0);
+	if (length(UV-.5) > .5)
+		COLOR.a = 0.0;
 }
 
 //void light() {

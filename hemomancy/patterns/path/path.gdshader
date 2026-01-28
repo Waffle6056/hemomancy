@@ -1,10 +1,11 @@
 shader_type canvas_item;
 uniform sampler2D transparency_map;
-const float step_size = 64.0/512.0;
+const float step_size = 32.0/512.0;
 uniform int frame_active = 1;
 uniform float y_clip = .1;
 uniform float x_scale = .1;
 uniform float x_pow = .1;
+uniform float y_scale = .1;
 
 void vertex() {
 	// Called for every vertex the material is visible on.
@@ -17,12 +18,13 @@ vec2 perp(vec2 vec){
 	return normalize(cross(vec3(vec,0),vec3(0,0,1)).xy);
 }
 vec2 squish_vec(vec2 pos){
-	float x_fac = pow(abs(pos.x),x_pow)*x_scale;
-	float displacement_from_x = 1.0-cos(x_fac * PI);
-	float y_offset_magnitude = .25*normalize(pos.y);
-	vec2 offset = vec2(0, y_offset_magnitude) * displacement_from_x;
-	vec2 squished_vec = pos + offset;
-	return squished_vec;
+	//float y_
+	//float displacement_from_x = ()*pow(abs(pos.x),x_pow)*x_scale;
+	//float y_offset_magnitude = .25*normalize(pos.y);
+	//vec2 offset = vec2(0, y_offset_magnitude) * displacement_from_x;
+	//vec2 squished_vec = pos * vec2(1,displacement_from_x);
+	//return squished_vec;
+	return vec2(0);
 }
 
 void fragment() {

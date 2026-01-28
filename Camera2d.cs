@@ -15,7 +15,7 @@ public partial class Camera2d : Camera2D
 	{
 		if (target != null)
 		{
-			GlobalPosition = new Vector2(target.GlobalPosition.X,0);
+			GlobalPosition = target.GlobalPosition;//new Vector2(target.GlobalPosition.X,0);
 		}
 	}
 }

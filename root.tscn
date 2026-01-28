@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bts6u3u7dti3b"]
+[gd_scene load_steps=18 format=3 uid="uid://bts6u3u7dti3b"]
 
 [ext_resource type="PackedScene" uid="uid://cl5catww2oaat" path="res://nexus/nexus.tscn" id="1_pq8q7"]
 [ext_resource type="Shader" uid="uid://dnl2w1yljscwm" path="res://environment/brick.gdshader" id="2_vvh5c"]
@@ -8,7 +8,9 @@
 [ext_resource type="Texture2D" path="res://environment/circle.tres" id="5_jnlp7"]
 [ext_resource type="Script" uid="uid://ck53mxrcnk2al" path="res://Camera2d.cs" id="5_vyht1"]
 [ext_resource type="PackedScene" uid="uid://bm06sc7clrtou" path="res://hemomancy/blood.tscn" id="9_huihk"]
-[ext_resource type="PackedScene" uid="uid://cdl55m21d5syg" path="res://hemomancy/patterns/path/path.tscn" id="10_tw3kd"]
+[ext_resource type="Script" uid="uid://by8jebfwclap6" path="res://enemy_controller/WaveSpawner.cs" id="9_tw3kd"]
+[ext_resource type="PackedScene" uid="uid://dupqe7iic0xpx" path="res://enemy_controller/spawn_node_melee.tscn" id="10_tw3kd"]
+[ext_resource type="PackedScene" uid="uid://dd058p1sdspnc" path="res://enemy_controller/melee_enemy.tscn" id="11_gd4vy"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_jnlp7"]
 noise_type = 2
@@ -46,17 +48,17 @@ position = Vector2(-385.32, -0.320007)
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 position = Vector2(289, -288.54)
 scale = Vector2(13.4975, 0.522812)
-color = Color(0.266575, 0.266575, 0.266575, 1)
+color = Color(0, 0, 0, 1)
 
 [node name="flooring" type="Sprite2D" parent="."]
 z_index = -1
 texture_repeat = 2
 material = SubResource("ShaderMaterial_vyht1")
-position = Vector2(289.16, 0)
-scale = Vector2(13.4975, 3.96625)
+scale = Vector2(30, 30)
 texture = ExtResource("3_28aoi")
 
 [node name="wall" type="Sprite2D" parent="."]
+visible = false
 z_index = -1
 texture_repeat = 2
 material = SubResource("ShaderMaterial_bf3um")
@@ -81,39 +83,43 @@ z_index = 1
 position = Vector2(-85, -4)
 Speed = 300.0
 
+[node name="bloodsim" parent="." instance=ExtResource("9_huihk")]
+
 [node name="PointLight2D2" type="PointLight2D" parent="."]
-position = Vector2(200, 240)
 color = Color(0.762526, 0.534045, 0.199022, 1)
-energy = 0.4
+energy = 2.0
 texture = ExtResource("5_jnlp7")
+texture_scale = 2.75
+height = 200.0
+
+[node name="WaveSpawner" type="Node2D" parent="." node_paths=PackedStringArray("SpawnNodeTypes", "NodeSpawnInterval", "WaveSpawnDelay")]
+script = ExtResource("9_tw3kd")
+SpawnNodeTypes = [NodePath("disabled spawn node presets/SpawnNodeMelee")]
+SpawnNodeSpawnRadius = 700.0
+WavePowerBase = 1.0
+WavePowerScaling = 0.5
+NodeSpawnInterval = NodePath("NodeSpawnInterval")
+WaveSpawnDelay = NodePath("WaveSpawnDelay")
+
+[node name="NodeSpawnInterval" type="Timer" parent="WaveSpawner"]
+wait_time = 0.2
+one_shot = true
+
+[node name="WaveSpawnDelay" type="Timer" parent="WaveSpawner"]
+one_shot = true
+
+[node name="disabled spawn node presets" type="Node2D" parent="WaveSpawner"]
+process_mode = 4
+position = Vector2(-10000, 0)
+
+[node name="SpawnNodeMelee" parent="WaveSpawner/disabled spawn node presets" instance=ExtResource("10_tw3kd")]
+
+[node name="PointLight2D2" type="PointLight2D" parent="WaveSpawner/disabled spawn node presets/SpawnNodeMelee"]
+color = Color(0.99999446, 0.24562898, 0.1842835, 1)
+energy = 3.0
+texture = ExtResource("3_28aoi")
 texture_scale = 2.0
-height = 176.0
+height = 30.0
 
-[node name="PointLight2D3" type="PointLight2D" parent="."]
-position = Vector2(200, -240)
-color = Color(0.762526, 0.534045, 0.199022, 1)
-energy = 0.4
-texture = ExtResource("5_jnlp7")
-texture_scale = 2.0
-height = 176.0
-
-[node name="PointLight2D4" type="PointLight2D" parent="."]
-position = Vector2(838, 240)
-color = Color(0.762526, 0.534045, 0.199022, 1)
-energy = 0.4
-texture = ExtResource("5_jnlp7")
-texture_scale = 2.0
-height = 176.0
-
-[node name="PointLight2D5" type="PointLight2D" parent="."]
-position = Vector2(833, -240)
-color = Color(0.762526, 0.534045, 0.199022, 1)
-energy = 0.4
-texture = ExtResource("5_jnlp7")
-texture_scale = 2.0
-height = 176.0
-
-[node name="Node2D" parent="." instance=ExtResource("9_huihk")]
-
-[node name="path" parent="." instance=ExtResource("10_tw3kd")]
-position = Vector2(311, -14)
+[node name="MeleeEnemy" parent="." instance=ExtResource("11_gd4vy")]
+position = Vector2(174, 38)

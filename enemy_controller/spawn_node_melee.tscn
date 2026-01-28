@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dupqe7iic0xpx"]
+
+[ext_resource type="Script" uid="uid://dt8q1hygo3tqq" path="res://SpawnNode.cs" id="1_3t3am"]
+[ext_resource type="PackedScene" uid="uid://dd058p1sdspnc" path="res://enemy_controller/melee_enemy.tscn" id="2_sm2x1"]
+
+[node name="SpawnNodeMelee" type="Node2D" node_paths=PackedStringArray("EnemyTypes")]
+script = ExtResource("1_3t3am")
+EnemyTypes = [NodePath("disabled presets/MeleeEnemy")]
+
+[node name="disabled presets" type="Node2D" parent="."]
+process_mode = 4
+position = Vector2(-10000, 0)
+
+[node name="MeleeEnemy" parent="disabled presets" instance=ExtResource("2_sm2x1")]
+ThreatWeight = 0.25

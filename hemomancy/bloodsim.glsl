@@ -282,7 +282,7 @@ void main() {
 	particle_inheritance.inheritance[particle_ind] = inheritance_value;
 
 	for (int i = 0; i < enemy_position.position.length(); i++){
-		if (length(enemy_position.position[i]-particle_pos) <= enemy_radius.radius[i]){ //TODO line circle collision
+		if (length(enemy_position.position[i]-particle_pos) <= enemy_radius.radius[i]){ 
 			atomicAdd(enemy_damage.damage[i],1);
 			particle_in_use.in_use[particle_ind] = false;
 		}

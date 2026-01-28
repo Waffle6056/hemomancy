@@ -1,22 +1,41 @@
-[gd_scene load_steps=27 format=3 uid="uid://cl5catww2oaat"]
+[gd_scene load_steps=36 format=3 uid="uid://cl5catww2oaat"]
 
 [ext_resource type="Shader" uid="uid://cncdmw8gg425k" path="res://nexus/nexus.gdshader" id="1_7ypn0"]
 [ext_resource type="Script" uid="uid://ckp7my4bmo32u" path="res://nexus/Nexus.cs" id="1_npyyr"]
+[ext_resource type="Shader" uid="uid://bgnpmwajsqnkx" path="res://nexus/barrier.gdshader" id="2_kylt6"]
 [ext_resource type="Texture2D" uid="uid://blx08pj0g0x6k" path="res://icon.svg" id="2_upiol"]
 [ext_resource type="Shader" uid="uid://b8seewkdpe3b7" path="res://nexus/nexus_center.gdshader" id="3_hadw0"]
+[ext_resource type="Script" uid="uid://dsush1fkqvvsl" path="res://player/OverhealthDisplay.cs" id="4_igjtn"]
 [ext_resource type="Texture2D" path="res://environment/circle.tres" id="4_j16j4"]
 [ext_resource type="PackedScene" uid="uid://j13cwmfkpli6" path="res://player/hp_component.tscn" id="6_h76f6"]
 [ext_resource type="Shader" uid="uid://8g6syoppwtkp" path="res://nexus/hitparticle.gdshader" id="7_ao4yy"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6rwgm"]
-radius = 34.0
+radius = 61.0
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_kylt6"]
+noise_type = 2
+frequency = 0.0017
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_igjtn"]
+noise = SubResource("FastNoiseLite_kylt6")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_igjtn"]
+shader = ExtResource("2_kylt6")
+shader_parameter/rotate_time_scale = 1.0
+shader_parameter/dis_exponent = 0.4
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/transparency_pattern = SubResource("NoiseTexture2D_igjtn")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ao4yy"]
+radius = 23.021729
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_3s3eb"]
 frequency = 0.0066
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_dsuym"]
-seamless = true
 noise = SubResource("FastNoiseLite_3s3eb")
+seamless = true
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_50umu"]
 shader = ExtResource("1_7ypn0")
@@ -24,12 +43,6 @@ shader_parameter/time_scale = 1.0
 shader_parameter/pulse_time_scale = 1.0
 shader_parameter/rotate_time_scale = 0.5
 shader_parameter/transparency_pattern = SubResource("NoiseTexture2D_dsuym")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_3yi2p"]
-shader = ExtResource("3_hadw0")
-shader_parameter/time_scale = 1.0
-shader_parameter/pulse_time_scale = 0.3
-shader_parameter/rotate_time_scale = 0.3
 
 [sub_resource type="Curve" id="Curve_7ypn0"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.265152, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -64,6 +77,12 @@ scale_max = 0.05
 color_ramp = SubResource("GradientTexture1D_6rwgm")
 alpha_curve = SubResource("CurveTexture_upiol")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3yi2p"]
+shader = ExtResource("3_hadw0")
+shader_parameter/time_scale = 1.0
+shader_parameter/pulse_time_scale = 0.3
+shader_parameter/rotate_time_scale = 0.3
+
 [sub_resource type="Animation" id="Animation_igjtn"]
 length = 0.001
 tracks/0/type = "value"
@@ -78,10 +97,154 @@ tracks/0/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BarrierShape/Barrier:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1.6, 1.6)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BarrierShape/Barrier:material:shader_parameter/dis_exponent")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.4]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("BarrierShape/Barrier:material:shader_parameter/color")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Hit:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Center:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.2, 0.2)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath(".:scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_lpyev"]
+resource_name = "appear"
+length = 1.0000033
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_w6aiu"]
+resource_name = "break"
+length = 3.0000036
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hit:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hit:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2.3333335, 3.0000002),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.25, 0.25), Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Center:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 3.0000036),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.2, 0.2), Vector2(0.76, 0.76)]
+}
+
+[sub_resource type="Animation" id="Animation_834gl"]
+resource_name = "disappear"
+length = 1.0000033
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(2, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_kylt6"]
 resource_name = "hit"
-length = 0.0333367
+length = 0.40000334
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -94,10 +257,49 @@ tracks/0/keys = {
 "update": 1,
 "values": [true, false]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/path = NodePath("BarrierShape/Barrier:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 0.13333334, 0.26666668),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1.8, 1.8), Vector2(1.6, 1.6), Vector2(1.7, 1.7), Vector2(1.6, 1.6)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BarrierShape/Barrier:material:shader_parameter/dis_exponent")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.26666668, 0.36666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.6, 0.6, 0.4]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("BarrierShape/Barrier:material:shader_parameter/color")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.13333334, 0.26666668, 0.36666667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 0.8665748, 0.64506453, 1), Color(1, 1, 1, 1), Color(1, 0.8665748, 0.64506453, 1), Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_w6aiu"]
 _data = {
 &"RESET": SubResource("Animation_igjtn"),
+&"appear": SubResource("Animation_lpyev"),
+&"break": SubResource("Animation_w6aiu"),
+&"disappear": SubResource("Animation_834gl"),
 &"hit": SubResource("Animation_kylt6")
 }
 
@@ -106,13 +308,14 @@ noise_type = 2
 frequency = 0.0117
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_834gl"]
-seamless = true
 noise = SubResource("FastNoiseLite_lpyev")
+seamless = true
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ojxid"]
 shader = ExtResource("7_ao4yy")
 shader_parameter/transparency_pattern = SubResource("NoiseTexture2D_834gl")
 shader_parameter/color_offset = Vector3(0.7, 0, 0)
+shader_parameter/color = Color(1, 0.8666667, 0.6431373, 1)
 
 [sub_resource type="Curve" id="Curve_fcotu"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -134,29 +337,47 @@ scale_min = 0.3
 scale_max = 0.3
 alpha_curve = SubResource("CurveTexture_uukg0")
 
-[node name="Nexus" type="StaticBody2D" node_paths=PackedStringArray("HP", "Anims") groups=["playerteam"]]
+[node name="Nexus" type="StaticBody2D" node_paths=PackedStringArray("Barrier", "Portal", "RadiusVisual", "HP", "Anims") groups=["playerteam"]]
+z_index = 1
 script = ExtResource("1_npyyr")
+Barrier = NodePath("BarrierShape")
+Portal = NodePath("Portal")
+RadiusVisual = NodePath("Radius")
 HP = NodePath("HPComponent")
 Anims = NodePath("AnimationPlayer")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="BarrierShape" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_6rwgm")
 
+[node name="Barrier" type="Sprite2D" parent="BarrierShape"]
+z_index = 1
+material = SubResource("ShaderMaterial_igjtn")
+scale = Vector2(1.6, 1.6)
+texture = ExtResource("2_upiol")
+script = ExtResource("4_igjtn")
+
+[node name="Portal" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Portal"]
+shape = SubResource("CircleShape2D_ao4yy")
+
 [node name="Radius" type="Sprite2D" parent="."]
+visible = false
 material = SubResource("ShaderMaterial_50umu")
-scale = Vector2(1.57, 1.57)
+scale = Vector2(1.3, 1.3)
 texture = ExtResource("2_upiol")
 
-[node name="Center" type="Sprite2D" parent="."]
-material = SubResource("ShaderMaterial_3yi2p")
-scale = Vector2(0.76, 0.76)
-texture = ExtResource("2_upiol")
-
-[node name="PassiveSwirl" type="GPUParticles2D" parent="."]
+[node name="PassiveSwirl" type="GPUParticles2D" parent="Radius"]
+scale = Vector2(0.76923084, 0.76923084)
 amount = 16
 texture = ExtResource("2_upiol")
 lifetime = 4.0
 process_material = SubResource("ParticleProcessMaterial_3s3eb")
+
+[node name="Center" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_3yi2p")
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_upiol")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 color = Color(0.635294, 0, 0, 1)
@@ -164,10 +385,13 @@ energy = 5.0
 texture = ExtResource("4_j16j4")
 height = 30.0
 
-[node name="HPComponent" parent="." instance=ExtResource("6_h76f6")]
-position = Vector2(0, -110)
+[node name="HPComponent" parent="." node_paths=PackedStringArray("OverhealthDisplay") instance=ExtResource("6_h76f6")]
+position = Vector2(0, -55)
 Length = 100.0
 Height = 20.0
+MaxHP = 0
+MaxOverhealth = 5000
+OverhealthDisplay = NodePath("../BarrierShape/Barrier")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -180,3 +404,5 @@ emitting = false
 amount = 3000
 texture = ExtResource("2_upiol")
 process_material = SubResource("ParticleProcessMaterial_3fryt")
+
+[connection signal="body_entered" from="Portal" to="." method="BodyEntered"]

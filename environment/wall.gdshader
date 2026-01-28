@@ -40,6 +40,7 @@ void fragment() {
 	COLOR.a = 1.0;
 	COLOR.rgb += vec3(.225,.225,.2);
 	NORMAL = NORMAL.xzy;
+	
 	//COLOR = vec4(NORMAL+vec3(.5),1.0);
 }
 

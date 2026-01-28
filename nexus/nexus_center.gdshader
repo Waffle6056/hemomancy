@@ -16,7 +16,7 @@ void fragment() {
 	float time = TIME * time_scale;
 	vec2 centered_uv = (UV-vec2(.5,.5));
 	float center_dis = length(centered_uv);
-	float dis_factor = center_dis*center_dis*4.0;
+	float dis_factor = center_dis*center_dis*4.0 * ((sin(time)+3.5)/2.5);
     float angle = atan(centered_uv.y, centered_uv.x);
 	float rotate_time = rotate_time_scale * time;
 	vec2 rotated_center_uv = vec2(cos(rotate_time+angle),sin(rotate_time+angle))*center_dis;

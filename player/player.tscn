@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bq28dawno13ag"]
+[gd_scene load_steps=28 format=3 uid="uid://bq28dawno13ag"]
 
 [ext_resource type="Texture2D" uid="uid://blx08pj0g0x6k" path="res://icon.svg" id="1_4flbx"]
 [ext_resource type="Script" uid="uid://8rg72xll20s0" path="res://player/Player.cs" id="1_rkbax"]
@@ -9,6 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://dcb6s467oqy27" path="res://hemomancy/patterns/condensation/condensation.tscn" id="7_boad6"]
 [ext_resource type="PackedScene" uid="uid://b4guuym6qd8p2" path="res://hemomancy/patterns/spike/spike.tscn" id="7_hg6s5"]
 [ext_resource type="Script" uid="uid://duvaeijy7bmtt" path="res://player/timer.gd" id="8_rgyib"]
+[ext_resource type="Shader" uid="uid://bgnpmwajsqnkx" path="res://nexus/barrier.gdshader" id="10_8t03j"]
+[ext_resource type="Script" uid="uid://dsush1fkqvvsl" path="res://player/OverhealthDisplay.cs" id="11_2ieo8"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rkbax"]
 radius = 25.0
@@ -25,6 +27,7 @@ seamless = true
 shader = ExtResource("3_qjkh3")
 shader_parameter/transparency_pattern = SubResource("NoiseTexture2D_g6k8r")
 shader_parameter/color_offset = Vector3(0.7, 0.7, 0.7)
+shader_parameter/color = Color(1, 1, 1, 1)
 
 [sub_resource type="Curve" id="Curve_8kif1"]
 _data = [Vector2(0, 0.444724), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -182,7 +185,19 @@ _data = {
 &"hit": SubResource("Animation_qjkh3")
 }
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("HP", "Anims", "FootStepEmitter", "DashStepEmitter", "Dagger", "Condensation", "Spike") groups=["playerteam"]]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_2ieo8"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ultwd"]
+noise = SubResource("FastNoiseLite_2ieo8")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ebec5"]
+shader = ExtResource("10_8t03j")
+shader_parameter/rotate_time_scale = 1.0
+shader_parameter/dis_exponent = 0.0
+shader_parameter/color = Color(1, 0, 0, 1)
+shader_parameter/transparency_pattern = SubResource("NoiseTexture2D_ultwd")
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("HP", "Anims", "FootStepEmitter", "DashStepEmitter", "Dagger", "Condensation", "KillTimer") groups=["playerteam"]]
 script = ExtResource("1_rkbax")
 HP = NodePath("HPComponent")
 Anims = NodePath("AnimationPlayer")
@@ -191,7 +206,7 @@ FootStepEmitter = NodePath("FootSteps")
 DashStepEmitter = NodePath("DashStep")
 Dagger = NodePath("Constructs/dagger")
 Condensation = NodePath("Constructs/condensation")
-Spike = NodePath("Constructs/spike")
+KillTimer = NodePath("Constructs/killtimer")
 
 [node name="Icon" type="Sprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
@@ -215,8 +230,8 @@ libraries = {
 &"": SubResource("AnimationLibrary_yw30f")
 }
 
-[node name="HPComponent" parent="." instance=ExtResource("4_yw30f")]
-position = Vector2(0, -55)
+[node name="HPComponent" parent="." node_paths=PackedStringArray("OverhealthDisplay") instance=ExtResource("4_yw30f")]
+OverhealthDisplay = NodePath("../OverhealthShield")
 
 [node name="FootSteps" parent="." instance=ExtResource("5_qjkh3")]
 
@@ -229,6 +244,7 @@ visible = false
 top_level = true
 position = Vector2(-1000, -1000)
 scale = Vector2(300, 300)
+AccelerationMagnitude = 250.0
 
 [node name="spike" parent="Constructs" instance=ExtResource("7_hg6s5")]
 visible = false
@@ -241,6 +257,12 @@ position = Vector2(-1000, -1000)
 RotationSpeed = 0.785
 AccelerationMagnitude = 7500.0
 
-[node name="testname" type="Timer" parent="Constructs/condensation" node_paths=PackedStringArray("target")]
+[node name="killtimer" type="Timer" parent="Constructs"]
 script = ExtResource("8_rgyib")
-target = NodePath("..")
+
+[node name="OverhealthShield" type="Sprite2D" parent="."]
+z_index = 1
+material = SubResource("ShaderMaterial_ebec5")
+scale = Vector2(1.455, 1.455)
+texture = ExtResource("1_4flbx")
+script = ExtResource("11_2ieo8")

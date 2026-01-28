@@ -66,9 +66,10 @@ noise = SubResource("FastNoiseLite_q75ar")
 shader = ExtResource("10_m4llh")
 shader_parameter/transparency_map = SubResource("NoiseTexture2D_dwcvp")
 shader_parameter/frame_active = 2
-shader_parameter/y_clip = 0.51
-shader_parameter/x_scale = 9.82
-shader_parameter/x_pow = 3.345
+shader_parameter/y_clip = 0.41
+shader_parameter/x_scale = 4.72
+shader_parameter/x_pow = 0.34
+shader_parameter/y_scale = 1.0
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_4nc1y")

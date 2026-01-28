@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class MeleeEnemy : CharacterBody2D, HasHP
+public partial class MeleeEnemy : Enemy, HasHP
 {
     [Export]
     public HpComponent HP { get; set; }
@@ -28,12 +28,12 @@ public partial class MeleeEnemy : CharacterBody2D, HasHP
     double FootStepTimer = 0;
     public override void _Ready()
     {
-        HasHP.EntityList.Add(this);
 		HPIndex = HasHP.Register(this);
         base._Ready();
-        HP.Hit += hitParticles;
+        HP.Hit += hit;
+        //GD.Print("called enemy ready "+this+" "+HPIndex);
     }
-    public void hitParticles()
+    public void hit(float amt)
     {
         if (HP.HP <= 0)
             QueueFree();
@@ -55,12 +55,13 @@ public partial class MeleeEnemy : CharacterBody2D, HasHP
 
         // Get the input direction and handle the movement/deceleration.
         // As good practice, you should replace UI actions with custom gameplay actions.
-        if (GlobalPosition.DistanceTo(Nexus.instance.GlobalPosition) <= DetectionRadius)
-            Target = Nexus.instance;
-        else if (GlobalPosition.DistanceTo(Player.instance.GlobalPosition) <= DetectionRadius)
-            Target = Player.instance;
-        else
-            Target = null;
+        Target = Player.instance;
+//        if (GlobalPosition.DistanceTo(Nexus.instance.GlobalPosition) <= DetectionRadius)
+//            Target = Nexus.instance;
+//        else if (GlobalPosition.DistanceTo(Player.instance.GlobalPosition) <= DetectionRadius)
+//            Target = Player.instance;
+//        else
+//            Target = null;
 
         Vector2 direction = new Vector2(0, 0);
         if (Target == null)
