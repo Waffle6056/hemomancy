@@ -35,43 +35,34 @@ public interface HasHP
     public float ParticleHitboxRadius { get; set; }
     [Export]
     public HpComponent HP { get; set; }
+	[Export]
+	public int SimFlags { get; set; } 
 }
 public partial class HpComponent : Node2D
 {
     [Signal]
     public delegate void HitEventHandler(float amt);
-    [Export]
-    public float Length = 200;
-    [Export]
-    public float Height = 200;
-    [Export]
-    public float Padding = 10;
-    [Export]
-    public Vector2 offset = new Vector2(0,-55);
 
     [Export]
-    public int MaxHP = 100;
+    public float MaxHP = 100;
     [Export]
-    public int MaxOverhealth = 75;
-    public int HP{get{return HP;} set{HP = Math.Min(MaxHP+MaxOverhealth,HP);}}
-    public int Overhealth{get{ return Math.Min(MaxOverhealth,Math.Max(0,HP-MaxHP));}}
+    public float MaxOverhealth = 75;
     [Export]
-	public Sprite2D HPDisplay = null;
+    public float HP = 100;//{get{return HP;} set{HP = Math.Min(MaxHP+MaxOverhealth,HP);}}
     [Export]
-    public Sprite2D BGDisplay = null;
+    public float Overhealth = 0;
     [Export]
-    public OverhealthDisplay OverhealthDisplay;
-    [Export]
-    public Node2D Pivot = null;
+    public float OverhealthDeltaPerSecond = 0;
+
 
     [Export]
-    public float WaveLength = 10;
+    public HealthDisplay HealthDisplay;
     [Export]
-    public float WaveTimeScale = 10;
+    public HealthDisplay OverhealthDisplay;
+    float unbledDamage = 0;
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
 	{
-        HP = MaxHP;
 	}
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -79,17 +70,50 @@ public partial class HpComponent : Node2D
 	public override void _Process(double delta)
     {
         time += delta;
-        BGDisplay.Scale = new Vector2(Length, Height);
-        HPDisplay.Scale = new Vector2(Math.Max(0,Length*HP/MaxHP - Padding), Height-Padding);
-        Pivot.Position = offset+new Vector2(0,(float)Math.Sin(time*WaveTimeScale)*WaveLength);
+        if (Overhealth > 0)
+        {
+            ChangeHP(Math.Min(Overhealth, OverhealthDeltaPerSecond * (float)delta), false);
+        }
         OverhealthDisplay?.set(Overhealth,MaxOverhealth);
+        HealthDisplay?.set(HP,MaxHP);
     }
-    public void TakeDamage(int amount)
+    public void ChangeHP(float amount, bool emitHit = true)
     {
+        
         //GD.Print("hit for " + amount);
-        HP -= amount;
-        EmitSignal(SignalName.Hit, amount);
-        BloodSimCPU.instance.InstantiateParticles(Math.Max(0,amount-Overhealth), GlobalPosition);
+        if (amount > 0)
+        {
+            HP += amount;
+            if (HP > MaxHP)
+            {
+                Overhealth += HP - MaxHP;
+                HP = MaxHP;
+            }
+            Overhealth = Math.Min(Overhealth, MaxOverhealth);
+        }
+        else
+        {
+            Overhealth += amount;
+            if (Overhealth < 0)
+            {
+                HP += Overhealth;
+                Overhealth = 0;
+            }
+            HP = Math.Max(0, HP);
+            unbledDamage += Math.Max(0, amount - Overhealth);
+            if (emitHit)
+               EmitSignal(SignalName.Hit, amount);
+        }
+        //BloodSimCPU.instance.InstantiateParticles((int)(Math.Max(0,amount-Overhealth()) * 10), GlobalPosition);
     }
+    public void EmitBlood(float damage)
+    {
+        BloodSimCPU.instance.InstantiateParticles((int)(damage * 10),GlobalPosition);
+    }
+    public void EmitBlood()
+    {
+        BloodSimCPU.instance.InstantiateParticles((int)(unbledDamage * 10),GlobalPosition);
+    }
+
 }
 

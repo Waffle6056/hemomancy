@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://j13cwmfkpli6"]
+[gd_scene load_steps=7 format=3 uid="uid://j13cwmfkpli6"]
 
 [ext_resource type="Script" uid="uid://cea2mmtnwoisu" path="res://player/HpComponent.cs" id="1_otge8"]
+[ext_resource type="Script" uid="uid://dsush1fkqvvsl" path="res://player/HealthDisplay.cs" id="2_d4ca4"]
 
 [sub_resource type="Gradient" id="Gradient_tty8s"]
 colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
@@ -20,23 +21,22 @@ width = 1
 height = 1
 use_hdr = true
 
-[node name="HPComponent" type="Node2D" node_paths=PackedStringArray("HPDisplay", "BGDisplay", "Pivot")]
+[node name="HPComponent" type="Node2D" node_paths=PackedStringArray("HealthDisplay")]
 script = ExtResource("1_otge8")
+HealthDisplay = NodePath("healthbar")
+
+[node name="healthbar" type="Sprite2D" parent="." node_paths=PackedStringArray("HPDisplay", "BGDisplay")]
+script = ExtResource("2_d4ca4")
 Length = 75.0
 Height = 10.0
 Padding = 5.0
-HPDisplay = NodePath("Pivot/RED")
-BGDisplay = NodePath("Pivot/BG")
-Pivot = NodePath("Pivot")
-WaveLength = 2.0
-WaveTimeScale = 2.0
+HPDisplay = NodePath("RED")
+BGDisplay = NodePath("BG")
 
-[node name="Pivot" type="Node2D" parent="."]
-
-[node name="BG" type="Sprite2D" parent="Pivot"]
+[node name="BG" type="Sprite2D" parent="healthbar"]
 z_index = 1
 texture = SubResource("GradientTexture2D_otge8")
 
-[node name="RED" type="Sprite2D" parent="Pivot"]
+[node name="RED" type="Sprite2D" parent="healthbar"]
 z_index = 2
 texture = SubResource("GradientTexture2D_nvhvp")

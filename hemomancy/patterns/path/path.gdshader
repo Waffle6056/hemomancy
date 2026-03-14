@@ -19,22 +19,22 @@ vec2 perp(vec2 vec){
 }
 vec2 squish_vec(vec2 pos){
 	//float y_
-	//float displacement_from_x = ()*pow(abs(pos.x),x_pow)*x_scale;
-	//float y_offset_magnitude = .25*normalize(pos.y);
-	//vec2 offset = vec2(0, y_offset_magnitude) * displacement_from_x;
-	//vec2 squished_vec = pos * vec2(1,displacement_from_x);
-	//return squished_vec;
-	return vec2(0);
+	float displacement_from_x = pow(abs(pos.x),x_pow)*x_scale;
+	float y_offset_magnitude = .25*normalize(pos.y);
+	vec2 offset = vec2(0, y_offset_magnitude) * displacement_from_x;
+	vec2 squished_vec = pos * vec2(1,displacement_from_x);
+	return squished_vec;
 }
 
 void fragment() {
 	// Called for every pixel the material is visible o
-	vec2 pos = UV-.5;
+	vec2 shifted_uv = UV + vec2(step_size,0);
+	vec2 pos = vec2(0,.5)-shifted_uv;
 	vec2 squished_vec = squish_vec(pos);
 	float strength = texture(transparency_map, vec_to_uv(vec2(squished_vec.y,0))).r;
 
 
-	vec2 pos2 = (UV-vec2(step_size,0))-.5;
+	vec2 pos2 = vec2(0,.5)-(shifted_uv-vec2(step_size,0));
 	vec2 squished_vec2 = squish_vec(pos2);
 
 	vec2 dir = normalize(squished_vec - squished_vec2) * vec2(1,-1) * strength;

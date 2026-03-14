@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://dekp5p4jjcnxh"]
+
+[ext_resource type="Script" uid="uid://dt8q1hygo3tqq" path="res://enemy/spawnnodes/SpawnNode.cs" id="1_3vl6p"]
+[ext_resource type="PackedScene" uid="uid://co2eda4bj87lb" path="res://enemy/enemytypes/rangedenemy/ranged_enemy.tscn" id="2_im545"]
+
+[node name="SpawnNodeRanged" type="Node2D" node_paths=PackedStringArray("EnemyTypes")]
+script = ExtResource("1_3vl6p")
+SpawnRadius = 150.0
+EnemyTypes = [NodePath("disabled presets/RangedEnemy")]
+EnemyStatPercentModiferScaling = 0.0
+
+[node name="disabled presets" type="Node2D" parent="."]
+process_mode = 4
+position = Vector2(-10000, 0)
+
+[node name="RangedEnemy" parent="disabled presets" instance=ExtResource("2_im545")]

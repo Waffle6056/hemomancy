@@ -1,0 +1,46 @@
+[gd_scene load_steps=7 format=3 uid="uid://0x0gv51wr7fj"]
+
+[ext_resource type="Material" uid="uid://bxar8jerq7srb" path="res://hemomancy/blood.tres" id="1_qdhns"]
+[ext_resource type="Texture2D" uid="uid://blx08pj0g0x6k" path="res://icon.svg" id="2_4kuuf"]
+
+[sub_resource type="Curve" id="Curve_6pfnp"]
+_limits = [-10000.0, 0.0, 0.0, 1.0]
+_data = [Vector2(1e-05, 0), 0.0, 0.0, 0, 0, Vector2(1, -10000), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_wodsf"]
+curve = SubResource("Curve_6pfnp")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_yr48c"]
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 90.0
+emission_ring_inner_radius = 85.0
+emission_ring_cone_angle = 90.0
+radial_velocity_min = 299.99997
+radial_velocity_max = 299.99997
+gravity = Vector3(0, 0, 0)
+radial_accel_min = 0.99999774
+radial_accel_max = 0.99999774
+radial_accel_curve = SubResource("CurveTexture_wodsf")
+scale_min = 0.0
+scale_max = 0.19999999
+collision_mode = 2
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_7ryw1"]
+polygon = PackedVector2Array(0, -25, 25, 0, 0, 25, -25, 0)
+
+[node name="BloodVisualEmitter" type="GPUParticles2D"]
+z_index = -1
+material = ExtResource("1_qdhns")
+emitting = false
+amount = 500
+texture = ExtResource("2_4kuuf")
+explosiveness = 0.25
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_yr48c")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_7ryw1")

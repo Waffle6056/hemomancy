@@ -20,11 +20,15 @@ public partial class BloodSimCPU : Node
 	Vector2[] InstantiatePosition;
 	int InstantiateInd = 0;
 	[Export]
+	int[] PatternInputFormat = new int[16];
+	[Export]
 	ImageTexture[] PatternData = new ImageTexture[16];
 	[Export]
 	ImageTexture[] PatternData2 = new ImageTexture[16];
 	[Export]
 	uint MaxFieldCount = 1000;
+	[Export]
+	public float GodotHPToSimHP = 10.0f;
 	RenderingDevice Renderer = RenderingServer.GetRenderingDevice();
 
 	enum ByteCount
@@ -35,21 +39,29 @@ public partial class BloodSimCPU : Node
 		glbool = 4,
 		glint = 4,
 		gltransform2d = 24,
-
 	}
+	public enum Flags
+	{
+		None = 0,
+		Group1 = 1,
+		Group2 = 2,
+	}
+
 	// Called when the node enters the scene tree for the first time.
 	Rid Shader;
 	Rid Pipeline;
 	Rid UniformSet;
 	long Computelist;
-	struct enemyStruct
+	struct EnemyStruct
 	{
 		public Rid Position;
 		public Rid Radius;
 		public Rid Damage;
+		public Rid HP;
+		public Rid Flags;
 	}
-	enemyStruct Enemy;
-	struct particleStruct
+	EnemyStruct Enemy;
+	struct ParticleStruct
 	{
 		public Rid Position;
 		public Rid Velocity;
@@ -58,22 +70,36 @@ public partial class BloodSimCPU : Node
 		public Rid MaxInheritance;
 		public Rid ToInstantiate;
 		public Rid InstantiatePosition;
+		public Rid Flags;
 		public Rid Misc;
 	}
-	particleStruct Particle;
-	struct playerStruct
+	ParticleStruct Particle;
+	struct PlayerStruct
 	{
 		public Rid FieldTransform;
 		public Rid FieldVelocityRot;
 		public Rid FieldMagnitude;
 		public Rid PatternIndex;
+		public Rid Flags;
 	}
-	playerStruct PlayerInput;
-	Rid[] Sampler = new Rid[16];
-	Rid[] Patterns = new Rid[16];
-	Rid[] Sampler2 = new Rid[16];
-	Rid[] Patterns2 = new Rid[16];
+	PlayerStruct PlayerInput;
+	struct PatternStruct
+	{ 
 
+		public Rid Metadata;
+		public Rid[] Sampler = new Rid[16];
+		public Rid[] Patterns = new Rid[16];
+		public Rid[] Sampler2 = new Rid[16];
+		public Rid[] Patterns2 = new Rid[16];
+		public PatternStruct()
+		{
+			Sampler = new Rid[16];		
+			Patterns = new Rid[16];
+			Sampler2 = new Rid[16];
+			Patterns2 = new Rid[16];
+		}
+	}
+	PatternStruct Pattern = new PatternStruct();
 
 
 	Rid CompileShader(String file)
@@ -124,6 +150,8 @@ public partial class BloodSimCPU : Node
 		data.Add(NewUniform(Enemy.Position = NewStorageBuffer(new byte[MaxEnemyCount * (int)ByteCount.glvec2])));
 		data.Add(NewUniform(Enemy.Radius   = NewStorageBuffer(new byte[MaxEnemyCount * (int)ByteCount.glfloat])));
 		data.Add(NewUniform(Enemy.Damage   = NewStorageBuffer(new byte[MaxEnemyCount * (int)ByteCount.glint])));
+		data.Add(NewUniform(Enemy.HP       = NewStorageBuffer(new byte[MaxEnemyCount * (int)ByteCount.glint])));
+		data.Add(NewUniform(Enemy.Flags    = NewStorageBuffer(new byte[MaxEnemyCount * (int)ByteCount.glint])));
 		return data;
 	}
 	Godot.Collections.Array<RDUniform> ParticleData()
@@ -140,6 +168,7 @@ public partial class BloodSimCPU : Node
 		data.Add(NewUniform(Particle.MaxInheritance      = NewStorageBuffer(new byte[MaxParticleCount * (int)ByteCount.glfloat])));
 		data.Add(NewUniform(Particle.ToInstantiate       = NewStorageBuffer(new byte[(int)ByteCount.glint + ToInstantiate.Length * (int)ByteCount.glint])));
 		data.Add(NewUniform(Particle.InstantiatePosition = NewStorageBuffer(new byte[InstantiatePosition.Length * (int)ByteCount.glvec2])));
+		data.Add(NewUniform(Particle.Flags               = NewStorageBuffer(new byte[MaxParticleCount * (int)ByteCount.glint])));
 		data.Add(NewUniform(Particle.Misc                = NewStorageBuffer(new byte[(int)ByteCount.glfloat + MaxParticleCount * (int)ByteCount.glfloat])));
 		return data;
 	}
@@ -150,6 +179,7 @@ public partial class BloodSimCPU : Node
 		data.Add(NewUniform(PlayerInput.FieldVelocityRot = NewStorageBuffer(new byte[MaxFieldCount * (int)ByteCount.glvec4])));
 		data.Add(NewUniform(PlayerInput.FieldMagnitude   = NewStorageBuffer(new byte[MaxFieldCount * (int)ByteCount.glvec2])));
 		data.Add(NewUniform(PlayerInput.PatternIndex     = NewStorageBuffer(new byte[MaxFieldCount * (int)ByteCount.glint])));
+		data.Add(NewUniform(PlayerInput.Flags		     = NewStorageBuffer(new byte[MaxFieldCount * (int)ByteCount.glint])));
 		return data;
 	}
 	Rid GetData()
@@ -159,6 +189,9 @@ public partial class BloodSimCPU : Node
 		data.AddRange(EnemyData());
 		data.AddRange(ParticleData());
 		data.AddRange(PlayerData());
+
+
+
 		RDTextureFormat format = new RDTextureFormat()
 		{
 			Width = (uint)512,//samplePatterns[i].GetWidth(),
@@ -170,6 +203,8 @@ public partial class BloodSimCPU : Node
 		};
 		//GD.Print(PatternData[0].GetFormat());
 
+		byte[] metadataData = ToByteArray(PatternInputFormat, ByteCount.glint);
+		data.Add(NewUniform(Pattern.Metadata = NewStorageBuffer(metadataData)));
 
 		RDUniform patternUniform = new RDUniform
 		{
@@ -184,14 +219,14 @@ public partial class BloodSimCPU : Node
 		RDSamplerState samplerState = new RDSamplerState();
 		for (int i = 0; i < 16; i++)
 		{
-			Sampler[i] = Renderer.SamplerCreate(samplerState);
-			Patterns[i] = Renderer.TextureCreate(format, new RDTextureView());
-			patternUniform.AddId(Sampler[i]);
-			patternUniform.AddId(Patterns[i]);
-			Sampler2[i] = Renderer.SamplerCreate(samplerState);
-			Patterns2[i] = Renderer.TextureCreate(format, new RDTextureView());
-			patternUniform2.AddId(Sampler2[i]);
-			patternUniform2.AddId(Patterns2[i]);
+			Pattern.Sampler[i] = Renderer.SamplerCreate(samplerState);
+			Pattern.Patterns[i] = Renderer.TextureCreate(format, new RDTextureView());
+			patternUniform.AddId(Pattern.Sampler[i]);
+			patternUniform.AddId(Pattern.Patterns[i]);
+			Pattern.Sampler2[i] = Renderer.SamplerCreate(samplerState);
+			Pattern.Patterns2[i] = Renderer.TextureCreate(format, new RDTextureView());
+			patternUniform2.AddId(Pattern.Sampler2[i]);
+			patternUniform2.AddId(Pattern.Patterns2[i]);
 		}
 
 		data.Add(patternUniform);
@@ -225,33 +260,53 @@ public partial class BloodSimCPU : Node
 		foreach (int i in HasHP.ActiveIndexes)
 		{
 			HasHP node = HasHP.EntityList[i];
-			if (intArray[i] > 0)
-				node.HP.TakeDamage(intArray[i]);
+			if (intArray[i] > 0) {
+				if (node == Player.instance)
+					node.HP.ChangeHP(intArray[i] / GodotHPToSimHP);
+				else
+					node.HP.ChangeHP(-intArray[i] / GodotHPToSimHP);
+			}
 		}
-	}
 
+	}
+	public void Reset()
+	{
+		int sz = (int) MaxParticleCount * (int) ByteCount.glbool;
+		Renderer.BufferUpdate(Particle.InUse, 0, (uint)sz, new byte[sz]);
+	}
 	void UpdateEnemyData(double delta)
 	{
 		//ProcessOutputDamageData(Renderer.BufferGetData(Enemy.Damage));
 		Renderer.BufferGetDataAsync(Enemy.Damage, Callable.From<byte[]>(ProcessOutputDamageData));
 		while (HasHP.InactiveQueued.Count > 0)
 			HasHP.InactiveIndexes.Enqueue(HasHP.InactiveQueued.Dequeue());
-		float[] positionData   = new float[MaxEnemyCount * (int) ByteCount.glvec2 / (int) ByteCount.glfloat];
-		float[] radiusData     = new float[MaxEnemyCount];
+		float[] positionData     = new float[MaxEnemyCount * (int) ByteCount.glvec2 / (int) ByteCount.glfloat];
+		float[] radiusData		 = new float[MaxEnemyCount];
 		int[]   outputDamageData = new int[MaxEnemyCount];
+		int[]   HPData			 = new int[MaxEnemyCount];
+		int[]	flagData		 = new int[MaxEnemyCount];
 		foreach (int i in HasHP.ActiveIndexes)
 		{
 			HasHP node = HasHP.EntityList[i];
 			positionData[i*2] = (node as Node2D).GlobalPosition.X;
 			positionData[i*2+1] = (node as Node2D).GlobalPosition.Y;
 			radiusData[i] = node.ParticleHitboxRadius;
+			if (node == Player.instance)
+				HPData[i] = (int)((Player.instance.HP.MaxHP+Player.instance.HP.Overhealth)*GodotHPToSimHP);
+			else
+				HPData[i] = (int)((node.HP.HP + node.HP.Overhealth) * GodotHPToSimHP);
+			flagData[i] = node.SimFlags;
 		}
 		byte[] positionDataBytes     = ToByteArray(positionData,     ByteCount.glfloat);
 		byte[] radiusDataBytes       = ToByteArray(radiusData,       ByteCount.glfloat);
 		byte[] outputDamageDataBytes = ToByteArray(outputDamageData, ByteCount.glint);
+		byte[] HPDataBytes			 = ToByteArray(HPData, ByteCount.glint);
+		byte[] flagDataBytes		 = ToByteArray(flagData, ByteCount.glint);
 		Renderer.BufferUpdate(Enemy.Position, 0, (uint)positionDataBytes.Length    , positionDataBytes);
 		Renderer.BufferUpdate(Enemy.Radius  , 0, (uint)radiusDataBytes.Length      , radiusDataBytes);
 		Renderer.BufferUpdate(Enemy.Damage  , 0, (uint)outputDamageDataBytes.Length, outputDamageDataBytes);
+		Renderer.BufferUpdate(Enemy.HP      , 0, (uint)HPDataBytes.Length          , HPDataBytes);
+		Renderer.BufferUpdate(Enemy.Flags   , 0, (uint)flagDataBytes.Length        , flagDataBytes);
 		
 	}
 
@@ -284,10 +339,11 @@ public partial class BloodSimCPU : Node
 	{
 		while (ManipulationField.InactiveQueued.Count > 0)
 			ManipulationField.InactiveIndexes.Enqueue(ManipulationField.InactiveQueued.Dequeue());
-		float[]   transformData    = new float[MaxFieldCount * (int) ByteCount.gltransform2d / (int) ByteCount.glfloat];
-		float[]   velocityRotData  = new float[MaxFieldCount * (int) ByteCount.glvec4 / (int) ByteCount.glfloat];
-		float[]   magnitudeData    = new float[MaxFieldCount * (int) ByteCount.glvec2 / (int) ByteCount.glfloat];
-		int[]     patternIndexData = new int[MaxFieldCount];
+		float[] transformData    = new float[MaxFieldCount * (int) ByteCount.gltransform2d / (int) ByteCount.glfloat];
+		float[] velocityRotData  = new float[MaxFieldCount * (int) ByteCount.glvec4 / (int) ByteCount.glfloat];
+		float[] magnitudeData    = new float[MaxFieldCount * (int) ByteCount.glvec2 / (int) ByteCount.glfloat];
+		int[]   patternIndexData = new int[MaxFieldCount];
+		int[]   flagData         = new int[MaxFieldCount];
 		foreach (int i in ManipulationField.ActiveIndexes)
 		{
 			ManipulationField node = ManipulationField.FieldList[i];
@@ -307,27 +363,29 @@ public partial class BloodSimCPU : Node
 			magnitudeData[i*2+0] = node.VelocityMagnitude;
 			magnitudeData[i*2+1] = node.AccelerationMagnitude;
 			patternIndexData[i] = node.Pattern;
+			flagData[i] = node.SimFlags;
 		}
 		//GD.Print(String.Join(',', velocityRotData));
 		byte[] transformBytes    = ToByteArray(transformData, ByteCount.glfloat);
 		byte[] velocityRotBytes  = ToByteArray(velocityRotData, ByteCount.glfloat);
 		byte[] magnitudeBytes    = ToByteArray(magnitudeData,ByteCount.glfloat);
 		byte[] patternIndexBytes = ToByteArray(patternIndexData, ByteCount.glint);
+		byte[] flagBytes		 = ToByteArray(flagData, ByteCount.glint);
 		Renderer.BufferUpdate(PlayerInput.FieldTransform   , 0, (uint) transformBytes.Length, transformBytes);
 		Renderer.BufferUpdate(PlayerInput.FieldVelocityRot , 0, (uint) velocityRotBytes.Length, velocityRotBytes);
 		Renderer.BufferUpdate(PlayerInput.FieldMagnitude   , 0, (uint) magnitudeBytes.Length, magnitudeBytes);
 		Renderer.BufferUpdate(PlayerInput.PatternIndex     , 0, (uint) patternIndexBytes.Length, patternIndexBytes);
-		//TODO patterns
+		Renderer.BufferUpdate(PlayerInput.Flags		       , 0, (uint) flagBytes.Length, flagBytes);
 	}
 	
 	void UpdatePatternData()
 	{
-		for (int i = 0; i < Patterns.Length; i++)
+		for (int i = 0; i < Pattern.Patterns.Length; i++)
 		{
 			if (PatternData[i] != null)
-				Renderer.TextureUpdate(Patterns[i], 0, PatternData[i].GetImage().GetData());
+				Renderer.TextureUpdate(Pattern.Patterns[i], 0, PatternData[i].GetImage().GetData());
 			if (PatternData2[i] != null)
-				Renderer.TextureUpdate(Patterns2[i], 0, PatternData2[i].GetImage().GetData());
+				Renderer.TextureUpdate(Pattern.Patterns2[i], 0, PatternData2[i].GetImage().GetData());
 		}
 	}
 
@@ -373,9 +431,10 @@ public partial class BloodSimCPU : Node
 		{
 			//GD.Print("field position data : " +bufferToString<float>(PlayerInput.FieldTransform,ByteCount.glfloat));
 			//GD.Print("mesh mat data : " +bufferToString<float>((RenderingServer.MultimeshGetBufferRdRid(Display.Multimesh.GetRid())),ByteCount.glfloat));
+			//GD.Print("entity flag data: " + bufferToString<int>(Enemy.Flags, ByteCount.glint));
 
-			//GD.Print("enemy data: " + bufferToString<float>(Enemy.Position, ByteCount.glfloat));
-			GD.Print(String.Join(", ", HasHP.EntityList));
+			//GD.Print("particle flag data: " + bufferToString<int>(Particle.Flags, ByteCount.glint));
+			//GD.Print(String.Join(", ", HasHP.EntityList));
 		}
 	}
 	public override void _PhysicsProcess(double delta)
@@ -426,20 +485,29 @@ public partial class BloodSimCPU : Node
 		Renderer.FreeRid(Enemy.Position);
 		Renderer.FreeRid(Enemy.Radius);
 		Renderer.FreeRid(Enemy.Damage);
+		Renderer.FreeRid(Enemy.HP);
+		Renderer.FreeRid(Enemy.Flags);
 		Renderer.FreeRid(Particle.Position);
 		Renderer.FreeRid(Particle.Velocity);
 		Renderer.FreeRid(Particle.InUse);
+		Renderer.FreeRid(Particle.Field);
+		Renderer.FreeRid(Particle.MaxInheritance);
 		Renderer.FreeRid(Particle.ToInstantiate);
 		Renderer.FreeRid(Particle.InstantiatePosition);
+		Renderer.FreeRid(Particle.Flags);
 		Renderer.FreeRid(Particle.Misc);
 		Renderer.FreeRid(PlayerInput.FieldTransform);
 		Renderer.FreeRid(PlayerInput.FieldVelocityRot);
 		Renderer.FreeRid(PlayerInput.FieldMagnitude);
 		Renderer.FreeRid(PlayerInput.PatternIndex);
+		Renderer.FreeRid(PlayerInput.Flags);
+		Renderer.FreeRid(Pattern.Metadata);
 		for (int i = 0; i < 16; i++)
 		{
-			Renderer.FreeRid(Sampler[i]);
-			Renderer.FreeRid(Patterns[i]);
+			Renderer.FreeRid(Pattern.Sampler[i]);
+			Renderer.FreeRid(Pattern.Patterns[i]);
+			Renderer.FreeRid(Pattern.Sampler2[i]);
+			Renderer.FreeRid(Pattern.Patterns2[i]);
 		}
 	}
 }

@@ -1,0 +1,26 @@
+[gd_scene load_steps=6 format=3 uid="uid://c6kfy4a15u7xg"]
+
+[ext_resource type="Script" uid="uid://dop0irwxtd40f" path="res://enemy/Projectile.cs" id="1_l4lhl"]
+[ext_resource type="Texture2D" uid="uid://blx08pj0g0x6k" path="res://icon.svg" id="2_hi8kc"]
+[ext_resource type="Script" uid="uid://cea2mmtnwoisu" path="res://player/HpComponent.cs" id="3_l4lhl"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lhrxa"]
+radius = 17.117243
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_gnxh5"]
+light_mode = 1
+
+[node name="bullet" type="Area2D" node_paths=PackedStringArray("HP")]
+script = ExtResource("1_l4lhl")
+HP = NodePath("HPComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_lhrxa")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("CanvasItemMaterial_gnxh5")
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_hi8kc")
+
+[node name="HPComponent" type="Node2D" parent="."]
+script = ExtResource("3_l4lhl")

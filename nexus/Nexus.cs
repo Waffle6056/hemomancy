@@ -16,6 +16,8 @@ public partial class Nexus : Node2D, HasHP
     public HpComponent HP { get; set; }
     public int HPIndex { get; set; }
     [Export]
+    public int SimFlags { get; set; } = 2;
+    [Export]
     public AnimationPlayer Anims;
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -38,14 +40,25 @@ public partial class Nexus : Node2D, HasHP
             Portal.Scale = Vector2.One;
             RadiusVisual.Visible = true;
             killflag = true;
+            HasHP.Deregister(HPIndex);
+            HPIndex = -1;
             Anims.Play("break");
         }
             
     }
+    public void Reset()
+    {
+        killflag = false;
+        Barrier.Scale = Vector2.One;
+        Portal.Scale = Vector2.Zero;
+        RadiusVisual.Visible = false;
+        HasHP.Register(this);
+        HP.ChangeHP(3001);
+    }
     public void BodyEntered(Node2D body)
     {
         if (body == Player.instance)
-        GD.Print("Portal Entered, should trigger stage change but not implemented lol");
+            GD.Print("Portal Entered, should trigger stage change but not implemented lol");
     }
     
 
@@ -55,7 +68,8 @@ public partial class Nexus : Node2D, HasHP
 	}
     public override void _ExitTree()
     {
-		HasHP.Deregister(HPIndex);
+        if (HPIndex != -1)
+		    HasHP.Deregister(HPIndex);
         base._ExitTree();
 	}
 }
