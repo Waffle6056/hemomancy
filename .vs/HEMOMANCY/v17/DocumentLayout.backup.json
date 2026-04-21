@@ -3,96 +3,32 @@
   "WorkspaceRootPath": "E:\\hemomancy\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|e:\\hemomancy\\hemomancy\\inputreader\\inputblocks\\simpleinput.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|solutionrelative:hemomancy\\inputreader\\inputblocks\\simpleinput.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|e:\\hemomancy\\hemomancy\\inputreader\\inputreader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|solutionrelative:hemomancy\\inputreader\\inputreader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|e:\\hemomancy\\hemomancy\\inputreader\\actions\\objectaltering.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|solutionrelative:hemomancy\\inputreader\\actions\\objectaltering.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|e:\\hemomancy\\hemomancy\\inputreader\\inputblocks\\variableinput.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|solutionrelative:hemomancy\\inputreader\\inputblocks\\variableinput.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|e:\\hemomancy\\hemomancy\\inputreader\\actions\\fieldalter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|solutionrelative:hemomancy\\inputreader\\actions\\fieldalter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|e:\\hemomancy\\hemomancy\\inputreader\\inputblocks\\mouseposition.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|solutionrelative:hemomancy\\inputreader\\inputblocks\\mouseposition.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|e:\\hemomancy\\hemomancy\\inputreader\\conditions\\mouseclicked.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|solutionrelative:hemomancy\\inputreader\\conditions\\mouseclicked.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|e:\\hemomancy\\hemomancy\\bloodsim.glsl||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|solutionrelative:hemomancy\\bloodsim.glsl||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|e:\\hemomancy\\hemomancy\\inputreader\\inputblocks\\mouseclick.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|solutionrelative:hemomancy\\inputreader\\inputblocks\\mouseclick.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|e:\\hemomancy\\hemomancy\\inputreader\\actions\\objectbehavioraltering.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|solutionrelative:hemomancy\\inputreader\\actions\\objectbehavioraltering.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|e:\\hemomancy\\hemomancy\\inputreader\\actions\\summon.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|solutionrelative:hemomancy\\inputreader\\actions\\summon.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|e:\\hemomancy\\hemomancy\\inputreader\\actionblock.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|solutionrelative:hemomancy\\inputreader\\actionblock.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|e:\\hemomancy\\hemomancy\\inputreader\\conditions\\simpleinputted.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|solutionrelative:hemomancy\\inputreader\\conditions\\simpleinputted.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|e:\\hemomancy\\hemomancy\\inputreader\\inputblocks\\variablevector2d.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|solutionrelative:hemomancy\\inputreader\\inputblocks\\variablevector2d.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|e:\\hemomancy\\hemomancy\\inputreader\\inputblocks\\inputblock.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|solutionrelative:hemomancy\\inputreader\\inputblocks\\inputblock.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|e:\\hemomancy\\hemomancy\\inputreader\\conditions\\clearcondition.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|solutionrelative:hemomancy\\inputreader\\conditions\\clearcondition.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|e:\\hemomancy\\hemomancy\\inputreader\\inputblocks\\variablenode2d.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|solutionrelative:hemomancy\\inputreader\\inputblocks\\variablenode2d.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|e:\\hemomancy\\hemomancy\\inputreader\\inputblocks\\playerposition.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|solutionrelative:hemomancy\\inputreader\\inputblocks\\playerposition.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|e:\\hemomancy\\player\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|solutionrelative:player\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|e:\\hemomancy\\hemomancy\\inputreader\\actions\\objecttrack.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|solutionrelative:hemomancy\\inputreader\\actions\\objecttrack.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|E:\\hemomancy\\hemomancy\\bloodsim.glsl||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:hemomancy\\bloodsim.glsl||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|e:\\hemomancy\\hemomancy\\manipulationfield.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|solutionrelative:hemomancy\\manipulationfield.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|e:\\hemomancy\\enemy\\projectile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|solutionrelative:enemy\\projectile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|e:\\hemomancy\\hemomancy\\bloodsimcpu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|solutionrelative:hemomancy\\bloodsimcpu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|e:\\hemomancy\\hemomancy\\inputreader\\inputblocks\\playerposition.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|solutionrelative:hemomancy\\inputreader\\inputblocks\\playerposition.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|e:\\hemomancy\\hemomancy\\inputreader\\inputblocks\\translatedvector2d.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|solutionrelative:hemomancy\\inputreader\\inputblocks\\translatedvector2d.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|e:\\hemomancy\\hemomancy\\inputreader\\actions\\action.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|solutionrelative:hemomancy\\inputreader\\actions\\action.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|e:\\hemomancy\\hemomancy\\inputreader\\inputblocks\\variablevector2d.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C1EDF766-19E9-4D0C-BE32-EED3B437BE36}|hemomancy.csproj|solutionrelative:hemomancy\\inputreader\\inputblocks\\variablevector2d.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -102,170 +38,110 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 5,
           "Children": [
             {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
+            },
+            {
               "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "VariableNode2D.cs",
-              "DocumentMoniker": "E:\\hemomancy\\hemomancy\\inputreader\\inputblocks\\VariableNode2D.cs",
-              "RelativeDocumentMoniker": "hemomancy\\inputreader\\inputblocks\\VariableNode2D.cs",
-              "ToolTip": "E:\\hemomancy\\hemomancy\\inputreader\\inputblocks\\VariableNode2D.cs",
-              "RelativeToolTip": "hemomancy\\inputreader\\inputblocks\\VariableNode2D.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "ManipulationField.cs",
+              "DocumentMoniker": "E:\\hemomancy\\hemomancy\\ManipulationField.cs",
+              "RelativeDocumentMoniker": "hemomancy\\ManipulationField.cs",
+              "ToolTip": "E:\\hemomancy\\hemomancy\\ManipulationField.cs",
+              "RelativeToolTip": "hemomancy\\ManipulationField.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAQwCwAAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-14T09:01:11.528Z",
-              "IsPinned": true,
+              "WhenOpened": "2026-04-13T05:57:29.76Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
-              "Title": "Action.cs",
-              "DocumentMoniker": "E:\\hemomancy\\hemomancy\\inputreader\\actions\\Action.cs",
-              "RelativeDocumentMoniker": "hemomancy\\inputreader\\actions\\Action.cs",
-              "ToolTip": "E:\\hemomancy\\hemomancy\\inputreader\\actions\\Action.cs",
-              "RelativeToolTip": "hemomancy\\inputreader\\actions\\Action.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAEAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "BloodSimCPU.cs",
+              "DocumentMoniker": "E:\\hemomancy\\hemomancy\\BloodSimCPU.cs",
+              "RelativeDocumentMoniker": "hemomancy\\BloodSimCPU.cs",
+              "ToolTip": "E:\\hemomancy\\hemomancy\\BloodSimCPU.cs",
+              "RelativeToolTip": "hemomancy\\BloodSimCPU.cs",
+              "ViewState": "AgIAAF0BAAAAAAAAAAAAAHEBAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-14T08:00:31.911Z",
-              "IsPinned": true,
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "Summon.cs",
-              "DocumentMoniker": "E:\\hemomancy\\hemomancy\\inputreader\\actions\\Summon.cs",
-              "RelativeDocumentMoniker": "hemomancy\\inputreader\\actions\\Summon.cs",
-              "ToolTip": "E:\\hemomancy\\hemomancy\\inputreader\\actions\\Summon.cs",
-              "RelativeToolTip": "hemomancy\\inputreader\\actions\\Summon.cs",
-              "ViewState": "AgIAAAUAAAAAAAAAAAAQwA0AAAAfAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-13T05:21:12.251Z",
-              "IsPinned": true,
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "VariableVector2D.cs",
-              "DocumentMoniker": "E:\\hemomancy\\hemomancy\\inputreader\\inputblocks\\VariableVector2D.cs",
-              "RelativeDocumentMoniker": "hemomancy\\inputreader\\inputblocks\\VariableVector2D.cs",
-              "ToolTip": "E:\\hemomancy\\hemomancy\\inputreader\\inputblocks\\VariableVector2D.cs",
-              "RelativeToolTip": "hemomancy\\inputreader\\inputblocks\\VariableVector2D.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAA9AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-14T09:02:32.54Z",
-              "IsPinned": true,
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "FieldAlter.cs",
-              "DocumentMoniker": "E:\\hemomancy\\hemomancy\\inputreader\\actions\\FieldAlter.cs",
-              "RelativeDocumentMoniker": "hemomancy\\inputreader\\actions\\FieldAlter.cs",
-              "ToolTip": "E:\\hemomancy\\hemomancy\\inputreader\\actions\\FieldAlter.cs",
-              "RelativeToolTip": "hemomancy\\inputreader\\actions\\FieldAlter.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAABwAAAAoAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-14T10:35:22.978Z",
-              "IsPinned": true,
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "SimpleInputted.cs",
-              "DocumentMoniker": "E:\\hemomancy\\hemomancy\\inputreader\\conditions\\SimpleInputted.cs",
-              "RelativeDocumentMoniker": "hemomancy\\inputreader\\conditions\\SimpleInputted.cs",
-              "ToolTip": "E:\\hemomancy\\hemomancy\\inputreader\\conditions\\SimpleInputted.cs",
-              "RelativeToolTip": "hemomancy\\inputreader\\conditions\\SimpleInputted.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-14T10:53:54.75Z",
-              "IsPinned": true,
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "MouseClicked.cs",
-              "DocumentMoniker": "E:\\hemomancy\\hemomancy\\inputreader\\conditions\\MouseClicked.cs",
-              "RelativeDocumentMoniker": "hemomancy\\inputreader\\conditions\\MouseClicked.cs",
-              "ToolTip": "E:\\hemomancy\\hemomancy\\inputreader\\conditions\\MouseClicked.cs",
-              "RelativeToolTip": "hemomancy\\inputreader\\conditions\\MouseClicked.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAVAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-14T10:53:59.466Z",
-              "IsPinned": true,
+              "WhenOpened": "2026-04-13T05:06:03.088Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "SimpleInput.cs",
-              "DocumentMoniker": "E:\\hemomancy\\hemomancy\\inputreader\\inputblocks\\SimpleInput.cs",
-              "RelativeDocumentMoniker": "hemomancy\\inputreader\\inputblocks\\SimpleInput.cs",
-              "ToolTip": "E:\\hemomancy\\hemomancy\\inputreader\\inputblocks\\SimpleInput.cs",
-              "RelativeToolTip": "hemomancy\\inputreader\\inputblocks\\SimpleInput.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAANAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-14T08:54:44.231Z",
-              "IsPinned": true,
+              "Title": "bloodsim.glsl",
+              "DocumentMoniker": "E:\\hemomancy\\hemomancy\\bloodsim.glsl",
+              "RelativeDocumentMoniker": "hemomancy\\bloodsim.glsl",
+              "ToolTip": "E:\\hemomancy\\hemomancy\\bloodsim.glsl",
+              "RelativeToolTip": "hemomancy\\bloodsim.glsl",
+              "ViewState": "AgIAABwBAAAAAAAAAAAQwDEBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-04-12T07:21:03.946Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "InputReader.cs",
-              "DocumentMoniker": "E:\\hemomancy\\hemomancy\\inputreader\\InputReader.cs",
-              "RelativeDocumentMoniker": "hemomancy\\inputreader\\InputReader.cs",
-              "ToolTip": "E:\\hemomancy\\hemomancy\\inputreader\\InputReader.cs",
-              "RelativeToolTip": "hemomancy\\inputreader\\InputReader.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAKAAAAAAAAAA==",
-       º  e  
-¯G<2‘Õ¬_=ø‚Œa¥è{£DyóbÅé“íÄM“u­ç=Š‘§,zã)‰ŞæØJÚ·6‹Vç~Ê W8>’m¬-½İ±™´j÷o¬ıÁ`l(-Ş˜iª®ÿ<@ğDóCñÃQÃ|QáüHAö°Fô2ÇU’¿-°´	·Fö²Æõ’Ç-’­©½¾ñ°Dt3gUê¿0OAô0GT2¿U°?4LµÄwfêå$[B»q³duëgj„/#\ùÊÂ×Œheî«Eà3Æä‹E§s:¥Ó;ÓIöé†ÎâÔIŸvè&ÎšÔkoH,6ÖéÎèTN¿tp'd«K?wP&¼ñËWC~±àtH'vš¦ë:ÏS=ÏQ”<oQì<MÑõœG)òÅ¨S>½Ğqœ$iÛnÛl[mûmƒm¡í¸M²µµ·76––îîÌLUõÿ €  x "€ 
-ø‚¡ xx"¢™¹ªòÿ€ Ø Z€; Xú…ƒ#!ÙØZÚ»3KU÷ ø‚€a (x¢ˆy¦¢úùƒáÁˆPf¼*ñßXzã IØ6Ú–Û.Û\[yûbÃi‘îìLMõõ‡"‚™¡ªø ¸ r€% 8R‡}¢¡¹¸rò¥…»#3YÕúßÊ€W >˜jŒ/%ÜËJ×w¦ˆzæ£
-ùÇÒ i¸.òœE©ó>ÅĞS=ÉÑ–ÜnÙìZÍûƒO!ôGJ²·5¶—6î–ÌnÕì_ø‚ƒ!¡ØxZ¢»9³Rõı‡¢€y "ø‚Šá§z†£"ùÙ‚Úá›kF¯rü%Û [X;z“c-éİÙ¤Zû{cAéğNÄ4SW}ş¡€x`"¨¾Šğg*ƒ_!øBŠ±§4z—c.©Ü~ÙàZÈ;“NíôM‡u¢§9º’ó-…İ£¹Êò×ƒ(aŞ¨X~º s8%Ò›«I¿vğ&ÄÓK÷I†¶âöÉ†ÖâŞÉ˜Vê¾Ï0T?OP4<QÎ¼Tqÿd@+pd+FŸrè%›$k[o{l#mÙíšÍ«¿O04ON´4wWf¾ªğ Xú€C 1ØZ{$#[YûzÃcéÌNÕô_x¢¹ rø%‚›!«Xz #8ÒŠİ§ºŠó'Úƒ!ËXWz¾£0yÔ"ßY˜:ê“-Ä“I­öı†Á¢Ğyœ"éÙÚä[{Gcr©å¾Ë0WT>¿Pp<$ÛL[uûgjï L5Ê—.œdiënÏlT-ÿ]€9 ø‚…¡£8yÒ¢İ¹™²êõ$›A«psGeò«¿C01Ô_Ox4"—Y®ºüsåÀK7LµÎ÷Frä%‹['{Z£{9ãRÉı–Á®Ğ|\!ùØBÚ±›4kWo~¬ }Ø!š˜k*¯_<8ÒŒ]¥ù»óA…ğc)Ã^Ñø\B¹ñ²Äu“g-ê)¤ûHCv±æôJÇw¦ºå³5ÇW¾°e´+7_V¸>òE¬3=ÕÑŸh	î†ÌbÕéŸèNƒtaçhJ®·<v‘æìJÍ÷†"ä‹Jçw
-¦‡:â“	­Æı’Á­}¬!½Øqš¤k;oSl=íÑœe©ë>ÏPT<?QĞ<\ùÌBÕñŸhnì`Mè5—$n›lkmïmŒ-¥İ»³Jõ÷‚‚á¡ˆxf¢ªù¿ğ„ c@)ğÄSF½òñ…„c#iÙîÚÌ[ûOtç@J°74—Nî´Lwuæ§
-ú‡"Ù Zø;“A­ğ}„!£Xyú¢Ã9‘Òì]ù¥‚û!ƒXaú¨C>±Ğt\'yÚ¢Û9›Rë}a¤({^£xyâ¢É¹–òîÅŒS%ıÛ›@kp/d+IßvØ&ÚšÛ+_Kx7b–©®şü@Ağ0D3OUô?P¼±ÀtP'|¡Ë8WR¾½°q´$w[f»jóoìÁÅS,=İÑ™œjéïÌUÃàHöƒáÂÈQ–¼nñìDMóu…ç#
-™Ç*ÒŸ¨	¾†ğbÄ)“^íøM‚µ¡·8v’¦íºÍ³µÏ7Nä4KWw~¦ zø#™ÁªĞ 	ØÚ‚Û!›Xkz¯c<)ÑŞÜXYúºÃ3ÕÌ_ø„£@yğ"Ä“Jí÷†…¢ã9‰ÒæİŠÙ§ú‹'AÚ°[4;WS~½àqˆ$f›jëol-Ã]‘ù¬Bıñ„`ch)îÌhUî¿päAÇpR¤=»Q³|uáçJ†·"ö™†êâÏ	”ïBÌ1•Ôol-Æ’é­ı¤A»psd%ë[{D#sYåúËAÎ°Tt?gP*¼1ÈV~ä KX7z–£.ùÜBÙñšÄkoMì5×%›(k^¯x|"¡Ù¸Zò»³C5ñ×^ƒxaâ¨I¾¶ğvÄ&ÓZİûƒJá÷F†²âõ‰‡&âšÉ«ÿNÀ4P|¡ÄxSb½é±ôdGkr¯e¼+1ßTX?z#,İÊÙ—î‹gEê³5ÄNôe‡k"¯Y¼:ñÓ]Ãy‘âìIöå†Ë"×Yºès¥Ä{cMéõÇ$R›}«a¿hp.¤{IãvÉæÖÊŞ×^Š¸g2ª•¿/0	ÏFÔ2ßU˜?*,Æ‰’æíŠÍ§º3$ÛOtgGj²¯5¼1Î”Tol -Øš‰«&ÿZÀ;LõÅ‡"Ù¥šû+_Aø0B”1¯T|?aĞ(\¹ÈrÖ¥û(C^±øtB§qº¤s;eÓkïIŒ6åÖË×H^¶¸vò¦ÅºÓ3ÕÉŸèÎ„Tcià.ÈV‰şæÀJĞ7‰ÎæÔJßw&Ššç+
-ŸG(2•¨o>¬}Ì!•Øo¬=ÇQ’¼m±í´M·u¶§6ú–Ã.ÑÜ\YùúÂÃ‘ÌlUíÿ€ 8Ò€] 9¸ò…¥£;9ÓRİı™ªà ˜ê d+JŸw(&šèk¯D|3aÕè_¸rƒe¡ë8OR´=·Q¶¼vñæÄJÓwæ‰Šæç
-Ê‡"™¤jûolíÀM5¬=Î‘”lomì-İ¥™»*ó_øÁ Px<"‘Ù¬Zıûƒ@ağ(D³Huö§ú‚Ã!‘ØlZ­û=ƒQ¡üxAâ°I´6÷VÆ¾Òğ]„9£Rùı‚Á¡xl"­Ù½šñ«C`1èNtd'kZ¯{<#QÙüZÁûCL1õÔGrˆ%¦›:ëS}Ä!“Xmú­ƒ=¡Ñ¸\r¹å²Ë5—W.¾œpiä.Ë\Wyş¢Ày"ìÊå—.‡\b¹é²Îõ”G/rœ%©Û>ÛP[|;aÓh]î¹Œråå‹'GZ²»5³W5ş— n€,`è	†äbËi—nî¬L}õá‡b†©¢şù€Bà1ˆfjä/\yÂ¢Ñ¹œréåË$W[~»`sh%î›kEïs%ÅÛMËu—g.ªœ)àÈV†¾âğI„6ãVÉşÖÀ^Ğ8\¹Í²ÕµŸ7(èdN«tg`*¨>ˆfŒ*åßJ‚·!¶˜vê¦Ï:ÔMÈ5–—.îœLiõîÇR…ı£¹ÀrĞ%œ)Ë^×x^¢¸y²¢õ¹‡2â•‰¯&üÁËWL>µĞw&‰ÚæÛ
-ÛGr‹e§k:¯S<=ÑÑœ\iùîÂÌQ•üoì MÀ5,Äi“níìMõ¥‡;"“Y­úıƒ¡ÀxP"¼±ÊôW~‚ a¸(r¥¨{>£Pyü"ÁÙZì;ÓEó)…ŞãIÊ¶×6Ş–ØnÚ¬[=ûQƒ|aáèHN¶´v÷fÆªÒÿ€	 øÂ‘ lx-â‰©¦şúÀC1ÌUÏ X:ƒS!ıØAš°k4/W\>¹ĞrÜ%™Û*Û_xb‡i¢®ù¼Bññ„DcsiåîËWEş³ uÀ'Œ%Ç[»M³uµç7
-–‡.âœI©öşÆÀRĞ=œ©Ì~Õà_8’‚í¡¸e²«5¿W0>”oL,5İ×Šègª„#`è
-Î‡bi¤.û\CyñâÄI“víæÍŠÕ§:ˆ&Úå›+G_r¸%²›5«W?~ l-Ê—)®ühAî°Lt5çW
-¾‡0b”)¯^ü8AÒ°]´9·Rö½†ñ¢Äy“bíéå¤K;wSf½êñdkAïpL$5ÛW~‹`gh*®Ÿ<hîŒLeõëB„1£TyÿbÀ)ìMÆµ’÷-†¢é¹òäE‹s'eÚ«?KP7|¡ÎøTB¿q°$tgKj·o6¬ıÎÁ”Po|,!İØYšºë3UÄ?PüÃ QØ<Z‘û,C]ñù„Bãq‰äfËj×o¬}Æ¡’øm‚­¡½¸q²¤u»g3j•ï/ÉÃÑÎÜTYÿzÀ#Ì
-ÕÇˆ¦…ºã3	ÕÆßØš…«#?YĞ:ÜÍÊÕ—.ˆf‰êæÏ
-ÔBˆ1¦”zïc)ÅŞÓ]Ê¹—2î•Œo%ìËE—s.¥Ü{ãJÉ÷ÆÒä]‹y§bú©ƒ>áĞH\6¹ÖòŞÅ˜S*½ß1˜jo$,]Ëy—bî©Œ~åàK7F–²îõŒG%ò›«C?qĞ$\yËb×i®è|N¡ôxGb²©µ¾÷0F”2ïUŒ?%ĞIÇvÒ¦İºÙ³õËB±¤t{gcj©ï>ÌUÌ?Ğ	ÃFÑòÜE™ó*ÅßÊ…—#.™ÜjÙïÌÇO´·E¶³6õÖÇÒˆ]¦¹ºòó…Ã#ÙÌZÕûHö€Fà2È–.äKI÷vÆ¦Òúİƒ¡ÊøW¾°`t('^š¸k2¯U¼?1Ğ\yÄ"ÓYúéƒáÄHSv½æñŠÄgjï%Œ%Ë[{N£tyçbÊ©—>îLl5í×…¨c>©Ğ~Ü YØ:Ú“-Ë]—y®¢üyâàIˆ6æ–Êî×^…øc©Á¾Ğp\$9ÛRÛ}›a«hn ,xâ‰‰¦æúÊÃÎŒTeÿk /@0	ÔßBØ1š”k/o\,9İÒÙšé«ÿD@3päDsB¥ñ»sCeñëOCt1çTJ¿w0&”ïK7EÖ³õÈG²õ¤G;r“e­ë=Q¤<{Qã|IáöÈFÖ²Şõ˜G*²Ÿ5¨>dl+mßm˜-ª¿)°ôGF²²õµ‡7"–™®êüOô G@2°´7D³NõôGr‚¥¡»8sR¥ı»³@uğ'ƒK!÷XFº²ó5…×#™ÈjÖ¯üAÆ°Rô=‡Q¢¼y±âôI‡vâ¦ÉºÖóÅÈS½Îñ”Dosl%íÛ›E«s?eĞ+IÈ6Ö–ŞîØLZµû7Vşà@H06”ïNÌ4U× x¢‚ù¡‚øa‚¨a¾¨p~¤ {X#z™ã*ÉßØÚ„[#{YãzÉãÉÎÖÔ^ßxX"º™³*õßŠ§ z˜#*™ß*Øˆ&‡Zâ»	³FõòÇ’ƒ-¡İ¸Y²ºõ³5Â—®Œ|eáëOF´2÷U†¿"ğ„
-ãG	ò†Å¢Ó9Òéé¤NûtCgqê¤O;tgMêµ7$›NëtOgt*§_:¸2Õ¥Ÿ;(^øe‚«!¿Xp:¤;MÓuç)Šç(J·(v¦èzÎ£yÏbÔ)Ÿ^è8N’´m·m¶­¶ı¶Á¶ĞvÜ&ÙÚÚÛKKwwf¦ªúÿ À P < ÀPüÁÀPP<<ÑÌ\UùÿÀ l -À	¬ıÂÁ‘ll-íİ™¥ªû?Pü AÀ0P<QÄ<SQıüAğ`D(3^•øo¬½Àq$lmËm—m®­¼}±á´Hwv¦¦úúÃÁÌPUü?Ğ \ 9ÀĞœ©Ã>ÑĞ\\9ùÒÂİ‘™¬jıïŒ eÀ+L5Æ—îŒe¥ë;SD=óQ…ücéÀNĞ4\yÎ¢ÔyŸbè)ähKn·lv­æıŠÁ§zŒ#%ÙÛÛKwKf·jö¯üÁÁPl<-ÑİœY©úşÃ QÀ<PüAÅğS=ÃQ‘ülAíğM„5£W9ş’Àm-¬½É±–ônÇlR­ı½± tx'bš©«>ÿP@<0Ô_Eø3•Á¯|!ÅØS½Ë1—Tn¿lp-ä‹I§vú¦Ã:ÑÓ]Éù–ÂîÑŒ\eùëÏA”0oT,?]Ğ9œéÍÕ¤_;xbé¥û$C[qûdCkqïdL+ußg*ŠŸ'(‹(g^ª¸2 ¸2„£O9ôÇM’µ­·=¶‘¶ìvÍæÕŠß'Š‹''Zš»+3_Uø?¬ }À!l
-­Ç=’‘­¬}½á±ˆtf§jú¯<ÑÀ\P9üÁÍU¬?=ĞœiÅîÓ]Åù“íÁe¬+=ßQ˜<j‘ï,LõÉ‡âÉ¤Vû~Ã`Qè<N‘ôlGmò­…½£1¹Ôrße˜+*Ÿ_(8’ˆm¦­ºı³µÀw&ŒåËGN²´u·g6ª–ÿ.ÀP	üÁÂĞQœ<iÑîÜLYõúÇÍ U¸?2¬=Ä“Lmõí‡¢…¹£2ùÕ‚ß!˜jŠ¯'<‘Ë,W]ş¹€rà%ˆ&‹Zç{
-£G9ò’Å­“=­Ñ½œq©ä~Ë`Wh>®|l!íØMšµ«7?V>ìMÌ5•×/œiÆ®Òü]ù Bø1‚”a¯h|.¡ÜxYâºÉ³õÎÇR}¤!»Xsz¥ã;	ÓFİòÙ…šã+	ßFØ2Ú•›/+\yÈ"Ö™êèO´wCf±êôOt§Aº°s4%×[»Hsv¥æû
-ÃGòŒE¥ó;ÓCñÉ„Vã~ÉàVÈ>Ö^ì8MÒµ·)¶öèFÎ²ÔuŸg(*Ÿ(h®ˆ|f¡êøO´·@v°&ôÇK·M¶µ¶÷6Æ–ÒîİŒY¥úûAÁğPD<3QÕü_ø B€1 xb„)£^ùøBÂ±‘´lwmæ­Šı§º€s %Ø‹K'wZ¦»:óSıÃ‘ÀlP-üÉ Vø>ÂQ¬<}ÑáœHiö®ÆüRÁıA¬0}Ô!ŸXh:®“<mÑíœM©õ¾Ç0R”=¯Q¼<qÑä\Ky÷bÆ©’şí€M 5¸2•¤o;lmÍí•¯%¼1ËTW~  x"Š™§*úŸ(Ş€X`:¨>Ğeœ+)ß^Ø8Z’»-³]µù·ö†àbÈ)–îèLNµôwf‚ªá¿p¤ûAƒpaä(K^·xv¢¦ùºÂó…ÌcéÏÔ_Cx1â”I¯vü&ÁÚĞ[;IÓvİæÙŠÚç
-‹G'rš¥«;?SP=üÌ`Uè?lmÁíM¬5½×1”hon¬,}İá™ˆjæ¯
-üÂ€Q <xâŒI¥öûÃBÑñœDiónÅìSıÅ“ mØ-š«)¿^ğ8D³Mµõ·6‚–á®È|V¡şø@B°1´wOf´*÷_¸ò… c8)Òİ¨Y¾ºğs%Ã[ûLCuñçJƒw!æ˜Jê·6„ãNÉôVÇ~Ò ]¸9²’õ­‡=¢‘¹¬rıå‹ gX*ºŸ3(Şd
-«G?r%¬=ËQ—|n¡ìxMâµ‰·&öšÆëÏM”5¯W<>‘Ğl\-ùİ‚Ù¡šøk¯A¼0qÔ$_[x;b“i­îıŒA¥ğ{#CYñúÄCqÍäU‹'`¨>‡Pb¼)±ŞôXGz²£5¹×2Ş•˜o*¬=È–ŒnåìK÷E†³"õÙ‡â‹	§Fú²Ã5‘×,^øi‚®á¼Hqö¤FûrÃe‘ë,O]ô9‡Râ½‰±¦ôzÇc©Í¾Õ°_48R½¤q»dskeïk/EÜ3ÕÊßŠ„g#j™ï*ÌÈ„ãDIóvÅæÓ
-İÇ’Ší§º…³#5Ù×Ş‹gJª·?6ìÍÄU“-àˆ	¦†úâÃ	‘ÆìRÍı•¯ |!Ê˜W*¾Ÿ0h.\d9ëRÏ}”!¯X|:¡Ó8]Ò¹²éµ÷$F›rëek$/[\;yÓbİé™êäOtgBª±¿4pd«Ds`%è‹Dgsj¥ï;EÍó…Ï#ÏJÔ7Vˆ>æJì7Ö…ã(IŞ¶ØvÚ¦Û:ÛS}Ëa—hn®¬|}ááˆHf¶ªöÿÀĞœ iÀ.Ğ\	ùÆÂÒÑœi©îşÌ@Uğ?LõÀG2Œ¥Ï;OMô5‡W"¾™°jô/\¹Á²Ğuœ')ÚÛ([^»xsb¥é»óDEósåÃÇLRµı·¶€và&ÈÖ‹çHJ¶·6ö–ÆîÒÌ]•ù¯üÀ`P(<‘ÈlV­şı€A 0x"Y¤:ûS}ÁáHl6­ÖıÁ¨P~¼ qØ$Z›{+c_iø.ÂœQ©ü~ÁàPH<6‘Öì^ÍøU‚¿!°t
-§G:²“5­×=‘¨l~­à}ˆ!¦˜zê£9ÄÓMõ©‡>âI¬6ıÖÁĞh\.¹ÜrÙåšË+_N¸4r—e®«<Qà<HöŒFåòË—C.±ÜtYçzÊ£9Î’ÔmŸm¨-¾°i´.÷\F¹òòÅ…“#-ÙİšÙ«ÿK 7@°ôGCr±å´K7wV¦¾úğC1ÃTQÿ|@!ğD
-³G5ò—®ƒ<aÑè\N¹ôrÇe’«-¿]°9´÷M†µ¢÷9†’âí‰¦åºË3UÎ¿pd+C_qø$B›q«dk`/h.‰ÜfÙêÚÏOGt2§Uº¿30ÔD3F•òïŒ%ÁÛ[L;uÓgê‰&äËKwN¦´z÷c©ÂşÑ€\`9èÎ”e¯k</QÜ<YÑúÜCñÊÄW~àeˆ+&ŸZè;“Dmóm…í£¹Å²Ó5×)èhN®´|waæ¨Jş· v€&àÈ‡Nâ´I·vö¦ÆúÒÃ‘É¬VışÁ€P`<(ŞŒXeú«?AĞ0\9ÏRÔ=ŸQ¨<~‘àlH-ö†é¢Îù”BïqŒ$eÛkoKl7mÖ­ı¨A¾°pt$'[Z»{3cUéÿÀP|áÀHP6¼ñÎÄTS}à!ˆfŠªç?
-,Á©~ì MØ5š—+.Ÿ\h9î’Ìm•í¯¼±Ã4Q×|^¡øxB¢±¹´r÷e†«"ÿY€:àÆ…’ã-‰İ¦ÙºÚóËCqÎ¤T{c`)èÎˆTf¿jğ/IÁöĞFÜ2ÙÕšß+Jˆ7&–šîëOEô3UÂ¿°tçC
-±Ç4R—}®¡¼xqâ¤I»vófÅêÓÄ	“FíòÍ…•£/9ÜÙÍšÕ«?H6ŒåÎËWO~´ wX&ºšó+ßC1Ê”W/~œ iØ.Úœ[)û^ÃxQâ¼I±öôFÇrÒ¥»)³^õøG²µ w8&’ší«¿E°34×O´wF¦²úõƒ!Â˜Qª¼1àHv„&ãZÉûÃNÑô\Gyò¢Å¹“2íÕŸ%¨>‹Pg|*¡ß8Xº³%µÛ7V‹~ç`J¨7>–nì,Mİõ™‡*âŸ	¨ş‚Àa(l­È}–¡®ø|B¡ñ¸Dr³eµë7V„>ãPIü6ÁÖĞ^Ü8YÒºİ³µÊ÷‚äa‹hgnª¬=àˆf…êã	ÄÓBİñ™„jão	ìÍÂÕ‘Ÿ,hî‰ŒfåêËD³Duógêƒ!ÄSJ½÷1†”bïiŒ.åÜK÷JÆ·ö†å¢Ë9—Rî½Œq¥ä{cGiò®Å¼S1ıÔAŸph$.›\kyïbÌ)•ŞïL
-µÇ7–®å¼K1÷TF¿rğ%„#KY÷zÆ£ùÍ‚Õ¡Ÿ8h®¼e±ë4OWt>§Pz¼#1ÙÔZß{#J™÷*ÆŸè…¤c;iÓnİìYúåƒ!ÇXRº½³1µÔwfˆ*æŸ
-è‚„a£hyî¢Ìy•âï	ŒåÂË—Lnµìwæ…Šã'	Ú†Û"ÛY›zëciÄ.Ó\]ùù‚Âá‘ˆlf­êı¤ {@#pä
-ËGr¥¤{;cSiıîÁŒPeü+ß@X0:”/MÜ5™×*ŞŸh
-®‡<b‘é¬NıôA‡pb¤)»^óxEâ³	µÆ÷Æ’å­‹=§Qº¼s1åÔKwH&¶šöëÏBÔ1ŸTh?n,líÉ–å®Ë<WQş¼@qğ$DsKe÷k¯Bü1Ô`_h8.’œm©í¾Í°U´?7P¼ñÄDSs}åá‹gFª²ÿ5€ ˜jƒo!ìMÊµ—7.–œnéìNÍôU‡" ¸
-ò‡¢ƒ9¡Òø]‚¹¡²øu‚§!º˜s*¥ß;J÷%†›"ëYzä#YÇzÒ£¹É²ÖõÇ(R½¨q¾¤p{d#kYïzÌ#ÙÏÔGH2¶•¶ï6ÌÕÎßXz„##YÙúÚÃËLWuş§ z€# Ø
-Ú‡"‹Y§zú£9ÁÒĞ]œ9©Òşİ€Y :øÁ¥{,#]ÙùšÂëLd5ëW~„ cX)úÃ(QŞ¼Xqú¤C;qÓd]ëybä)‹^çxJ¢·9¶’öí†Í¢Õ¹Ÿ2è$dkKowl&­Úı›«@p $J‹w'fšªë?P<QÁüPAü0AÔ0_T8?R=¬½Ìq•äolmÂ­‘½¬q½äq‹dgkj¯o<,İÌY•úïÅÀS=Ì•ÌoìÄ“C-ñİ„Y£zùãÉÁ–ĞnÜ,YİúÙƒáËWF¾²ğu„'#Z™û*Ã_øB…ñ£yÃbÑéœNéôNÇtR§}º¡³8uÒ§º‰³&õÚÇ‹M§uº§3:•Ó/Ü	™ÆêÒÏ”	¯Fü2ÁÕ_,8Ò‰¦éºÎóEÏs%Ï[;OSt=çQŠ¼g1ê”O/t'IÚ¶Û6ÛVÛ~Û`[h;n“lmíí¥¥»;3SUıÿ€ ` ( €`¨ş€``((ˆhf®ªüà H 6€àÈVƒ~áàHH6¶–öîÆÌRÕıŸ¨ ~€ `(
-‡(b©¨~ş @x0"”¯Jü7Ö€^à8H¶¶å¶Ë6×VŞ¾ØpZ¤;;SS}ıáˆ`f¨*şŸ h .€`	èÎ‚ÔaŸhh.®œ|iáîÈLVµş÷ F€2àˆ&„ãK	÷FÆ²Òõ‡)¢ù¨Bş±€t`'h®‹<gQê¼O1ôGOr´%·[6»Vó~ÅàS=Æ‘’ìmí¥»%³[5ûW~à`H(6–ènÎ¬T}ÿa€(`¨~† bø)‚á¨H~¶ vø&ÂšÑ«Ià6ÈÖŞäXKz·c6©ÖşŞÀXP:¼1ÍÔUŸ( ˜j†¯"üÊàW>†bì)Şå˜K*·_6¸òÅ¤S;}Óaèi®ä|Ka÷hF®²üuç J˜7*–Ÿ.èN‰ôfÇjÒ¯¼	±ÆôRÇ}’¡­¸}²¡µ¸w2¦•ºï3ÅÏÏE”3/UÜ?Ğ
-ÜÂŠÑ§z‰ã&ÉÚÖÛÛH[v»fójÅïÅÅ“-Íİ•™¯*üÈ V€>àH6…ÖãÉÈVÖ¾ŞğXD:³S5ı×€h`.¨~‰àfÈ*ÖŸèN†´b÷i†®âüIöàFÈ2Ö•ï(LµÈw¦úäCqÇdR«}¿a°(t§Hz¶£6ùÖÂŞÑ˜\j¹ï2Ì•Ï/IÄ6ÓVİşÙ€Zà;Fòå…‹#'YÚºÛ3UË`¨~ƒ`aè(N´hwn¦¬zıã‰ÀfĞ*ÜÈ
-Ö‡âˆI¦¶úöÃÑÂÜQ™üjÁïL5Å×Èe–«.ÿ\@9ğÄ“E­ó=…Ñ£yÉâÖÉÖè^Î¸Tr¿e°+4WH>¶vì&ÍÚÕ›+Hvˆ&æšÊëN„4cWiş®À|P!üAÊ°W4>—Pn¼,qİäY‹zçc
-©Ç>Ò]¬9½Òñ„i£nùìBÍñ•„o#líÊÍ—®<dëLOuô'Z‚»!³Xuú§:Ó ]Ø9š’ë-]¤9»Ró}…á£yÆ¢Òù‚é¡ødB«q¿dp+dkH/vœ&éÚÎÛ[O{t#gYêºÏ3ÏO4WD>³Puü'Ú€[ ;Xzã%‰Û&ÛZÛ{cKi÷nÆ¬Rıı `x("™¨jş¯ | !ÀP
-¼1Â”Q¯||!áØHZ¶»6óVÅşÓ ]À9ìÅ¥“;-Ó]ù©‚şá€H`6¨şÀdP+|aÈ(V¾èpN¤4{Wc~©à~È V˜>êO,4×I¶èvÎ¦Ôzßc)Ê×(^¸hr®¥¼{1ãTIÿvÀ&ĞÜÇJÒ·¶‰¶æöÊÆ×Ş˜eª«??P<ÅÌSıÏ” o@,0Ô	ŸFè2Î•”o/l-Éİ–Ù®Úü[û@Cp1äKOwt&§Zú»3AÕğ_8Rı A¸0r”%¯[<;QÓ|]áùˆBæ±Šôgj‚¯!¼qÊ¤W;~“`mè-¤i»nólEíó…Å£9ÍÒÕŸ)¨şˆ@f°*ôH¶¶àvÈ&ÖšŞëOJ´77V–¾îğLD5óWşƒ aÀ(P¼qÆ¤Rû}ƒa¡èxN¢´y·bö©†şâÀI6ìÍÎÕ”_/x"‰Ù¦ÚúÛAËpWd>«P| !ØZŠ»'3Z•û/\ùÀBĞ1œiÏnÔ,_]ø9‚’á­ˆ}¦¡ºøs¥Á»sL%õÛB‹q§dz«c?iĞ.ÜYÉúÖÃÑÈ\V¹şòÀE3,İÏ”
-ïG2…Õ£9ÈÖå¨K>·Pv¼&ñÚÄ[{Mãu‰ç&Êš×+ŸHh6®–ünÁìPMü5× ^˜8j’¯-¼±É´V÷~Æ Rø=‚‘¡¬x}â¡‰¸fòªÅ¿0ÔŸC(1Ş”Xoz¬#=ÙÑšÜkïJÌ7ÖäKF·rö¥†û"ÃY‘úìCñÅ„S#}ÙášÈk¯Nü4A×p^¤8{R£}¹á²Èu–§.úœC)ñŞÄXSz½ã1‰ÔfßjØ/œ)Ç^Ò¸]²¹µ²÷5†—"î™ŒjåïEÂ³µÌwæ
-äB‡q¢¤y»bói…îãIÅöÓİÂÙ‘šìkïEŒ3%ÕÛHv‡fâªÉ¿ğÄSC}ñá„Hcv©æşÊÀW>ŒeÌ+ßO4
-—G.²œu©ç>ÊW,>Ğiœ.éÜNÙôZÇ{£M¹õ²Ç5’—-®¼i±îôLGuò§ºƒ3!ÕØ_¸2‡U¢¿9°ô‡E¢³9µÒ÷†‰¢æùŠÂçŠŒg%ê›+DsH%ö›ëBÏq”$o[l;mÓmí©¾å°K47WV¾¾ğpD$3[Uû`è N€4`h®„|caéèNÎ´Twf *øˆ¦€zà#ÆŠÒçŠ‰§&úšÃ+ßLX5ú—.Ü`Yè:Î“mÏm”-¯]¼9±Òô]‡y¢¢ù¹‚òá…ˆc&©ÚşÛ [@;pdëEs$%Û[{Kcwiæ®ÊüWş€@`0(Hd6«Vÿ~À P<
-‘Ç,Rı©¾àpH$6›Vë~Ï`T(?^8l­Í½•±¯4|aÎ¨T~¿`p($›Hkv¯fü*ÁßX:…Ó#ÙÉšÖëÏHT6¿Vğ>ÄSL=õÑ‡b‰é¦ÎúÔCqÈ$V›~ë`Oh4.—\n¹ìrÍå•‹/'\¹Ë2×U¿(p¤{F£rùå‚Ë!—Xnº¬s=åÑ‹gIê¶Ï6ÔßNØ4Z—{.£\yùâÂÉ‘–ìnÍìUÿ%€ Xz‚£!¹ØrÚ¥›;+S_}ø!‚˜aª¨> x"…Ù£ùË×A°ht.§\z¹ã2ÉÕ–ß.ØZ‰û&ÃZÑûCIñöÄFÓrİå™‹*ç_
-¸2‚•¡¯8|¡Í¸U²¿5°4—Dn³luíçŠ…§#:™Ó*İß˜
-ê‡"„£Jù÷Æ
+              "DocumentIndex": 3,
+              "Title": "PlayerPosition.cs",
+              "DocumentMoniker": "E:\\hemomancy\\hemomancy\\inputreader\\inputblocks\\PlayerPosition.cs",
+              "RelativeDocumentMoniker": "hemomancy\\inputreader\\inputblocks\\PlayerPosition.cs",
+              "ToolTip": "E:\\hemomancy\\hemomancy\\inputreader\\inputblocks\\PlayerPosition.cs",
+              "RelativeToolTip": "hemomancy\\inputreader\\inputblocks\\PlayerPosition.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-12T07:18:58.391Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Action.cs",
+              "DocumentMoniker": "E:\\hemomancy\\hemomancy\\inputreader\\actions\\Action.cs",
+              "RelativeDocumentMoniker": "hemomancy\\inputreader\\actions\\Action.cs",
+              "ToolTip": "E:\\hemomancy\\hemomancy\\inputreader\\actions\\Action.cs",
+              "RelativeToolTip": "hemomancy\\inputreader\\actions\\Action.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAxwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-12T07:08:56.692Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "TranslatedVector2D.cs",
+              "DocumentMoniker": "E:\\hemomancy\\hemomancy\\inputreader\\inputblocks\\TranslatedVector2D.cs",
+              "RelativeDocumentMoniker": "hemomancy\\inputreader\\inputblocks\\TranslatedVector2D.cs",
+              "ToolTip": "E:\\hemomancy\\hemomancy\\inputreader\\inputblocks\\TranslatedVector2D.cs",
+              "RelativeToolTip": "hemomancy\\inputreader\\inputblocks\\TranslatedVector2D.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACIAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-17T22:45:46.105Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "VariableVector2D.cs",
+              "DocumentMoniker": "E:\\hemomancy\\hemomancy\\inputreader\\inputblocks\\VariableVector2D.cs",
+              "RelativeDocumentMoniker": "hemomancy\\inputreader\\inputblocks\\VariableVector2D.cs",
+              "ToolTip": "E:\\hemomancy\\hemomancy\\inputreader\\inputblocks\\VariableVector2D.cs",
+              "RelativeToolTip": "hemomancy\\inputreader\\inputblocks\\VariableVector2D.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-17T21:47:07.247Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -33,7 +33,7 @@ void fragment() {
 			COLOR = vec4(.5,.5,1,1);
 			break;
 		case 2:
-			COLOR = vec4(vec_to_uv(dir), 1, 1);
+			COLOR = vec4(vec_to_uv(dir), 0, 1);
 			break;
 	}
 }

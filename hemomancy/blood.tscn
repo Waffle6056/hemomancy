@@ -3,16 +3,16 @@
 [ext_resource type="Texture2D" uid="uid://blx08pj0g0x6k" path="res://icon.svg" id="1_6b75d"]
 [ext_resource type="Shader" uid="uid://bkaao0mkld0l4" path="res://hemomancy/particletest.gdshader" id="1_44s4y"]
 [ext_resource type="Script" uid="uid://bx7cmujnwj2v0" path="res://hemomancy/BloodSimCPU.cs" id="1_k6j45"]
-[ext_resource type="Texture2D" uid="uid://bjeui7f5e4pxi" path="res://hemomancy/patterns/dagger/dagger1.tres" id="2_6qwvo"]
+[ext_resource type="Texture2D" uid="uid://dsc8a4fbdr1el" path="res://hemomancy/patterns/dagger/dagger1.tres" id="2_6qwvo"]
 [ext_resource type="Texture2D" uid="uid://d14cb8roh0b26" path="res://hemomancy/patterns/condensation/condensation1.tres" id="3_dhu25"]
-[ext_resource type="Texture2D" uid="uid://cwi4noboej1n2" path="res://hemomancy/patterns/dagger/dagger2.tres" id="3_s1km8"]
-[ext_resource type="Texture2D" uid="uid://byqqqp57at33n" path="res://hemomancy/patterns/spike/spike1.tres" id="4_fq687"]
-[ext_resource type="Texture2D" uid="uid://cemb0yhko42l0" path="res://hemomancy/patterns/condensation/condensation2.tres" id="5_8a4ng"]
-[ext_resource type="Texture2D" uid="uid://c33pdv5ac1yiq" path="res://hemomancy/patterns/path/path1.tres" id="5_oilwi"]
-[ext_resource type="Texture2D" uid="uid://bbekac52o8o0i" path="res://hemomancy/patterns/absorb/absorb1.tres" id="6_yw8yx"]
-[ext_resource type="Texture2D" uid="uid://xd5pu037r5of" path="res://hemomancy/patterns/spike/spike2.tres" id="7_rilc2"]
-[ext_resource type="Texture2D" uid="uid://os1stxr7tifn" path="res://hemomancy/patterns/path/path2.tres" id="9_oilwi"]
-[ext_resource type="Texture2D" uid="uid://comufl075ljwy" path="res://hemomancy/patterns/absorb/absorb2.tres" id="11_ob88a"]
+[ext_resource type="Texture2D" uid="uid://brosqutl15w1d" path="res://hemomancy/patterns/dagger/dagger2.tres" id="3_s1km8"]
+[ext_resource type="Texture2D" uid="uid://dqhg0h3sm42gc" path="res://hemomancy/patterns/spike/spike1.tres" id="4_fq687"]
+[ext_resource type="Texture2D" uid="uid://drlojp3e35chr" path="res://hemomancy/patterns/condensation/condensation2.tres" id="5_8a4ng"]
+[ext_resource type="Texture2D" uid="uid://b8dhgqsyhpxwv" path="res://hemomancy/patterns/path/path1.tres" id="5_oilwi"]
+[ext_resource type="Texture2D" uid="uid://26wa4y7x2gkw" path="res://hemomancy/patterns/absorb/absorb1.tres" id="6_yw8yx"]
+[ext_resource type="Texture2D" uid="uid://54ednpgonsjn" path="res://hemomancy/patterns/spike/spike2.tres" id="7_rilc2"]
+[ext_resource type="Texture2D" uid="uid://c1mou6eep74ml" path="res://hemomancy/patterns/path/path2.tres" id="9_oilwi"]
+[ext_resource type="Texture2D" uid="uid://beh6a5b8uwfhk" path="res://hemomancy/patterns/absorb/absorb2.tres" id="11_ob88a"]
 [ext_resource type="Material" uid="uid://bxar8jerq7srb" path="res://hemomancy/blood.tres" id="14_yw8yx"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6b75d"]
@@ -35,7 +35,7 @@ buffer = PackedFloat32Array(-4.4293e+22, -4.4293e+22, -4.4293e+22, -4.4293e+22, 
 script = ExtResource("1_k6j45")
 Display = NodePath("MultiMeshInstance2D")
 MaxMomentaryInstantiationPositions = 1500
-PatternInputFormat = PackedInt32Array(0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+PatternInputFormat = PackedInt32Array(0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 PatternData = [ExtResource("2_6qwvo"), ExtResource("3_dhu25"), ExtResource("4_fq687"), ExtResource("5_oilwi"), ExtResource("6_yw8yx"), null, null, null, null, null, null, null, null, null, null, null]
 PatternData2 = [ExtResource("3_s1km8"), ExtResource("5_8a4ng"), ExtResource("7_rilc2"), ExtResource("9_oilwi"), ExtResource("11_ob88a"), null, null, null, null, null, null, null, null, null, null, null]
 

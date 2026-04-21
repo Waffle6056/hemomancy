@@ -10,12 +10,20 @@ public partial class Summon : Action
 	[Export]
 	public VariableVector2D TargetPosition;
 	[Export]
+	public VariableNode2D ParentNode;
+	[Export]
 	public VariableNode2D ReferenceOutput;
     public override void Start()
     {
         base.Start();
 		Node2D f = ObjectTemplate.Duplicate() as Node2D;
-		ObjectTemplate.GetTree().Root.AddChild(f);
+		Node parent;
+		if (ParentNode == null)
+			parent = ObjectTemplate.GetTree().Root;
+		else
+			parent = ParentNode.Data;
+		parent.AddChild(f);
+
 		if (StartPosition != null)
 			f.GlobalPosition = StartPosition.Data;
 		if (TargetPosition != null)

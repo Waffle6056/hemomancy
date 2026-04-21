@@ -1,15 +1,23 @@
-[gd_scene load_steps=3 format=3 uid="uid://f286v02rp6a1"]
+[gd_scene load_steps=8 format=3 uid="uid://f286v02rp6a1"]
 
 [ext_resource type="Script" uid="uid://dmvk7122tmtia" path="res://hemomancy/ManipulationField.cs" id="1_icm13"]
-[ext_resource type="Texture2D" path="res://hemomancy/patterns/absorb/absorb2.tres" id="2_icm13"]
+[ext_resource type="Texture2D" uid="uid://beh6a5b8uwfhk" path="res://hemomancy/patterns/absorb/absorb2.tres" id="2_icm13"]
+[ext_resource type="Script" uid="uid://cdixe2obj7utr" path="res://hemomancy/patterns/absorb/FieldTypeDisplay.cs" id="3_mp76d"]
+[ext_resource type="Texture2D" uid="uid://brosqutl15w1d" path="res://hemomancy/patterns/dagger/dagger2.tres" id="4_12ud6"]
+[ext_resource type="Texture2D" uid="uid://drlojp3e35chr" path="res://hemomancy/patterns/condensation/condensation2.tres" id="5_n5gv0"]
+[ext_resource type="Texture2D" uid="uid://54ednpgonsjn" path="res://hemomancy/patterns/spike/spike2.tres" id="6_to4vj"]
+[ext_resource type="Texture2D" uid="uid://c1mou6eep74ml" path="res://hemomancy/patterns/path/path2.tres" id="7_8c4b1"]
 
 [node name="absorb" type="Node2D"]
 scale = Vector2(512, 512)
 script = ExtResource("1_icm13")
 Pattern = 4
 
-[node name="Samplepattern" type="Sprite2D" parent="."]
+[node name="Samplepattern" type="Sprite2D" parent="." node_paths=PackedStringArray("field")]
 modulate = Color(1, 1, 1, 0.28235295)
 z_index = 7
 scale = Vector2(0.002, 0.002)
 texture = ExtResource("2_icm13")
+script = ExtResource("3_mp76d")
+textures = Array[ImageTexture]([ExtResource("4_12ud6"), ExtResource("5_n5gv0"), ExtResource("6_to4vj"), ExtResource("7_8c4b1"), ExtResource("2_icm13")])
+field = NodePath("..")

@@ -43,9 +43,13 @@ public partial class ManipulationField : Node2D
 	public int Pattern = 0;
 	[Export]
 	public int SimFlags { get; set; } = 2;//  equals (int) BloodSimCPU.Flags.Group2 but it doesnt show up if casting;
+	[Export]
+	public bool InterpolateState = true;
+	public Transform2D previousState;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		previousState = GlobalTransform;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -61,12 +65,36 @@ public partial class ManipulationField : Node2D
 		FieldIndex = Register(this);
 	}
 
+	Vector2 interpolatedVelocity = Vector2.Zero;
+	float interpolatedRotation = 0f;
+	Vector2 innateVelocity = Vector2.Zero;
+	float innateRotation = 0f;
+	Transform2D innateState;
 	public virtual void PreSimProcess(double delta)
 	{
+		if (InterpolateState){
 
+			innateVelocity = Velocity;
+			interpolatedVelocity = (GlobalPosition - previousState.Origin) / (float)delta; 
+			Velocity = interpolatedVelocity;
+		
+			innateRotation = RotationSpeed;
+			interpolatedRotation = (GlobalRotation - previousState.X.Angle()) / (float)delta; 
+			RotationSpeed = interpolatedRotation;
+			
+			innateState = GlobalTransform;
+			GlobalTransform = previousState;
+		}
+		//GD.Print(Velocity);
 	}
 	public virtual void PostSimProcess(double delta)
 	{
+		if (InterpolateState){
+			GlobalTransform = innateState;
+			Velocity = innateVelocity;
+			RotationSpeed = innateRotation;
+		}
+		previousState = GlobalTransform;
 		GlobalPosition += Velocity * (float) delta;
 		Rotate(RotationSpeed * (float)delta);
 	}

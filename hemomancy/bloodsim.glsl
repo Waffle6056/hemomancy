@@ -83,7 +83,11 @@ layout(set = 0,binding = 18) restrict buffer PlayerFieldFlags{
 } player_field_flags;
 
 const int LINE_PATTERN = 0;
+// acceleration dir.x, acceleration dir.y, step size ^ -1
+// line displacement percent.x, line displacement percent.y, maximum displacement magnitude in local space
 const int SIMPLE_PATTERN = 1;
+// velocity dir.x, velocity dir.y,
+// acceleration dir.x, accleration dir.y, inheritance val
 layout(set = 0,binding = 19) restrict buffer PatternMetadata{
     int input_format[16];
 } pattern_metadata;
@@ -94,6 +98,7 @@ layout(binding = 22) restrict buffer MultiMeshBuffer{
 	mat2x4[] transforms;
 } multi_mesh_transforms;
 
+const float MAX_HEIGHT = 15;
 const float FRICTION_COEFFICIENT = 3.0;
 const float BORDER_WIDTH = 25;
 const float GRADIENT_STEP_SIZE = 1.0/256.0;
@@ -105,6 +110,9 @@ const float NORMALIZED_THRESHOLD = .9;
 
 const int FLAG_GROUP1 = 1;
 const int FLAG_GROUP2 = 2;
+const int FLAG_GROUP3 = 4;
+const int FLAG_GROUP4 = 8;
+const int FLAG_ACTIVE = 16;
 
 float rand(vec2 co)
 {
@@ -200,13 +208,13 @@ void calc_simple_motion(inout vec2 velocity, inout vec2 acceleration, inout floa
 	mat3x2 field_transform = player_field_transform.field_transform[field_ind];
 	
 	vec2 velocity_direction = uv_to_vec(pattern_point.xy);
-	if (length(velocity_direction) > NORMALIZED_THRESHOLD)
+	if (length(velocity_direction) > NONZERO_THRESHOLD)
 		velocity = normalize(mat2(field_transform) * velocity_direction) * player_field_magnitude.field_magnitude[field_ind].x;
 	
 	vec2 acceleration_direction = uv_to_vec(pattern_point2.xy);
-	if (length(acceleration_direction) > NORMALIZED_THRESHOLD){
-		acceleration = normalize(mat2(field_transform) * acceleration_direction) * player_field_magnitude.field_magnitude[field_ind].y / particle_misc.mass[particle_ind] * inheritance_value;
-	}
+	if (length(acceleration_direction) > NONZERO_THRESHOLD)
+		acceleration = normalize(mat2(field_transform) * acceleration_direction) * player_field_magnitude.field_magnitude[field_ind].y / particle_misc.mass[particle_ind];
+	//}
 	distance_step = 1/pattern_point.z;
 }
 
@@ -275,21 +283,24 @@ void main() {
 	mat3 to_local;
 	bool in_a_field = false;
 	for (int i = 0; i < player_field_transform.field_transform.length(); i++){
+		if ((player_field_flags.flags[i] & FLAG_ACTIVE) == 0)
+			continue;
 		mat3 inv = inverse(mat3(player_field_transform.field_transform[i]));
 		vec2 local_pos = (inv * vec3(particle_pos,1)).xy + .5;
+		float cur_inheritance_value = 0;
 		
-
 		if (min(local_pos.x,local_pos.y) >= 0 && max(local_pos.x,local_pos.y) <= 1){
-			float cur_inheritance_value = calc_inheritance(i, local_pos);
-			if (i == particle_field.ind[particle_ind])
-				cur_inheritance_value = max(cur_inheritance_value, particle_inheritance.inheritance[particle_ind]);
-			if (cur_inheritance_value > inheritance_value){
-				inheritance_value = cur_inheritance_value;
-				field_ind = i;
-				uv = local_pos;
-				to_local = inv;
-				in_a_field = true;
-			}
+			cur_inheritance_value = calc_inheritance(i, local_pos);
+		}
+		if (i == particle_field.ind[particle_ind])
+			cur_inheritance_value = max(cur_inheritance_value, particle_inheritance.inheritance[particle_ind]);
+
+		if (cur_inheritance_value > inheritance_value){
+			inheritance_value = cur_inheritance_value;
+			field_ind = i;
+			uv = local_pos;
+			to_local = inv;
+			in_a_field = true;
 		}
 	}
 
@@ -337,7 +348,9 @@ void main() {
 	}
 
 	vec2 xaxis = vec2(sqrt(particle_misc.mass[particle_ind]),0);
-	xaxis = rotate2d((particle_misc.mass[particle_ind]-MIN_MASS)/(MAX_MASS-MIN_MASS) * 3.14) * xaxis;
+//	xaxis = rotate2d((particle_misc.mass[particle_ind]-MIN_MASS)/(MAX_MASS-MIN_MASS) * 3.14) * xaxis;`
+	//if (in_a_field)
+	xaxis = rotate2d(inheritance_value * 3.14) * xaxis;
 	vec2 yaxis = rotate2d(3.14/2) * xaxis;
 	
 	multi_mesh_transforms.transforms[particle_ind][0][0] =  xaxis.x;
@@ -345,7 +358,7 @@ void main() {
 	multi_mesh_transforms.transforms[particle_ind][1][0] =  yaxis.x;
 	multi_mesh_transforms.transforms[particle_ind][1][1] =	yaxis.y;
 	multi_mesh_transforms.transforms[particle_ind][0][3] =  particle_pos.x;
-	multi_mesh_transforms.transforms[particle_ind][1][3] =  particle_pos.y;
+	multi_mesh_transforms.transforms[particle_ind][1][3] =  particle_pos.y + MAX_HEIGHT * inheritance_value;
 
 	particle_position.position[particle_ind] = particle_pos;
     particle_velocity.velocity[particle_ind] = velocity;

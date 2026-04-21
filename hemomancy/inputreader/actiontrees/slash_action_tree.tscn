@@ -1,0 +1,326 @@
+[gd_scene load_steps=27 format=3 uid="uid://cd6e1xck8cpmp"]
+
+[ext_resource type="Script" uid="uid://bdminwqcure6f" path="res://hemomancy/inputreader/InputReader.cs" id="1_2tuhj"]
+[ext_resource type="Script" uid="uid://g4pw7g7a4stc" path="res://hemomancy/inputreader/inputblocks/SimpleInput.cs" id="2_lxs8i"]
+[ext_resource type="Script" uid="uid://du0e8rasptob1" path="res://hemomancy/inputreader/inputblocks/VariableNode2D.cs" id="3_no2hb"]
+[ext_resource type="Script" path="res://hemomancy/inputreader/inputblocks/MousePosition.cs" id="4_epchg"]
+[ext_resource type="Script" uid="uid://blnivlleomtkr" path="res://hemomancy/inputreader/inputblocks/PlayerPosition.cs" id="5_vqx0k"]
+[ext_resource type="Script" uid="uid://cu5ym8gysc5bs" path="res://hemomancy/inputreader/ActionBlock.cs" id="6_kjay3"]
+[ext_resource type="Script" uid="uid://duittcfwxeadq" path="res://hemomancy/inputreader/inputblocks/TranslatedVector2D.cs" id="6_lxs8i"]
+[ext_resource type="Script" uid="uid://bspdct1j4d26h" path="res://hemomancy/inputreader/inputblocks/Angle.cs" id="7_epchg"]
+[ext_resource type="Script" uid="uid://c61mup3o7beub" path="res://hemomancy/inputreader/NextAction.cs" id="7_xbuvb"]
+[ext_resource type="Script" uid="uid://vuxql0xuidyg" path="res://hemomancy/inputreader/conditions/SimpleInputted.cs" id="8_dkudg"]
+[ext_resource type="Script" uid="uid://c7cljbjwpjvt7" path="res://hemomancy/inputreader/inputblocks/Negative.cs" id="8_no2hb"]
+[ext_resource type="Script" uid="uid://c00fq1himycrr" path="res://hemomancy/inputreader/actions/Summon.cs" id="9_dcq11"]
+[ext_resource type="PackedScene" uid="uid://f286v02rp6a1" path="res://hemomancy/patterns/absorb/absorb.tscn" id="10_a8wfh"]
+[ext_resource type="Script" uid="uid://b5sbylekjcvbn" path="res://hemomancy/inputreader/actions/ObjectTrack.cs" id="11_43imw"]
+[ext_resource type="Script" uid="uid://cvafcpa5hscqs" path="res://hemomancy/inputreader/actions/FieldAlter.cs" id="12_7xwdn"]
+[ext_resource type="Script" uid="uid://dt62i4i2jdjwf" path="res://hemomancy/inputreader/actions/LookAtVector.cs" id="14_epchg"]
+[ext_resource type="Script" uid="uid://b4q8ka3ncftcq" path="res://hemomancy/inputreader/conditions/AnimFinished.cs" id="17_epchg"]
+[ext_resource type="Script" uid="uid://cwqc3uepqa8a3" path="res://hemomancy/inputreader/actions/AnimationAction.cs" id="17_vqx0k"]
+[ext_resource type="Script" uid="uid://ivirr0n3qmw7" path="res://hemomancy/inputreader/actions/StartTimer.cs" id="19_kjay3"]
+[ext_resource type="Script" uid="uid://dx3mef6e821id" path="res://hemomancy/inputreader/actions/QueueFree.cs" id="20_dkudg"]
+[ext_resource type="Script" uid="uid://dbl26ur8tgjip" path="res://hemomancy/inputreader/conditions/TimerFinished.cs" id="20_xbuvb"]
+
+[sub_resource type="Animation" id="Animation_kjay3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../InputBlocks/SlashOrigin/RotatedOffset:RotationBase")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_vqx0k"]
+resource_name = "Slash"
+length = 0.30000335
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../InputBlocks/SlashOrigin/RotatedOffset:RotationBase")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.26287672, 0.3),
+"transitions": PackedFloat32Array(2, 0.5, 1),
+"update": 0,
+"values": [-1.5699999999999998, 1.47, 1.5699999999999998]
+}
+
+[sub_resource type="Animation" id="Animation_xbuvb"]
+resource_name = "Slash1"
+length = 0.40000334
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../InputBlocks/SlashOrigin/RotatedOffset:RotationBase")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.26666668, 0.4),
+"transitions": PackedFloat32Array(2, 0.5, 1),
+"update": 0,
+"values": [-1.5699999999999998, 1.47, 1.5699999999999998]
+}
+
+[sub_resource type="Animation" id="Animation_dkudg"]
+resource_name = "Slash2"
+length = 0.40000334
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../InputBlocks/SlashOrigin/RotatedOffset:RotationBase")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.26666668, 0.4),
+"transitions": PackedFloat32Array(2, 0.5, 1),
+"update": 0,
+"values": [1.5699999999999998, -1.47, -1.5699999999999998]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xbuvb"]
+_data = {
+&"RESET": SubResource("Animation_kjay3"),
+&"Slash": SubResource("Animation_vqx0k"),
+&"Slash1": SubResource("Animation_xbuvb"),
+&"Slash2": SubResource("Animation_dkudg")
+}
+
+[node name="SlashActionTree" type="Node" node_paths=PackedStringArray("CurrentBlock", "InputsProcessed")]
+script = ExtResource("1_2tuhj")
+CurrentBlock = NodePath("ActionBlocks/NotActive")
+InputsProcessed = [null, null]
+
+[node name="InputBlocks" type="Node" parent="."]
+
+[node name="SlashInput" type="Node" parent="InputBlocks"]
+script = ExtResource("2_lxs8i")
+ActionName = "R"
+
+[node name="CurrentField" type="Node" parent="InputBlocks"]
+script = ExtResource("3_no2hb")
+
+[node name="MousePosition" type="Node" parent="InputBlocks"]
+script = ExtResource("4_epchg")
+
+[node name="PlayerPosition" type="Node" parent="InputBlocks"]
+script = ExtResource("5_vqx0k")
+
+[node name="SlashOrigin" type="Node" parent="InputBlocks" node_paths=PackedStringArray("Original", "Offset")]
+script = ExtResource("6_lxs8i")
+Original = NodePath("../PlayerPosition")
+ScaleBase = Vector2(1, 1)
+Offset = NodePath("RotatedOffset")
+
+[node name="RotatedOffset" type="Node" parent="InputBlocks/SlashOrigin" node_paths=PackedStringArray("Original", "Rotation")]
+script = ExtResource("6_lxs8i")
+Original = NodePath("Offset")
+ScaleBase = Vector2(1, 1)
+Rotation = NodePath("CurrentRotation")
+
+[node name="Offset" type="Node" parent="InputBlocks/SlashOrigin/RotatedOffset"]
+script = ExtResource("6_lxs8i")
+ScaleBase = Vector2(1, 1)
+OffsetBase = Vector2(100, 0)
+
+[node name="CurrentRotation" type="Node" parent="InputBlocks/SlashOrigin/RotatedOffset" node_paths=PackedStringArray("v2")]
+script = ExtResource("7_epchg")
+v2 = NodePath("MouseVec")
+
+[node name="MouseVec" type="Node" parent="InputBlocks/SlashOrigin/RotatedOffset/CurrentRotation" node_paths=PackedStringArray("Original", "Offset")]
+script = ExtResource("6_lxs8i")
+Original = NodePath("../../../../MousePosition")
+ScaleBase = Vector2(1, 1)
+Offset = NodePath("NegativePlayerPos")
+
+[node name="NegativePlayerPos" type="Node" parent="InputBlocks/SlashOrigin/RotatedOffset/CurrentRotation/MouseVec" node_paths=PackedStringArray("Orig")]
+script = ExtResource("8_no2hb")
+Orig = NodePath("../../../../../PlayerPosition")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="InputBlocks"]
+root_node = NodePath("../../ActionBlocks/Slash1")
+libraries = {
+&"": SubResource("AnimationLibrary_xbuvb")
+}
+
+[node name="Cooldown" type="Timer" parent="InputBlocks"]
+one_shot = true
+
+[node name="ActionBlocks" type="Node" parent="."]
+
+[node name="NotActive" type="Node" parent="ActionBlocks" node_paths=PackedStringArray("Actions", "NextActions")]
+script = ExtResource("6_kjay3")
+Actions = []
+NextActions = [NodePath("Next")]
+
+[node name="Next" type="Node" parent="ActionBlocks/NotActive" node_paths=PackedStringArray("ClearCondition", "Next")]
+script = ExtResource("7_xbuvb")
+ClearCondition = NodePath("SlashInputted")
+Next = NodePath("../../Start")
+
+[node name="SlashInputted" type="Node" parent="ActionBlocks/NotActive/Next" node_paths=PackedStringArray("InputBlock")]
+script = ExtResource("8_dkudg")
+OnPress = true
+InputBlock = NodePath("../../../../InputBlocks/SlashInput")
+
+[node name="Start" type="Node" parent="ActionBlocks" node_paths=PackedStringArray("Actions", "NextActions")]
+script = ExtResource("6_kjay3")
+Actions = [NodePath("SummonTargetField"), NodePath("FollowOrigin"), NodePath("LookAtPlayer")]
+NextActions = [NodePath("Next")]
+
+[node name="SummonTargetField" type="Node" parent="ActionBlocks/Start" node_paths=PackedStringArray("ObjectTemplate", "StartPosition", "ReferenceOutput")]
+script = ExtResource("9_dcq11")
+ObjectTemplate = NodePath("Node/condense")
+StartPosition = NodePath("../../../InputBlocks/SlashOrigin")
+ReferenceOutput = NodePath("../../../InputBlocks/CurrentField")
+
+[node name="Node" type="Node" parent="ActionBlocks/Start/SummonTargetField"]
+process_mode = 4
+
+[node name="condense" parent="ActionBlocks/Start/SummonTargetField/Node" instance=ExtResource("10_a8wfh")]
+visible = false
+SimFlags = 0
+
+[node name="FollowOrigin" type="Node" parent="ActionBlocks/Start" node_paths=PackedStringArray("TargetPosition", "Object")]
+script = ExtResource("11_43imw")
+TargetPosition = NodePath("../../../InputBlocks/SlashOrigin")
+Object = NodePath("../../../InputBlocks/CurrentField")
+RemoveModificationOnStop = false
+
+[node name="LookAtPlayer" type="Node" parent="ActionBlocks/Start" node_paths=PackedStringArray("TargetPosition", "Object")]
+script = ExtResource("14_epchg")
+TargetPosition = NodePath("../../../InputBlocks/PlayerPosition")
+RotationOffset = -1.5699999999999998
+Object = NodePath("../../../InputBlocks/CurrentField")
+RemoveModificationOnStop = false
+
+[node name="Next" type="Node" parent="ActionBlocks/Start" node_paths=PackedStringArray("Next")]
+script = ExtResource("7_xbuvb")
+Next = NodePath("../../Neutral1")
+
+[node name="Neutral1" type="Node" parent="ActionBlocks" node_paths=PackedStringArray("Actions", "NextActions")]
+script = ExtResource("6_kjay3")
+Actions = [NodePath("SetCondenseField")]
+NextActions = [NodePath("Slash")]
+
+[node name="SetCondenseField" type="Node" parent="ActionBlocks/Neutral1" node_paths=PackedStringArray("Object")]
+script = ExtResource("12_7xwdn")
+AccelerationMagnitude = 5000.0
+Pattern = 1
+SimFlags = 0
+Scale = Vector2(512, 512)
+Object = NodePath("../../../InputBlocks/CurrentField")
+RemoveModificationOnStop = false
+
+[node name="Slash" type="Node" parent="ActionBlocks/Neutral1" node_paths=PackedStringArray("ClearCondition", "Next")]
+script = ExtResource("7_xbuvb")
+ClearCondition = NodePath("SlashInputted")
+Next = NodePath("../../Slash1")
+
+[node name="SlashInputted" type="Node" parent="ActionBlocks/Neutral1/Slash" node_paths=PackedStringArray("InputBlock")]
+script = ExtResource("8_dkudg")
+InputBlock = NodePath("../../../../InputBlocks/SlashInput")
+
+[node name="Slash1" type="Node" parent="ActionBlocks" node_paths=PackedStringArray("Actions", "NextActions")]
+script = ExtResource("6_kjay3")
+Actions = [NodePath("SetDaggerField"), NodePath("PlayAnimation")]
+NextActions = [NodePath("Neutral2")]
+
+[node name="SetDaggerField" type="Node" parent="ActionBlocks/Slash1" node_paths=PackedStringArray("Object")]
+script = ExtResource("12_7xwdn")
+VelocityMagnitude = 1000.0
+Scale = Vector2(256, 256)
+Object = NodePath("../../../InputBlocks/CurrentField")
+RemoveModificationOnStop = false
+
+[node name="PlayAnimation" type="Node" parent="ActionBlocks/Slash1" node_paths=PackedStringArray("Anims")]
+script = ExtResource("17_vqx0k")
+Anims = NodePath("../../../InputBlocks/AnimationPlayer")
+AnimName = "Slash1"
+
+[node name="Neutral2" type="Node" parent="ActionBlocks/Slash1" node_paths=PackedStringArray("ClearCondition", "Next")]
+script = ExtResource("7_xbuvb")
+ClearCondition = NodePath("AnimFinished")
+Next = NodePath("../../Neutral2")
+
+[node name="AnimFinished" type="Node" parent="ActionBlocks/Slash1/Neutral2" node_paths=PackedStringArray("Anims")]
+script = ExtResource("17_epchg")
+Anims = NodePath("../../../../InputBlocks/AnimationPlayer")
+
+[node name="Neutral2" type="Node" parent="ActionBlocks" node_paths=PackedStringArray("Actions", "NextActions")]
+script = ExtResource("6_kjay3")
+Actions = [NodePath("SetCondenseField")]
+NextActions = [NodePath("Slash2")]
+
+[node name="SetCondenseField" type="Node" parent="ActionBlocks/Neutral2" node_paths=PackedStringArray("Object")]
+script = ExtResource("12_7xwdn")
+AccelerationMagnitude = 5000.0
+Pattern = 1
+SimFlags = 0
+Scale = Vector2(512, 512)
+Object = NodePath("../../../InputBlocks/CurrentField")
+RemoveModificationOnStop = false
+
+[node name="Slash2" type="Node" parent="ActionBlocks/Neutral2" node_paths=PackedStringArray("ClearCondition", "Next")]
+script = ExtResource("7_xbuvb")
+ClearCondition = NodePath("SlashInputted")
+Next = NodePath("../../Slash2")
+
+[node name="SlashInputted" type="Node" parent="ActionBlocks/Neutral2/Slash2" node_paths=PackedStringArray("InputBlock")]
+script = ExtResource("8_dkudg")
+InputBlock = NodePath("../../../../InputBlocks/SlashInput")
+
+[node name="Slash2" type="Node" parent="ActionBlocks" node_paths=PackedStringArray("Actions", "NextActions")]
+script = ExtResource("6_kjay3")
+Actions = [NodePath("SetDaggerField"), NodePath("PlayAnimation")]
+NextActions = [NodePath("EndStep")]
+
+[node name="SetDaggerField" type="Node" parent="ActionBlocks/Slash2" node_paths=PackedStringArray("Object")]
+script = ExtResource("12_7xwdn")
+VelocityMagnitude = 1000.0
+Scale = Vector2(256, 256)
+Object = NodePath("../../../InputBlocks/CurrentField")
+RemoveModificationOnStop = false
+
+[node name="PlayAnimation" type="Node" parent="ActionBlocks/Slash2" node_paths=PackedStringArray("Anims")]
+script = ExtResource("17_vqx0k")
+Anims = NodePath("../../../InputBlocks/AnimationPlayer")
+AnimName = "Slash2"
+
+[node name="EndStep" type="Node" parent="ActionBlocks/Slash2" node_paths=PackedStringArray("ClearCondition", "Next")]
+script = ExtResource("7_xbuvb")
+ClearCondition = NodePath("AnimFinished")
+Next = NodePath("../../EndStep")
+
+[node name="AnimFinished" type="Node" parent="ActionBlocks/Slash2/EndStep" node_paths=PackedStringArray("Anims")]
+script = ExtResource("17_epchg")
+Anims = NodePath("../../../../InputBlocks/AnimationPlayer")
+
+[node name="EndStep" type="Node" parent="ActionBlocks" node_paths=PackedStringArray("Actions", "NextActions")]
+script = ExtResource("6_kjay3")
+Actions = [NodePath("StartCooldown"), NodePath("FreeCurrentField")]
+NextActions = [NodePath("NotActive")]
+
+[node name="StartCooldown" type="Node" parent="ActionBlocks/EndStep" node_paths=PackedStringArray("Timer")]
+script = ExtResource("19_kjay3")
+Timer = NodePath("../../../InputBlocks/Cooldown")
+
+[node name="FreeCurrentField" type="Node" parent="ActionBlocks/EndStep" node_paths=PackedStringArray("Node")]
+script = ExtResource("20_dkudg")
+Node = NodePath("../../../InputBlocks/CurrentField")
+
+[node name="NotActive" type="Node" parent="ActionBlocks/EndStep" node_paths=PackedStringArray("ClearCondition", "Next")]
+script = ExtResource("7_xbuvb")
+ClearCondition = NodePath("TimerFinished")
+Next = NodePath("../../NotActive")
+
+[node name="TimerFinished" type="Node" parent="ActionBlocks/EndStep/NotActive" node_paths=PackedStringArray("Timer")]
+script = ExtResource("20_xbuvb")
+Timer = NodePath("../../../../InputBlocks/Cooldown")

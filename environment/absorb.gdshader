@@ -1,6 +1,7 @@
 shader_type canvas_item;
 uniform int frame_active = 1;
 uniform float radius = 0.1;
+uniform float exponent = 2;
 
 void vertex() {
 	// Called for every vertex the material is visible on.
@@ -13,8 +14,12 @@ vec2 vec_to_uv(vec2 vec){
 void fragment() {
 	// Called for every pixel the material is visible o
 	float inheritance = 0.0;
+	vec2 centered_vec = UV-vec2(.5,.5);
+	float center_dis = length(centered_vec) / radius;
+	float dis_factor = sqrt(1.0-pow(center_dis,exponent));
+
 	if (length(UV-.5) < radius)
-		inheritance = 1.0;
+		inheritance = dis_factor;
 	switch (frame_active){
 		case 1:
 			COLOR = vec4(.5,.5,1.0,1.0);

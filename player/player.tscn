@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://bq28dawno13ag"]
+[gd_scene load_steps=36 format=3 uid="uid://bq28dawno13ag"]
 
 [ext_resource type="Texture2D" uid="uid://blx08pj0g0x6k" path="res://icon.svg" id="1_4flbx"]
 [ext_resource type="Script" uid="uid://8rg72xll20s0" path="res://player/Player.cs" id="1_rkbax"]
@@ -7,24 +7,14 @@
 [ext_resource type="PackedScene" uid="uid://ds7utwgypyluw" path="res://player/foot_steps.tscn" id="5_qjkh3"]
 [ext_resource type="PackedScene" uid="uid://cdl55m21d5syg" path="res://hemomancy/patterns/path/path.tscn" id="6_ebec5"]
 [ext_resource type="PackedScene" uid="uid://cgxyxbdgd214l" path="res://hemomancy/patterns/dagger/dagger.tscn" id="6_g6k8r"]
-[ext_resource type="Script" uid="uid://bdminwqcure6f" path="res://hemomancy/inputreader/InputReader.cs" id="6_wodsf"]
+[ext_resource type="PackedScene" uid="uid://ca2yseojcudhp" path="res://hemomancy/inputreader/actiontrees/absorb_action_tree.tscn" id="6_wodsf"]
+[ext_resource type="PackedScene" uid="uid://cd6e1xck8cpmp" path="res://hemomancy/inputreader/actiontrees/slash_action_tree.tscn" id="7_32hag"]
 [ext_resource type="PackedScene" uid="uid://dcb6s467oqy27" path="res://hemomancy/patterns/condensation/condensation.tscn" id="7_boad6"]
 [ext_resource type="PackedScene" uid="uid://b4guuym6qd8p2" path="res://hemomancy/patterns/spike/spike.tscn" id="7_hg6s5"]
 [ext_resource type="Script" uid="uid://duvaeijy7bmtt" path="res://player/timer.gd" id="8_rgyib"]
-[ext_resource type="Script" uid="uid://g4pw7g7a4stc" path="res://hemomancy/inputreader/inputblocks/SimpleInput.cs" id="8_x7c3f"]
-[ext_resource type="Script" uid="uid://du0e8rasptob1" path="res://hemomancy/inputreader/inputblocks/VariableNode2D.cs" id="9_s7qer"]
-[ext_resource type="Script" path="res://hemomancy/inputreader/inputblocks/MousePosition.cs" id="10_g4c7l"]
-[ext_resource type="Script" uid="uid://blnivlleomtkr" path="res://hemomancy/inputreader/inputblocks/PlayerPosition.cs" id="10_knn7v"]
-[ext_resource type="Script" uid="uid://cu5ym8gysc5bs" path="res://hemomancy/inputreader/ActionBlock.cs" id="10_s7qer"]
-[ext_resource type="PackedScene" uid="uid://f286v02rp6a1" path="res://hemomancy/patterns/absorb/absorb.tscn" id="10_yllr7"]
 [ext_resource type="Script" uid="uid://dsush1fkqvvsl" path="res://player/HealthDisplay.cs" id="11_2ieo8"]
-[ext_resource type="Script" uid="uid://c61mup3o7beub" path="res://hemomancy/inputreader/NextAction.cs" id="11_g4c7l"]
-[ext_resource type="Script" uid="uid://vuxql0xuidyg" path="res://hemomancy/inputreader/conditions/SimpleInputted.cs" id="12_x7c3f"]
 [ext_resource type="PackedScene" uid="uid://0x0gv51wr7fj" path="res://hemomancy/blood_visual_emitter.tscn" id="14_kb6p2"]
-[ext_resource type="Script" uid="uid://c00fq1himycrr" path="res://hemomancy/inputreader/actions/Summon.cs" id="14_s7qer"]
-[ext_resource type="Script" uid="uid://b5sbylekjcvbn" path="res://hemomancy/inputreader/actions/ObjectTrack.cs" id="15_g4c7l"]
 [ext_resource type="Script" uid="uid://dxm6pxms3upsh" path="res://player/SpinningPivot.cs" id="15_wodsf"]
-[ext_resource type="Script" uid="uid://cvafcpa5hscqs" path="res://hemomancy/inputreader/actions/FieldAlter.cs" id="17_7pqkx"]
 [ext_resource type="Shader" uid="uid://d1116mw2ipdra" path="res://nexus/barrier2.gdshader" id="20_s7qer"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rkbax"]
@@ -377,98 +367,9 @@ OverhealthDisplay = NodePath("../OverhealthShield")
 FootStepInterval = 0.2
 Character = NodePath("..")
 
-[node name="AbsorbInputReader" type="Node" parent="." node_paths=PackedStringArray("CurrentBlock", "InputsProcessed")]
-script = ExtResource("6_wodsf")
-CurrentBlock = NodePath("ActionBlocks/Neutral")
-InputsProcessed = [NodePath("InputBlocks/AbsorbInput"), NodePath("")]
+[node name="AbsorbActionTree" parent="." instance=ExtResource("6_wodsf")]
 
-[node name="InputBlocks" type="Node" parent="AbsorbInputReader"]
-
-[node name="AbsorbInput" type="Node" parent="AbsorbInputReader/InputBlocks"]
-script = ExtResource("8_x7c3f")
-ActionName = "AbsorbBlood"
-
-[node name="CurrentField" type="Node" parent="AbsorbInputReader/InputBlocks"]
-script = ExtResource("9_s7qer")
-
-[node name="MousePosition" type="Node" parent="AbsorbInputReader/InputBlocks"]
-script = ExtResource("10_g4c7l")
-
-[node name="PlayerPosition" type="Node" parent="AbsorbInputReader/InputBlocks"]
-script = ExtResource("10_knn7v")
-
-[node name="ActionBlocks" type="Node" parent="AbsorbInputReader"]
-
-[node name="Neutral" type="Node" parent="AbsorbInputReader/ActionBlocks" node_paths=PackedStringArray("Actions", "NextActions")]
-script = ExtResource("10_s7qer")
-Actions = []
-NextActions = [NodePath("Next")]
-
-[node name="Next" type="Node" parent="AbsorbInputReader/ActionBlocks/Neutral" node_paths=PackedStringArray("ClearCondition", "Next")]
-script = ExtResource("11_g4c7l")
-ClearCondition = NodePath("AbsorbInputted")
-Next = NodePath("../../Stage1")
-
-[node name="AbsorbInputted" type="Node" parent="AbsorbInputReader/ActionBlocks/Neutral/Next" node_paths=PackedStringArray("InputBlock")]
-script = ExtResource("12_x7c3f")
-OnPress = true
-InputBlock = NodePath("../../../../InputBlocks/AbsorbInput")
-
-[node name="Stage1" type="Node" parent="AbsorbInputReader/ActionBlocks" node_paths=PackedStringArray("Actions", "NextActions")]
-script = ExtResource("10_s7qer")
-Actions = [NodePath("SummonField"), NodePath("TrackMouse")]
-NextActions = [NodePath("Next")]
-
-[node name="SummonField" type="Node" parent="AbsorbInputReader/ActionBlocks/Stage1" node_paths=PackedStringArray("ObjectTemplate", "StartPosition", "ReferenceOutput")]
-script = ExtResource("14_s7qer")
-ObjectTemplate = NodePath("Node/absorb")
-StartPosition = NodePath("../../../InputBlocks/MousePosition")
-ReferenceOutput = NodePath("../../../InputBlocks/CurrentField")
-
-[node name="Node" type="Node" parent="AbsorbInputReader/ActionBlocks/Stage1/SummonField"]
-process_mode = 4
-
-[node name="absorb" parent="AbsorbInputReader/ActionBlocks/Stage1/SummonField/Node" instance=ExtResource("10_yllr7")]
-RotationSpeed = 0.785
-VelocityMagnitude = 5000.0
-AccelerationMagnitude = 5000.0
-SimFlags = 1
-
-[node name="TrackMouse" type="Node" parent="AbsorbInputReader/ActionBlocks/Stage1" node_paths=PackedStringArray("TargetPosition", "Object")]
-script = ExtResource("15_g4c7l")
-TargetPosition = NodePath("../../../InputBlocks/MousePosition")
-Object = NodePath("../../../InputBlocks/CurrentField")
-
-[node name="Next" type="Node" parent="AbsorbInputReader/ActionBlocks/Stage1" node_paths=PackedStringArray("ClearCondition", "Next")]
-script = ExtResource("11_g4c7l")
-ClearCondition = NodePath("AbsorbReleased")
-Next = NodePath("../../Stage2")
-
-[node name="AbsorbReleased" type="Node" parent="AbsorbInputReader/ActionBlocks/Stage1/Next" node_paths=PackedStringArray("InputBlock")]
-script = ExtResource("12_x7c3f")
-InputBlock = NodePath("../../../../InputBlocks/AbsorbInput")
-
-[node name="Stage2" type="Node" parent="AbsorbInputReader/ActionBlocks" node_paths=PackedStringArray("Actions", "NextActions")]
-script = ExtResource("10_s7qer")
-Actions = [NodePath("AlterField"), NodePath("TrackPlayer")]
-NextActions = [NodePath("Reset")]
-
-[node name="AlterField" type="Node" parent="AbsorbInputReader/ActionBlocks/Stage2" node_paths=PackedStringArray("Object")]
-script = ExtResource("17_7pqkx")
-Pattern = 1
-Scale = Vector2(2048, 2048)
-Object = NodePath("../../../InputBlocks/CurrentField")
-RemoveModificationOnStop = false
-
-[node name="TrackPlayer" type="Node" parent="AbsorbInputReader/ActionBlocks/Stage2" node_paths=PackedStringArray("TargetPosition", "Object")]
-script = ExtResource("15_g4c7l")
-TargetPosition = NodePath("../../../InputBlocks/PlayerPosition")
-Object = NodePath("../../../InputBlocks/CurrentField")
-RemoveModificationOnStop = false
-
-[node name="Reset" type="Node" parent="AbsorbInputReader/ActionBlocks/Stage2" node_paths=PackedStringArray("Next")]
-script = ExtResource("11_g4c7l")
-Next = NodePath("../../Neutral")
+[node name="SlashActionTree" parent="." instance=ExtResource("7_32hag")]
 
 [node name="Constructs" type="Node2D" parent="."]
 process_mode = 4

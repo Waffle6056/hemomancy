@@ -19,7 +19,14 @@ public partial class ObjectBehaviorAltering : ObjectAltering
     {
         base.Start();
         Node2D Current = Object.Data;
-        currentDeco = () => { Decoration(Current); };
+        RunDecoEventHandler thisDeco = null;
+        thisDeco = () => { 
+            if (IsInstanceValid(Current))
+                Decoration(Current); 
+            else
+                RunDeco -= thisDeco;
+            };
+        currentDeco = thisDeco;
         RunDeco += currentDeco;
     }
     public override void Stop()

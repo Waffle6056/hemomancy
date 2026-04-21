@@ -1,0 +1,124 @@
+[gd_scene load_steps=15 format=3 uid="uid://ca2yseojcudhp"]
+
+[ext_resource type="Script" uid="uid://bdminwqcure6f" path="res://hemomancy/inputreader/InputReader.cs" id="1_pfj06"]
+[ext_resource type="Script" uid="uid://g4pw7g7a4stc" path="res://hemomancy/inputreader/inputblocks/SimpleInput.cs" id="2_y5vff"]
+[ext_resource type="Script" uid="uid://du0e8rasptob1" path="res://hemomancy/inputreader/inputblocks/VariableNode2D.cs" id="3_e2ugd"]
+[ext_resource type="Script" path="res://hemomancy/inputreader/inputblocks/MousePosition.cs" id="4_qi7he"]
+[ext_resource type="Script" uid="uid://blnivlleomtkr" path="res://hemomancy/inputreader/inputblocks/PlayerPosition.cs" id="5_j2keb"]
+[ext_resource type="Script" uid="uid://cu5ym8gysc5bs" path="res://hemomancy/inputreader/ActionBlock.cs" id="6_iskj1"]
+[ext_resource type="Script" uid="uid://c61mup3o7beub" path="res://hemomancy/inputreader/NextAction.cs" id="7_afuct"]
+[ext_resource type="Script" uid="uid://vuxql0xuidyg" path="res://hemomancy/inputreader/conditions/SimpleInputted.cs" id="8_omll2"]
+[ext_resource type="Script" uid="uid://c00fq1himycrr" path="res://hemomancy/inputreader/actions/Summon.cs" id="9_l6a2m"]
+[ext_resource type="PackedScene" uid="uid://f286v02rp6a1" path="res://hemomancy/patterns/absorb/absorb.tscn" id="10_hrr68"]
+[ext_resource type="Script" uid="uid://b5sbylekjcvbn" path="res://hemomancy/inputreader/actions/ObjectTrack.cs" id="11_8jle7"]
+[ext_resource type="Script" uid="uid://cvafcpa5hscqs" path="res://hemomancy/inputreader/actions/FieldAlter.cs" id="12_35wny"]
+[ext_resource type="Script" uid="uid://cl76108ot06sa" path="res://hemomancy/inputreader/actions/AttachNode.cs" id="13_ujj18"]
+[ext_resource type="Script" uid="uid://duvaeijy7bmtt" path="res://player/timer.gd" id="14_tk24u"]
+
+[node name="AbsorbActionTree" type="Node" node_paths=PackedStringArray("CurrentBlock", "InputsProcessed")]
+script = ExtResource("1_pfj06")
+CurrentBlock = NodePath("ActionBlocks/Neutral")
+InputsProcessed = [null, null]
+
+[node name="InputBlocks" type="Node" parent="."]
+
+[node name="AbsorbInput" type="Node" parent="InputBlocks"]
+script = ExtResource("2_y5vff")
+ActionName = "AbsorbBlood"
+
+[node name="CurrentField" type="Node" parent="InputBlocks"]
+script = ExtResource("3_e2ugd")
+
+[node name="MousePosition" type="Node" parent="InputBlocks"]
+script = ExtResource("4_qi7he")
+
+[node name="PlayerPosition" type="Node" parent="InputBlocks"]
+script = ExtResource("5_j2keb")
+
+[node name="ActionBlocks" type="Node" parent="."]
+
+[node name="Neutral" type="Node" parent="ActionBlocks" node_paths=PackedStringArray("Actions", "NextActions")]
+script = ExtResource("6_iskj1")
+Actions = []
+NextActions = [NodePath("Next")]
+
+[node name="Next" type="Node" parent="ActionBlocks/Neutral" node_paths=PackedStringArray("ClearCondition", "Next")]
+script = ExtResource("7_afuct")
+ClearCondition = NodePath("AbsorbInputted")
+Next = NodePath("../../Stage1")
+
+[node name="AbsorbInputted" type="Node" parent="ActionBlocks/Neutral/Next" node_paths=PackedStringArray("InputBlock")]
+script = ExtResource("8_omll2")
+OnPress = true
+InputBlock = NodePath("../../../../InputBlocks/AbsorbInput")
+
+[node name="Stage1" type="Node" parent="ActionBlocks" node_paths=PackedStringArray("Actions", "NextActions")]
+script = ExtResource("6_iskj1")
+Actions = [NodePath("SummonField"), NodePath("TrackMouse")]
+NextActions = [NodePath("Next")]
+
+[node name="SummonField" type="Node" parent="ActionBlocks/Stage1" node_paths=PackedStringArray("ObjectTemplate", "StartPosition", "ReferenceOutput")]
+script = ExtResource("9_l6a2m")
+ObjectTemplate = NodePath("Node/absorb")
+StartPosition = NodePath("../../../InputBlocks/MousePosition")
+ReferenceOutput = NodePath("../../../InputBlocks/CurrentField")
+
+[node name="Node" type="Node" parent="ActionBlocks/Stage1/SummonField"]
+process_mode = 4
+
+[node name="absorb" parent="ActionBlocks/Stage1/SummonField/Node" instance=ExtResource("10_hrr68")]
+visible = false
+VelocityMagnitude = 0.0
+AccelerationMagnitude = 0.0
+SimFlags = 1
+InterpolateState = false
+
+[node name="TrackMouse" type="Node" parent="ActionBlocks/Stage1" node_paths=PackedStringArray("TargetPosition", "Object")]
+script = ExtResource("11_8jle7")
+TargetPosition = NodePath("../../../InputBlocks/MousePosition")
+Object = NodePath("../../../InputBlocks/CurrentField")
+
+[node name="Next" type="Node" parent="ActionBlocks/Stage1" node_paths=PackedStringArray("ClearCondition", "Next")]
+script = ExtResource("7_afuct")
+ClearCondition = NodePath("AbsorbReleased")
+Next = NodePath("../../Stage2")
+
+[node name="AbsorbReleased" type="Node" parent="ActionBlocks/Stage1/Next" node_paths=PackedStringArray("InputBlock")]
+script = ExtResource("8_omll2")
+InputBlock = NodePath("../../../../InputBlocks/AbsorbInput")
+
+[node name="Stage2" type="Node" parent="ActionBlocks" node_paths=PackedStringArray("Actions", "NextActions")]
+script = ExtResource("6_iskj1")
+Actions = [NodePath("AlterField"), NodePath("TrackPlayer"), NodePath("SummonDeathTimer")]
+NextActions = [NodePath("Reset")]
+
+[node name="AlterField" type="Node" parent="ActionBlocks/Stage2" node_paths=PackedStringArray("Object")]
+script = ExtResource("12_35wny")
+RotationSpeed = 0.788
+AccelerationMagnitude = 25000.0
+Pattern = 1
+Scale = Vector2(2048, 2048)
+Object = NodePath("../../../InputBlocks/CurrentField")
+RemoveModificationOnStop = false
+
+[node name="TrackPlayer" type="Node" parent="ActionBlocks/Stage2" node_paths=PackedStringArray("TargetPosition", "Object")]
+script = ExtResource("11_8jle7")
+TargetPosition = NodePath("../../../InputBlocks/PlayerPosition")
+Object = NodePath("../../../InputBlocks/CurrentField")
+RemoveModificationOnStop = false
+
+[node name="SummonDeathTimer" type="Node" parent="ActionBlocks/Stage2" node_paths=PackedStringArray("ObjectTemplate", "ParentNode")]
+script = ExtResource("13_ujj18")
+ObjectTemplate = NodePath("Node/killtimer")
+ParentNode = NodePath("../../../InputBlocks/CurrentField")
+
+[node name="Node" type="Node" parent="ActionBlocks/Stage2/SummonDeathTimer"]
+process_mode = 4
+
+[node name="killtimer" type="Timer" parent="ActionBlocks/Stage2/SummonDeathTimer/Node"]
+wait_time = 10.0
+script = ExtResource("14_tk24u")
+
+[node name="Reset" type="Node" parent="ActionBlocks/Stage2" node_paths=PackedStringArray("Next")]
+script = ExtResource("7_afuct")
+Next = NodePath("../../Neutral")

@@ -45,6 +45,9 @@ public partial class BloodSimCPU : Node
 		None = 0,
 		Group1 = 1,
 		Group2 = 2,
+		Group3 = 4,
+		Group4 = 8,
+		Active = 16,
 	}
 
 	// Called when the node enters the scene tree for the first time.
@@ -358,12 +361,13 @@ public partial class BloodSimCPU : Node
 			transformData[i * 6 + 5] =test[2][1];
 			velocityRotData[i*4+0] = node.Velocity.X;
 			velocityRotData[i*4+1] = node.Velocity.Y;
+			//GD.Print(test +" "+node.Velocity);
 
 			velocityRotData[i*4+2] = node.RotationSpeed;
 			magnitudeData[i*2+0] = node.VelocityMagnitude;
 			magnitudeData[i*2+1] = node.AccelerationMagnitude;
 			patternIndexData[i] = node.Pattern;
-			flagData[i] = node.SimFlags;
+			flagData[i] = node.SimFlags | (int) Flags.Active;
 		}
 		//GD.Print(String.Join(',', velocityRotData));
 		byte[] transformBytes    = ToByteArray(transformData, ByteCount.glfloat);
